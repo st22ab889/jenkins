@@ -1,0 +1,720 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="en"><head><META http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta content="shanhe.me" name="Author"><title>JMeter Test Results</title><style type="text/css">
+            
+                * { margin: 0; padding: 0 }
+                html, body { width: 100%; height: 100%; background: #b4b4b4; font-size: 12px }
+                table { border: none; border-collapse: collapse; table-layout: fixed }
+                td { vertical-align: baseline; font-size: 12px }
+                #left-panel { position: absolute; left: 0; top: 0; bottom: 0; width: 300px; overflow: auto; background: #dee4ea }
+                #left-panel li.navigation { font-weight: bold; cursor: default; color: #9da8b2; line-height: 18px; background-position: 12px 5px; background-repeat: no-repeat; padding: 0 0 0 25px; background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAkAAAAICAYAAAArzdW1AAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB9sDEBQqGbO7BEcAAAAdaVRYdENvbW1lbnQAAAAAAENyZWF0ZWQgd2l0aCBHSU1QZC5lBwAAAKRJREFUGNN1zM0KgkAYheF3RvtXSsGyWhRNaILS7bdt11W0KgJvoPwZp0UlBPUtz3nOJw7Hk7necv5dOA2Qaazo2vZP0LEt9olCVtqQROufKNmuqBuBNAYW4QzXGX6B0bDPcjGnMQYJ8Cg12U59oSzaUJQa4IUAXMclDHwAAn/MxPMw765FZd2QRgopBWmsKCrdfhXnS/4ZYElBXdyxewN008Y8AephLAkqz613AAAAAElFTkSuQmCC) }
+                #left-panel li.success { color: #565b60 }
+                #left-panel li.failure { color: red }
+                #left-panel li { list-style: none; color: black; cursor: pointer }
+                #left-panel li.selected { background-repeat: repeat-x; color: white; background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAAUCAYAAABMDlehAAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB9sDEBQxLTs5O2gAAAAdaVRYdENvbW1lbnQAAAAAAENyZWF0ZWQgd2l0aCBHSU1QZC5lBwAAAEdJREFUCNc1y7ERgEAMA0GNUhIyGqM2uqKgtyWZhE9v53A/7/A6D7BkMDNgy2AroB2wHTCZv5UMOgFLG1bvd7XBckBlwCXjA5wMOF5iOX/MAAAAAElFTkSuQmCC) }
+                #left-panel div { line-height: 20px; background-position: 25px 3px; background-repeat: no-repeat; padding: 0 0 0 45px }
+                #left-panel div.success { background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA8AAAAOCAYAAADwikbvAAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB9sDEBULEEc6wzcAAAAdaVRYdENvbW1lbnQAAAAAAENyZWF0ZWQgd2l0aCBHSU1QZC5lBwAAAiNJREFUKM99kktIVGEYhp/jzJl08lI6logp2Y2EFkbtaqlFROsWrlq4ioJWQRs37VoUVItWkYEVRGSBlhleCpywDEWxTEuxcURTZ6YzxzP/5WshCOHUt36f93kXnyMi5Lsnb4clI4s4fhkXzp5w8mWcfHBvfEpUxVdCUUU6lUPNHuD86cYtBQX5GhPrM7hRg7GaSDRg2vuUd90WuOPVsOyqy6FFo2yOQHlU1S9z9dZT+S/8I7GCLlkAN4eyAf56mnT6Fy1HLnGuuYa++MS/4e74qMRqfXLaJ9BpfnsrLC0m2BYuoqwUbj/+274JD43OEqmexwvW8NUKXnaZtVSS1pNtAAyOvyC6v48HnUNb4Z7PH8UtTlIQWA5tb2RhYY7kz3l2FleytJYg/qWb8t2KZ/0PN+1hgI6uEUr2jpHKpGlquExVaS0VbjUZL7WxaqIXK6ADQ0n9GNfv9XCttWnD/O57t0TKFklnF3g5fJ/seoaa2D4O1x0F4PlgO9oIftbgFgYMfLgjACGqj0vlsddoUnj+Kt/mxunq72RP+UGqYjWMTA7R+b6dUCSEGEF5hoJQip6BaFs4HJtCyRrKs6wHCovDip/kys0WWpovMpOYBCtoT2N9B5uzWG0Zid8gnFrVFEQDtBaUrxEgXBimaEeER2/uIiK4roPOaMRYjBKsFly3fOO3G06dETGCWIsYjckprMphtEKMAQtgsMYi1mJMQHJ6xvkDKQoyphCzkl0AAAAASUVORK5CYII=) }
+                #left-panel div.failure { background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA8AAAAOCAYAAADwikbvAAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB9sDEBUJOEC5CU8AAAAdaVRYdENvbW1lbnQAAAAAAENyZWF0ZWQgd2l0aCBHSU1QZC5lBwAAAeVJREFUKM+NkDtok2EUhp8vl9ZLo/EyKI6KFgqCKC4OClrBWUQEcRRx1cGpk3WyInWrgoMZKkW8thYaEYQ0i7WC2ngrNDTERHJvkv/L/3//dxwc7F8jeOAsh/c973OOEhG61aPnaen7maXYt4MLZ4+pbppQt+F06jNH3QWOb8pxUs+SmJzjv83hxY8SVy3wNdtVneiHqe54IhLoB4/TUkyMyOrKj5yXoVtPZK02kLyYK7OnlqFWzgcCGtUC/YUJ3n5a/jd28tU7ORTN0myUA6Jms8bpWIa798elqzn1fokjThrpVBC3ETzNbYAuca59j/Hp+b/N869Tsk8tgVMCXQk+RlfQuk1/tMLMwzsSMCcm5zjhvoR2AdpF0GuwO4aqttS05ZSbZHhsBoAIwI83Cdkd/460XDAOG02d24MxvlR8dsUUh3f2UHaEtgdbWCHz4oZwcVCp66PP5FLhKjEc8DXaCMsNy8DYn/SnZ+L0hhWOb/F8yLs9fDtwk8j+VpqwrlC34PrgGEu2bhlYhZ1b8dncq3AMeBaUr/k6NUyk4ChKzu+N2hc6Bqody+WDG8g2fLatD7F3axjPgmvAtYJvIbouhhIRrl0ZktnkBGIt1gqeMXQ8D2MMiCIUCqFEsFhEQMSykCuqX0MzLAUJTzRsAAAAAElFTkSuQmCC) }
+                #left-panel div.detail { display: none }
+                #right-panel { position: absolute; right: 0; top: 0; bottom: 0; left: 301px; overflow: auto; background: white }
+                #right-panel .group { font-size: 12px; font-weight: bold; line-height: 16px; padding: 0 0 0 18px; counter-reset: assertion; background-repeat: repeat-x; background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAAQCAYAAADXnxW3AAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB9sDEBUkDq8pxjkAAAAdaVRYdENvbW1lbnQAAAAAAENyZWF0ZWQgd2l0aCBHSU1QZC5lBwAAADdJREFUCNdVxrERwDAMAzGK0v47eS6Z927SpMFBAAbkvSvnRk5+7K5cVfLMyN39bWakJAjA5xw9R94jN3tVhVEAAAAASUVORK5CYII=) }
+                #right-panel .zebra { background-repeat: repeat; padding: 0 0 0 18px; background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAAmCAYAAAAFvPEHAAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB9sDEBYWFlNztEcAAAAdaVRYdENvbW1lbnQAAAAAAENyZWF0ZWQgd2l0aCBHSU1QZC5lBwAAABdJREFUCNdjYKAtePv5338mBgYGBpoQAGy1BAJlb/y6AAAAAElFTkSuQmCC) }
+                #right-panel .data { line-height: 19px; white-space: nowrap }
+                #right-panel pre.data { white-space: pre }
+                #right-panel tbody.failure { color: red }
+                #right-panel td.key { min-width: 108px }
+                #right-panel td.delimiter { min-width: 18px }
+                #right-panel td.assertion:before { counter-increment: assertion; content: counter(assertion) ". " }
+                #right-panel td.assertion { color: black }
+                #right-panel .trail { border-top: 1px solid #b4b4b4 }
+                
+            </style><script type="text/javascript">
+            
+                var onclick_li = (function() {
+                    var last_selected = null;
+                    return function(li) {
+                        if( last_selected == li )
+                            return;
+                        if( last_selected )
+                            last_selected.className = "";
+                        last_selected = li;
+                        last_selected.className = "selected";
+                        document.getElementById("right-panel").innerHTML = last_selected.firstChild.nextSibling.innerHTML;
+                        return false;
+                    };
+                })();
+                
+                var patch_timestamp = function() {
+                    var spans = document.getElementsByTagName("span");
+                    var len = spans.length;
+                    for( var i = 0; i < len; ++i ) {
+                        var span = spans[i];
+                        if( "patch_timestamp" == span.className )
+                            span.innerHTML = new Date( parseInt( span.innerHTML ) );
+                    }
+                };
+                
+                var patch_navigation_class = (function() {
+                
+                    var set_class = function(el, flag) {
+                        if(el) {
+                            el.className += flag ? " success" : " failure";
+                        }
+                    };
+                
+                    var traverse = function(el, group_el, flag) {
+                        while(1) {
+                            if(el) {
+                                if(el.className == 'navigation') {
+                                    set_class(group_el, flag);
+                                    group_el = el;
+                                    flag = true;
+                                } else {
+                                    var o = el.firstChild;
+                                    o = o ? o.className : null;
+                                    flag = flag ? (o == 'success') : false;
+                                }
+                                el = el.nextSibling;
+                            } else {
+                                set_class(group_el, flag);
+                                break;
+                            }
+                        }
+                    };
+                    
+                    return function() {
+                        var o = document.getElementById("result-list");
+                        o = o ? o.firstChild : null;
+                        if(o)
+                            traverse(o, null, true);
+                    };
+                })();
+        
+                window.onload = function() {
+                    patch_timestamp();
+                    patch_navigation_class();
+                    var o = document.getElementById("result-list");
+                    o = o ? o.firstChild : null;
+                    o = o ? o.nextSibling : null;
+                    if(o)
+                        onclick_li(o);
+                };
+        
+            </script></head><body><div id="left-panel"><ol id="result-list"><li class="navigation">Thread: 测试接口json 3-1</li><li onclick="return onclick_li(this);"><div class="success">HTTP Request</div><div class="detail"><div class="group">Sampler</div><div class="zebra"><table><tr><td class="data key">Thread Name</td><td class="data delimiter">:</td><td class="data">测试接口json 3-1</td></tr><tr><td class="data key">Timestamp</td><td class="data delimiter">:</td><td class="data"><span class="patch_timestamp">1566121251221</span></td></tr><tr><td class="data key">Time</td><td class="data delimiter">:</td><td class="data">146 ms</td></tr><tr><td class="data key">Latency</td><td class="data delimiter">:</td><td class="data">145 ms</td></tr><tr><td class="data key">Bytes</td><td class="data delimiter">:</td><td class="data">545</td></tr><tr><td class="data key">Sample Count</td><td class="data delimiter">:</td><td class="data"></td></tr><tr><td class="data key">Error Count</td><td class="data delimiter">:</td><td class="data"></td></tr><tr><td class="data key">Response Code</td><td class="data delimiter">:</td><td class="data">200</td></tr><tr><td class="data key">Response Message</td><td class="data delimiter">:</td><td class="data">OK</td></tr></table></div><div class="trail"></div><div class="group">Request</div><div class="zebra"><table><tr><td class="data key">Method/Url</td><td class="data delimiter">:</td><td class="data"><pre class="data">GET http://baike.baidu.com/api/openapi/BaikeLemmaCardApi?scope=103&amp;format=json&amp;appid=379020&amp;bk_key=%E9%93%B6%E9%AD%82&amp;bk_length=600</pre></td></tr><tr><td class="data key">Query String</td><td class="data delimiter">:</td><td class="data"><pre class="data"></pre></td></tr><tr><td class="data key">Cookies</td><td class="data delimiter">:</td><td class="data"><pre class="data"></pre></td></tr><tr><td class="data key">Request Headers</td><td class="data delimiter">:</td><td class="data"><pre class="data">Connection: keep-alive
+Host: baike.baidu.com
+User-Agent: Apache-HttpClient/4.5.7 (Java/1.8.0_181)
+</pre></td></tr></table></div><div class="trail"></div><div class="group">Response</div><div class="zebra"><table><tr><td class="data key">Response Headers</td><td class="data delimiter">:</td><td class="data"><pre class="data">HTTP/1.1 200 OK
+Connection: keep-alive
+Content-Type: application/json
+Date: Sun, 18 Aug 2019 09:40:51 GMT
+P3p: CP=" OTI DSP COR IVA OUR IND COM "
+P3p: CP=" OTI DSP COR IVA OUR IND COM "
+Server: Apache
+Set-Cookie: BAIDUID=4DED1B80CDF7A3C043EE24BBBC1BB0D3:FG=1; expires=Mon, 17-Aug-20 09:40:51 GMT; max-age=31536000; path=/; domain=.baidu.com; version=1
+Set-Cookie: BAIDUID=4DED1B80CDF7A3C078DF721EBE190DD1:FG=1; expires=Mon, 17-Aug-20 09:40:51 GMT; max-age=31536000; path=/; domain=.baidu.com; version=1
+Content-Length: 11
+</pre></td></tr><tr><td class="data key">Response Data</td><td class="data delimiter">:</td><td class="data"><pre class="data">{"errno":2}</pre></td></tr><tr><td class="data key">Response File</td><td class="data delimiter">:</td><td class="data"><pre class="data"></pre></td></tr></table></div><div class="trail"></div></div></li><li class="navigation">Thread: 测试百度 2-1</li><li onclick="return onclick_li(this);"><div class="success">HTTP Request</div><div class="detail"><div class="group">Sampler</div><div class="zebra"><table><tr><td class="data key">Thread Name</td><td class="data delimiter">:</td><td class="data">测试百度 2-1</td></tr><tr><td class="data key">Timestamp</td><td class="data delimiter">:</td><td class="data"><span class="patch_timestamp">1566121251221</span></td></tr><tr><td class="data key">Time</td><td class="data delimiter">:</td><td class="data">146 ms</td></tr><tr><td class="data key">Latency</td><td class="data delimiter">:</td><td class="data">145 ms</td></tr><tr><td class="data key">Bytes</td><td class="data delimiter">:</td><td class="data">2781</td></tr><tr><td class="data key">Sample Count</td><td class="data delimiter">:</td><td class="data"></td></tr><tr><td class="data key">Error Count</td><td class="data delimiter">:</td><td class="data"></td></tr><tr><td class="data key">Response Code</td><td class="data delimiter">:</td><td class="data">200</td></tr><tr><td class="data key">Response Message</td><td class="data delimiter">:</td><td class="data">OK</td></tr></table></div><div class="trail"></div><div class="group">Request</div><div class="zebra"><table><tr><td class="data key">Method/Url</td><td class="data delimiter">:</td><td class="data"><pre class="data">GET http://www.baidu.com/</pre></td></tr><tr><td class="data key">Query String</td><td class="data delimiter">:</td><td class="data"><pre class="data"></pre></td></tr><tr><td class="data key">Cookies</td><td class="data delimiter">:</td><td class="data"><pre class="data"></pre></td></tr><tr><td class="data key">Request Headers</td><td class="data delimiter">:</td><td class="data"><pre class="data">Connection: keep-alive
+Host: www.baidu.com
+User-Agent: Apache-HttpClient/4.5.7 (Java/1.8.0_181)
+</pre></td></tr></table></div><div class="trail"></div><div class="group">Response</div><div class="zebra"><table><tr><td class="data key">Response Headers</td><td class="data delimiter">:</td><td class="data"><pre class="data">HTTP/1.1 200 OK
+Accept-Ranges: bytes
+Cache-Control: private, no-cache, no-store, proxy-revalidate, no-transform
+Connection: Keep-Alive
+Content-Length: 2381
+Content-Type: text/html
+Date: Sun, 18 Aug 2019 09:40:51 GMT
+Etag: "588604c4-94d"
+Last-Modified: Mon, 23 Jan 2017 13:27:32 GMT
+Pragma: no-cache
+Server: bfe/1.0.8.18
+Set-Cookie: BDORZ=27315; max-age=86400; domain=.baidu.com; path=/
+</pre></td></tr><tr><td class="data key">Response Data</td><td class="data delimiter">:</td><td class="data"><pre class="data">&lt;!DOCTYPE html&gt;&#13;
+&lt;!--STATUS OK--&gt;&lt;html&gt; &lt;head&gt;&lt;meta http-equiv=content-type content=text/html;charset=utf-8&gt;&lt;meta http-equiv=X-UA-Compatible content=IE=Edge&gt;&lt;meta content=always name=referrer&gt;&lt;link rel=stylesheet type=text/css href=http://s1.bdstatic.com/r/www/cache/bdorz/baidu.min.css&gt;&lt;title&gt;&ccedil;&#153;&frac34;&aring;&ordm;&brvbar;&auml;&cedil;&#128;&auml;&cedil;&#139;&iuml;&frac14;&#140;&auml;&frac12;&nbsp;&aring;&deg;&plusmn;&ccedil;&#159;&yen;&eacute;&#129;&#147;&lt;/title&gt;&lt;/head&gt; &lt;body link=#0000cc&gt; &lt;div id=wrapper&gt; &lt;div id=head&gt; &lt;div class=head_wrapper&gt; &lt;div class=s_form&gt; &lt;div class=s_form_wrapper&gt; &lt;div id=lg&gt; &lt;img hidefocus=true src=//www.baidu.com/img/bd_logo1.png width=270 height=129&gt; &lt;/div&gt; &lt;form id=form name=f action=//www.baidu.com/s class=fm&gt; &lt;input type=hidden name=bdorz_come value=1&gt; &lt;input type=hidden name=ie value=utf-8&gt; &lt;input type=hidden name=f value=8&gt; &lt;input type=hidden name=rsv_bp value=1&gt; &lt;input type=hidden name=rsv_idx value=1&gt; &lt;input type=hidden name=tn value=baidu&gt;&lt;span class="bg s_ipt_wr"&gt;&lt;input id=kw name=wd class=s_ipt value maxlength=255 autocomplete=off autofocus&gt;&lt;/span&gt;&lt;span class="bg s_btn_wr"&gt;&lt;input type=submit id=su value=&ccedil;&#153;&frac34;&aring;&ordm;&brvbar;&auml;&cedil;&#128;&auml;&cedil;&#139; class="bg s_btn"&gt;&lt;/span&gt; &lt;/form&gt; &lt;/div&gt; &lt;/div&gt; &lt;div id=u1&gt; &lt;a href=http://news.baidu.com name=tj_trnews class=mnav&gt;&aelig;&#150;&deg;&eacute;&#151;&raquo;&lt;/a&gt; &lt;a href=http://www.hao123.com name=tj_trhao123 class=mnav&gt;hao123&lt;/a&gt; &lt;a href=http://map.baidu.com name=tj_trmap class=mnav&gt;&aring;&#156;&deg;&aring;&#155;&frac34;&lt;/a&gt; &lt;a href=http://v.baidu.com name=tj_trvideo class=mnav&gt;&egrave;&sect;&#134;&eacute;&cent;&#145;&lt;/a&gt; &lt;a href=http://tieba.baidu.com name=tj_trtieba class=mnav&gt;&egrave;&acute;&acute;&aring;&#144;&sect;&lt;/a&gt; &lt;noscript&gt; &lt;a href=http://www.baidu.com/bdorz/login.gif?login&amp;amp;tpl=mn&amp;amp;u=http%3A%2F%2Fwww.baidu.com%2f%3fbdorz_come%3d1 name=tj_login class=lb&gt;&ccedil;&#153;&raquo;&aring;&frac12;&#149;&lt;/a&gt; &lt;/noscript&gt; &lt;script&gt;document.write('&lt;a href="http://www.baidu.com/bdorz/login.gif?login&amp;tpl=mn&amp;u='+ encodeURIComponent(window.location.href+ (window.location.search === "" ? "?" : "&amp;")+ "bdorz_come=1")+ '" name="tj_login" class="lb"&gt;&ccedil;&#153;&raquo;&aring;&frac12;&#149;&lt;/a&gt;');&lt;/script&gt; &lt;a href=//www.baidu.com/more/ name=tj_briicon class=bri style="display: block;"&gt;&aelig;&#155;&acute;&aring;&curren;&#154;&auml;&ordm;&sect;&aring;&#147;&#129;&lt;/a&gt; &lt;/div&gt; &lt;/div&gt; &lt;/div&gt; &lt;div id=ftCon&gt; &lt;div id=ftConw&gt; &lt;p id=lh&gt; &lt;a href=http://home.baidu.com&gt;&aring;&#133;&sup3;&auml;&ordm;&#142;&ccedil;&#153;&frac34;&aring;&ordm;&brvbar;&lt;/a&gt; &lt;a href=http://ir.baidu.com&gt;About Baidu&lt;/a&gt; &lt;/p&gt; &lt;p id=cp&gt;&amp;copy;2017&amp;nbsp;Baidu&amp;nbsp;&lt;a href=http://www.baidu.com/duty/&gt;&auml;&frac12;&iquest;&ccedil;&#148;&uml;&ccedil;&#153;&frac34;&aring;&ordm;&brvbar;&aring;&#137;&#141;&aring;&iquest;&#133;&egrave;&macr;&raquo;&lt;/a&gt;&amp;nbsp; &lt;a href=http://jianyi.baidu.com/ class=cp-feedback&gt;&aelig;&#132;&#143;&egrave;&sect;&#129;&aring;&#143;&#141;&eacute;&brvbar;&#136;&lt;/a&gt;&amp;nbsp;&auml;&ordm;&not;ICP&egrave;&macr;&#129;030173&aring;&#143;&middot;&amp;nbsp; &lt;img src=//www.baidu.com/img/gs.gif&gt; &lt;/p&gt; &lt;/div&gt; &lt;/div&gt; &lt;/div&gt; &lt;/body&gt; &lt;/html&gt;&#13;
+</pre></td></tr><tr><td class="data key">Response File</td><td class="data delimiter">:</td><td class="data"><pre class="data"></pre></td></tr></table></div><div class="trail"></div></div></li><li class="navigation">Thread: 线程组 1-1</li><li onclick="return onclick_li(this);"><div class="success">HTTP请求</div><div class="detail"><div class="group">Sampler</div><div class="zebra"><table><tr><td class="data key">Thread Name</td><td class="data delimiter">:</td><td class="data">线程组 1-1</td></tr><tr><td class="data key">Timestamp</td><td class="data delimiter">:</td><td class="data"><span class="patch_timestamp">1566121251221</span></td></tr><tr><td class="data key">Time</td><td class="data delimiter">:</td><td class="data">850 ms</td></tr><tr><td class="data key">Latency</td><td class="data delimiter">:</td><td class="data">176 ms</td></tr><tr><td class="data key">Bytes</td><td class="data delimiter">:</td><td class="data">19004</td></tr><tr><td class="data key">Sample Count</td><td class="data delimiter">:</td><td class="data"></td></tr><tr><td class="data key">Error Count</td><td class="data delimiter">:</td><td class="data"></td></tr><tr><td class="data key">Response Code</td><td class="data delimiter">:</td><td class="data">200</td></tr><tr><td class="data key">Response Message</td><td class="data delimiter">:</td><td class="data">OK</td></tr></table></div><div class="trail"></div><div class="group">Request</div><div class="zebra"><table><tr><td class="data key">Method/Url</td><td class="data delimiter">:</td><td class="data"><pre class="data">GET https://www.cnblogs.com/UncleYong/</pre></td></tr><tr><td class="data key">Query String</td><td class="data delimiter">:</td><td class="data"><pre class="data"></pre></td></tr><tr><td class="data key">Cookies</td><td class="data delimiter">:</td><td class="data"><pre class="data"></pre></td></tr><tr><td class="data key">Request Headers</td><td class="data delimiter">:</td><td class="data"><pre class="data">Connection: keep-alive
+Host: www.cnblogs.com
+User-Agent: Apache-HttpClient/4.5.7 (Java/1.8.0_181)
+</pre></td></tr></table></div><div class="trail"></div><div class="group">Response</div><div class="zebra"><table><tr><td class="data key">Response Headers</td><td class="data delimiter">:</td><td class="data"><pre class="data">HTTP/1.1 200 OK
+Date: Sun, 18 Aug 2019 09:40:51 GMT
+Content-Type: text/html; charset=utf-8
+Transfer-Encoding: chunked
+Connection: keep-alive
+Vary: Accept-Encoding
+Cache-Control: public,max-age=10
+</pre></td></tr><tr><td class="data key">Response Data</td><td class="data delimiter">:</td><td class="data"><pre class="data">&lt;!DOCTYPE html&gt;
+&lt;html lang="zh-cn"&gt;
+&lt;head&gt;
+    &lt;meta charset="utf-8" /&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0" /&gt;
+    &lt;meta name="referrer" content="origin" /&gt;
+    
+    &lt;meta http-equiv="Cache-Control" content="no-transform" /&gt;
+    &lt;meta http-equiv="Cache-Control" content="no-siteapp" /&gt;
+    &lt;title&gt;qzcsbj - 博客园&lt;/title&gt;
+    
+    &lt;link rel="shortcut icon" href="//common.cnblogs.com/favicon.ico" type="image/x-icon" /&gt;
+    &lt;link rel="stylesheet" href="/css/blog-common.min.css?v=HrvK75b61-WJQPXtn_liCIWUC4EcnwT_lmrRbncieJo" /&gt;
+    &lt;link id="MainCss" rel="stylesheet" href="/skins/simplememory/bundle-simplememory.min.css?v=h-hNL0OecmJJJBSDulvE8iy08VWrYSL9CnbTmAQnC3Q" /&gt;
+    &lt;link type="text/css" rel="stylesheet" href="https://www.cnblogs.com/blog/customcss/305209.css?v=jYxX9I/Nb1vp87guGt3mXLUPQzw=" /&gt;
+    &lt;link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/skins/SimpleMemory/bundle-SimpleMemory-mobile.min.css" /&gt;
+    
+    &lt;link type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/uncleyong/rss" /&gt;
+    &lt;link type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/uncleyong/rsd.xml" /&gt;
+    &lt;link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/uncleyong/wlwmanifest.xml" /&gt;
+    &lt;script src="https://common.cnblogs.com/scripts/jquery-2.2.0.min.js"&gt;&lt;/script&gt;
+    &lt;script src="/js/blog-common.min.js?v=QpGyczkTXk3TRlmx5WjzQ1nBeI2bvPcJ0wTjD2PWkv0"&gt;&lt;/script&gt;
+    &lt;script&gt;
+        var currentBlogId = 305209;
+        var currentBlogApp = 'uncleyong';
+        var cb_enable_mathjax = false;
+        var isLogined = false;
+    &lt;/script&gt;
+    
+    
+    
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;a name="top"&gt;&lt;/a&gt;
+    &lt;div id="page_begin_html"&gt;
+        &lt;!--火箭1&#13;
+&lt;link href="https://blog-static.cnblogs.com/files/uncleyong/huojian.css" rel="stylesheet"&gt;&#13;
+--&gt;&#13;
+&#13;
+&lt;!--火箭2--&gt;&#13;
+&lt;link href="https://blog-static.cnblogs.com/files/uncleyong/huojian2.css" rel="stylesheet"&gt;
+    &lt;/div&gt;
+    
+&lt;!--done--&gt;
+&lt;div id="home"&gt;
+&lt;div id="header"&gt;
+	&lt;div id="blogTitle"&gt;
+        &lt;a id="lnkBlogLogo" href="https://www.cnblogs.com/uncleyong/"&gt;&lt;img id="blogLogo" src="/skins/custom/images/logo.gif" alt="返回主页" /&gt;&lt;/a&gt;		
+		
+&lt;!--done--&gt;
+&lt;h1&gt;
+&lt;a id="Header1_HeaderTitle" class="headermaintitle" href="https://www.cnblogs.com/uncleyong/"&gt;全栈测试笔记&lt;/a&gt;
+&lt;/h1&gt;
+&lt;h2&gt;
+做一个暖心的测试技术分享者，分享干货包括：性能、自动化、测开、安全。
+&lt;/h2&gt;
+
+
+
+
+		
+	&lt;/div&gt;&lt;!--end: blogTitle 博客的标题和副标题 --&gt;
+	&lt;div id="navigator"&gt;
+		
+&lt;ul id="navList"&gt;
+&lt;li&gt;&lt;a id="blog_nav_sitehome" class="menu" href="https://www.cnblogs.com/"&gt;
+博客园&lt;/a&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;a id="blog_nav_myhome" class="menu" href="https://www.cnblogs.com/uncleyong/"&gt;
+首页&lt;/a&gt;
+&lt;/li&gt;
+&lt;li&gt;
+
+&lt;a id="blog_nav_newpost" class="menu" href="https://i.cnblogs.com/EditPosts.aspx?opt=1"&gt;
+新随笔&lt;/a&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;a id="blog_nav_contact" class="menu" href="https://msg.cnblogs.com/send/qzcsbj"&gt;
+联系&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;
+
+&lt;!--&lt;partial name="./Shared/_XmlLink.cshtml" model="Model" /&gt;&lt;/li&gt;--&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;a id="blog_nav_admin" class="menu" href="https://i.cnblogs.com/"&gt;
+管理&lt;/a&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+
+
+		&lt;div class="blogStats"&gt;
+			
+			&lt;span id="stats_post_count"&gt;随笔 - 
+216&amp;nbsp; &lt;/span&gt;
+&lt;span id="stats_article_count"&gt;文章 - 
+0&amp;nbsp; &lt;/span&gt;
+&lt;span id="stats-comment_count"&gt;评论 - 
+37&lt;/span&gt;
+
+			
+		&lt;/div&gt;&lt;!--end: blogStats --&gt;
+	&lt;/div&gt;&lt;!--end: navigator 博客导航栏 --&gt;
+&lt;/div&gt;&lt;!--end: header 头部 --&gt;
+
+&lt;div id="main"&gt;
+	&lt;div id="mainContent"&gt;
+	&lt;div class="forFlow"&gt;
+		
+&lt;!--done--&gt;
+
+
+
+
+
+		
+
+
+&lt;div class="day"&gt;
+    &lt;div class="dayTitle"&gt;
+        &lt;a href="https://www.cnblogs.com/uncleyong/archive/2019/05/08.html"&gt;2019年5月8日&lt;/a&gt;
+    &lt;/div&gt;
+
+        &lt;div class="postTitle"&gt;
+            
+
+&lt;a class="postTitle2" href="https://www.cnblogs.com/uncleyong/p/10836607.html"&gt;
+[置顶]    测试技术提升建议（必看）
+&lt;/a&gt;
+
+        &lt;/div&gt;
+        &lt;div class="postCon"&gt;
+
+    &lt;div class="c_b_p_desc"&gt;
+摘要：去年年底开始，很多测试人员抱怨互联网寒冬来袭，抱怨找不到好工作，抱怨要求高，但是我发现，技术好的，找工作甚至找到非常不错的工作还是很轻松的。所以，还是要自身实力强，打铁还需自身硬。 测试招聘要求发展 2010年左右，测试招聘要求大概都是熟悉测试流程，熟悉用例设计方法。 2017年左右，测试招聘要求是            &lt;a href="https://www.cnblogs.com/uncleyong/p/10836607.html" class="c_b_p_desc_readmore"&gt;阅读全文&lt;/a&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+        &lt;div class="clear"&gt;&lt;/div&gt;
+        &lt;div class="postDesc"&gt;
+
+posted @ 2019-05-08 23:26 qzcsbj 阅读 (4107) 评论 (7)
+&lt;a href="https://i.cnblogs.com/EditPosts.aspx?postid=10836607" rel="nofollow"&gt;
+    编辑
+&lt;/a&gt;
+&lt;/div&gt;
+        &lt;div class="clear"&gt;&lt;/div&gt;
+&lt;/div&gt;
+
+
+		
+
+
+&lt;div class="day"&gt;
+    &lt;div class="dayTitle"&gt;
+        &lt;a href="https://www.cnblogs.com/uncleyong/archive/2016/08/09.html"&gt;2016年8月9日&lt;/a&gt;
+    &lt;/div&gt;
+
+        &lt;div class="postTitle"&gt;
+            
+
+&lt;a class="postTitle2" href="https://www.cnblogs.com/uncleyong/p/10530261.html"&gt;
+[置顶]    【自学目录】从测试小白到高级全栈测试修炼之路（自动化 、性能、测开、安全），持续更新中。。。
+&lt;/a&gt;
+
+        &lt;/div&gt;
+        &lt;div class="postCon"&gt;
+
+    &lt;div class="c_b_p_desc"&gt;
+摘要：说明：以下内容均为本人工作及学习总结，分享给大家，抛砖引玉，共同进步。 》》》》》》 标红的为已经完成的，黑色点不动的是待完成的，加密的是草稿阶段。 逆袭路线推荐 测试技术提升建议：https://www.cnblogs.com/uncleyong/p/10836607.html 1、测试入门：测试            &lt;a href="https://www.cnblogs.com/uncleyong/p/10530261.html" class="c_b_p_desc_readmore"&gt;阅读全文&lt;/a&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+        &lt;div class="clear"&gt;&lt;/div&gt;
+        &lt;div class="postDesc"&gt;
+
+posted @ 2016-08-09 23:49 qzcsbj 阅读 (15999) 评论 (3)
+&lt;a href="https://i.cnblogs.com/EditPosts.aspx?postid=10530261" rel="nofollow"&gt;
+    编辑
+&lt;/a&gt;
+&lt;/div&gt;
+        &lt;div class="clear"&gt;&lt;/div&gt;
+&lt;/div&gt;
+
+
+		
+
+
+&lt;div class="day"&gt;
+    &lt;div class="dayTitle"&gt;
+        &lt;a href="https://www.cnblogs.com/uncleyong/archive/2019/08/14.html"&gt;2019年8月14日&lt;/a&gt;
+    &lt;/div&gt;
+
+        &lt;div class="postTitle"&gt;
+            
+
+&lt;a class="postTitle2" href="https://www.cnblogs.com/uncleyong/p/11356236.html"&gt;
+    flask如何返回真正意义上的json字符串？以及中文如何正常显示？
+&lt;/a&gt;
+
+        &lt;/div&gt;
+        &lt;div class="postCon"&gt;
+
+    &lt;div class="c_b_p_desc"&gt;
+摘要：flask中，不能直接return字典，需要把字典转换为json字符串方式有三种：1. return str(字典)2.return json.dumps(字典)3.return jsonify(字典)其中，dumps是json模块的方法，jsonify是flask封装的方法 虽然他们返回的都是js            &lt;a href="https://www.cnblogs.com/uncleyong/p/11356236.html" class="c_b_p_desc_readmore"&gt;阅读全文&lt;/a&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+        &lt;div class="clear"&gt;&lt;/div&gt;
+        &lt;div class="postDesc"&gt;
+
+posted @ 2019-08-14 22:46 qzcsbj 阅读 (55) 评论 (0)
+&lt;a href="https://i.cnblogs.com/EditPosts.aspx?postid=11356236" rel="nofollow"&gt;
+    编辑
+&lt;/a&gt;
+&lt;/div&gt;
+        &lt;div class="clear"&gt;&lt;/div&gt;
+&lt;/div&gt;
+
+
+		
+
+
+&lt;div class="day"&gt;
+    &lt;div class="dayTitle"&gt;
+        &lt;a href="https://www.cnblogs.com/uncleyong/archive/2019/08/13.html"&gt;2019年8月13日&lt;/a&gt;
+    &lt;/div&gt;
+
+        &lt;div class="postTitle"&gt;
+            
+
+&lt;a class="postTitle2" href="https://www.cnblogs.com/uncleyong/p/11343821.html"&gt;
+    记录一次群答问：requests获取cookie
+&lt;/a&gt;
+
+        &lt;/div&gt;
+        &lt;div class="postCon"&gt;
+
+    &lt;div class="c_b_p_desc"&gt;
+摘要：问题： 为了测试，写的sever，下面仅为set cookie的部分代码 测试 输出结果： &amp;lt;Response [200]&amp;gt;200{&amp;quot;code&amp;quot;:9420, &amp;quot;msg&amp;quot;:&amp;quot;恭喜qzcsbj，登录成功&amp;quot;,&amp;quot;token&amp;quot;:&amp;quot;970aa0ddb521bcde8ce7f1592a889e1c&amp;quot;}&amp;lt;Reque            &lt;a href="https://www.cnblogs.com/uncleyong/p/11343821.html" class="c_b_p_desc_readmore"&gt;阅读全文&lt;/a&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+        &lt;div class="clear"&gt;&lt;/div&gt;
+        &lt;div class="postDesc"&gt;
+
+posted @ 2019-08-13 06:28 qzcsbj 阅读 (11) 评论 (0)
+&lt;a href="https://i.cnblogs.com/EditPosts.aspx?postid=11343821" rel="nofollow"&gt;
+    编辑
+&lt;/a&gt;
+&lt;/div&gt;
+        &lt;div class="clear"&gt;&lt;/div&gt;
+&lt;/div&gt;
+
+
+		
+
+
+&lt;div class="day"&gt;
+    &lt;div class="dayTitle"&gt;
+        &lt;a href="https://www.cnblogs.com/uncleyong/archive/2019/08/05.html"&gt;2019年8月5日&lt;/a&gt;
+    &lt;/div&gt;
+
+        &lt;div class="postTitle"&gt;
+            
+
+&lt;a class="postTitle2" href="https://www.cnblogs.com/uncleyong/p/11309729.html"&gt;
+    笔试题：python文件操作
+&lt;/a&gt;
+
+        &lt;/div&gt;
+        &lt;div class="postCon"&gt;
+
+    &lt;div class="c_b_p_desc"&gt;
+摘要：请说出下面代码结果及原因，很easy。 说明：test.txt文件不存在 输出结果及原因： 输出结果及原因： 输出结果及原因：            &lt;a href="https://www.cnblogs.com/uncleyong/p/11309729.html" class="c_b_p_desc_readmore"&gt;阅读全文&lt;/a&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+        &lt;div class="clear"&gt;&lt;/div&gt;
+        &lt;div class="postDesc"&gt;
+
+posted @ 2019-08-05 22:13 qzcsbj 阅读 (164) 评论 (0)
+&lt;a href="https://i.cnblogs.com/EditPosts.aspx?postid=11309729" rel="nofollow"&gt;
+    编辑
+&lt;/a&gt;
+&lt;/div&gt;
+        &lt;div class="clear"&gt;&lt;/div&gt;
+&lt;/div&gt;
+
+
+		
+
+
+&lt;div class="day"&gt;
+    &lt;div class="dayTitle"&gt;
+        &lt;a href="https://www.cnblogs.com/uncleyong/archive/2019/08/02.html"&gt;2019年8月2日&lt;/a&gt;
+    &lt;/div&gt;
+
+        &lt;div class="postTitle"&gt;
+            
+
+&lt;a class="postTitle2" href="https://www.cnblogs.com/uncleyong/p/11289033.html"&gt;
+    面向对象小测试（二）
+&lt;/a&gt;
+
+        &lt;/div&gt;
+        &lt;div class="postCon"&gt;
+
+    &lt;div class="c_b_p_desc"&gt;
+摘要：请参考下面代码，分别说出1-19题运行结果，及原因。 特别说明：__query2这个方法后面的所有方法上面都有装饰器， 博客里面没显示出来，是博客的bug吧，要选中才显示，最好复制出来看 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19            &lt;a href="https://www.cnblogs.com/uncleyong/p/11289033.html" class="c_b_p_desc_readmore"&gt;阅读全文&lt;/a&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+        &lt;div class="clear"&gt;&lt;/div&gt;
+        &lt;div class="postDesc"&gt;
+
+posted @ 2019-08-02 00:54 qzcsbj 阅读 (112) 评论 (0)
+&lt;a href="https://i.cnblogs.com/EditPosts.aspx?postid=11289033" rel="nofollow"&gt;
+    编辑
+&lt;/a&gt;
+&lt;/div&gt;
+        &lt;div class="clear"&gt;&lt;/div&gt;
+&lt;/div&gt;
+
+
+		
+
+
+&lt;div class="day"&gt;
+    &lt;div class="dayTitle"&gt;
+        &lt;a href="https://www.cnblogs.com/uncleyong/archive/2019/08/01.html"&gt;2019年8月1日&lt;/a&gt;
+    &lt;/div&gt;
+
+        &lt;div class="postTitle"&gt;
+            
+
+&lt;a class="postTitle2" href="https://www.cnblogs.com/uncleyong/p/11283647.html"&gt;
+    面向对象小测试（一）
+&lt;/a&gt;
+
+        &lt;/div&gt;
+        &lt;div class="postCon"&gt;
+
+    &lt;div class="c_b_p_desc"&gt;
+摘要：没对象？没关系，new一个，赶紧来测试下自己new的技术如何吧。 请直接说出上面代码结果及原因： 请直接说出上面代码结果及原因： 请直接说出上面代码结果及原因： 请直接说出上面代码结果及原因： 请直接说出上面代码结果及原因： 请直接说出上面代码结果及原因： 请直接说出上面代码结果及原因： 请直接说出            &lt;a href="https://www.cnblogs.com/uncleyong/p/11283647.html" class="c_b_p_desc_readmore"&gt;阅读全文&lt;/a&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+        &lt;div class="clear"&gt;&lt;/div&gt;
+        &lt;div class="postDesc"&gt;
+
+posted @ 2019-08-01 00:47 qzcsbj 阅读 (247) 评论 (2)
+&lt;a href="https://i.cnblogs.com/EditPosts.aspx?postid=11283647" rel="nofollow"&gt;
+    编辑
+&lt;/a&gt;
+&lt;/div&gt;
+        &lt;div class="clear"&gt;&lt;/div&gt;
+&lt;/div&gt;
+
+
+		
+
+
+&lt;div class="day"&gt;
+    &lt;div class="dayTitle"&gt;
+        &lt;a href="https://www.cnblogs.com/uncleyong/archive/2019/07/27.html"&gt;2019年7月27日&lt;/a&gt;
+    &lt;/div&gt;
+
+        &lt;div class="postTitle"&gt;
+            
+
+&lt;a class="postTitle2" href="https://www.cnblogs.com/uncleyong/p/11268846.html"&gt;
+    接口测试：postman PK jmeter
+&lt;/a&gt;
+
+        &lt;/div&gt;
+        &lt;div class="postCon"&gt;
+
+    &lt;div class="c_b_p_desc"&gt;
+摘要：测试接口，postman和jmeter是用得最频繁的工具，特别是jmeter，支持很多种协议，除了测功能，还能做自动化测试和性能测试（更多内容，请参考：https://www.cnblogs.com/uncleyong/category/881242.html）。 下面主要介绍postman和jme            &lt;a href="https://www.cnblogs.com/uncleyong/p/11268846.html" class="c_b_p_desc_readmore"&gt;阅读全文&lt;/a&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+        &lt;div class="clear"&gt;&lt;/div&gt;
+        &lt;div class="postDesc"&gt;
+
+posted @ 2019-07-27 11:12 qzcsbj 阅读 (620) 评论 (0)
+&lt;a href="https://i.cnblogs.com/EditPosts.aspx?postid=11268846" rel="nofollow"&gt;
+    编辑
+&lt;/a&gt;
+&lt;/div&gt;
+        &lt;div class="clear"&gt;&lt;/div&gt;
+&lt;/div&gt;
+
+
+		
+
+
+&lt;div class="day"&gt;
+    &lt;div class="dayTitle"&gt;
+        &lt;a href="https://www.cnblogs.com/uncleyong/archive/2019/07/22.html"&gt;2019年7月22日&lt;/a&gt;
+    &lt;/div&gt;
+
+        &lt;div class="postTitle"&gt;
+            
+
+&lt;a class="postTitle2" href="https://www.cnblogs.com/uncleyong/p/11230413.html"&gt;
+    【笔试题】局部变量和全局变量---------------【答不对，你还敢说你精通、熟悉python？】
+&lt;/a&gt;
+
+        &lt;/div&gt;
+        &lt;div class="postCon"&gt;
+
+    &lt;div class="c_b_p_desc"&gt;
+摘要：请说出运行结果，并解释why? 第一部分 上面代码结果是： 上面代码结果是： 上面代码结果是： 函数外部未定义res 上面代码结果是： 上面代码结果是： 上面代码结果是： 上面代码结果是： 上面代码结果是： 上面代码结果是： 函数外部未定义money 上面代码结果是： 第二部分 上面代码结果是： 上            &lt;a href="https://www.cnblogs.com/uncleyong/p/11230413.html" class="c_b_p_desc_readmore"&gt;阅读全文&lt;/a&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+        &lt;div class="clear"&gt;&lt;/div&gt;
+        &lt;div class="postDesc"&gt;
+
+posted @ 2019-07-22 23:53 qzcsbj 阅读 (662) 评论 (0)
+&lt;a href="https://i.cnblogs.com/EditPosts.aspx?postid=11230413" rel="nofollow"&gt;
+    编辑
+&lt;/a&gt;
+&lt;/div&gt;
+        &lt;div class="clear"&gt;&lt;/div&gt;
+&lt;/div&gt;
+
+
+		
+
+
+&lt;div class="day"&gt;
+    &lt;div class="dayTitle"&gt;
+        &lt;a href="https://www.cnblogs.com/uncleyong/archive/2019/07/06.html"&gt;2019年7月6日&lt;/a&gt;
+    &lt;/div&gt;
+
+        &lt;div class="postTitle"&gt;
+            
+
+&lt;a class="postTitle2" href="https://www.cnblogs.com/uncleyong/p/11158806.html"&gt;
+    面试必备：技术术语
+&lt;/a&gt;
+
+        &lt;/div&gt;
+        &lt;div class="postCon"&gt;
+
+    &lt;div class="c_b_p_desc"&gt;
+摘要：部分整理自网络，如有侵权，请联系删除。 正向代理 &amp;amp; 反向代理 正向代理：作为一个媒介将互联网上获取的资源返回给相关联的客户端，代理和客户端在一个局域网，对于服务端是透明的。 反向代理：根据客户端的请求，从后端的服务器上获取资源，然后再将这些资源返回给客户端，代理和服务器在一个局域网，对客户端是透明            &lt;a href="https://www.cnblogs.com/uncleyong/p/11158806.html" class="c_b_p_desc_readmore"&gt;阅读全文&lt;/a&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+        &lt;div class="clear"&gt;&lt;/div&gt;
+        &lt;div class="postDesc"&gt;
+
+posted @ 2019-07-06 17:24 qzcsbj 阅读 (358) 评论 (0)
+&lt;a href="https://i.cnblogs.com/EditPosts.aspx?postid=11158806" rel="nofollow"&gt;
+    编辑
+&lt;/a&gt;
+&lt;/div&gt;
+        &lt;div class="clear"&gt;&lt;/div&gt;
+&lt;/div&gt;
+
+
+		
+
+
+&lt;div class="day"&gt;
+    &lt;div class="dayTitle"&gt;
+        &lt;a href="https://www.cnblogs.com/uncleyong/archive/2019/06/30.html"&gt;2019年6月30日&lt;/a&gt;
+    &lt;/div&gt;
+
+        &lt;div class="postTitle"&gt;
+            
+
+&lt;a class="postTitle2" href="https://www.cnblogs.com/uncleyong/p/10986466.html"&gt;
+    性能测试：jmeter中通过beanshell把关联转变成参数化
+&lt;/a&gt;
+
+        &lt;/div&gt;
+        &lt;div class="postCon"&gt;
+
+    &lt;div class="c_b_p_desc"&gt;
+摘要：在用jmeter做性能测试的时候，可能会因为依赖请求导致一些问题。 问题一：问题一：参数化数据量不足，比如：我要压测的某个接口依赖登录，先通过登录获取到tokenId（每个账号登录一次），然后作为被压测接口的入参，如果账号不足，当我并发的线程数多于登录账号数量，就会出现账号二次登录，而前一次登录获取            &lt;a href="https://www.cnblogs.com/uncleyong/p/10986466.html" class="c_b_p_desc_readmore"&gt;阅读全文&lt;/a&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+        &lt;div class="clear"&gt;&lt;/div&gt;
+        &lt;div class="postDesc"&gt;
+
+posted @ 2019-06-30 21:29 qzcsbj 阅读 (242) 评论 (0)
+&lt;a href="https://i.cnblogs.com/EditPosts.aspx?postid=10986466" rel="nofollow"&gt;
+    编辑
+&lt;/a&gt;
+&lt;/div&gt;
+        &lt;div class="clear"&gt;&lt;/div&gt;
+&lt;/div&gt;
+
+
+		
+
+
+&lt;div class="day"&gt;
+    &lt;div class="dayTitle"&gt;
+        &lt;a href="https://www.cnblogs.com/uncleyong/archive/2019/06/29.html"&gt;2019年6月29日&lt;/a&gt;
+    &lt;/div&gt;
+
+        &lt;div class="postTitle"&gt;
+            
+
+&lt;a class="postTitle2" href="https://www.cnblogs.com/uncleyong/p/11119489.html"&gt;
+    笔试题汇总，含参考答案（持续更新中。。。自问自答，自娱自乐）--机会只留给有准备的人【注册登录可见】
+&lt;/a&gt;
+
+        &lt;/div&gt;
+        &lt;div class="postCon"&gt;
+
+    &lt;div class="c_b_p_desc"&gt;
+只有注册用户登录后才能阅读该文。            &lt;a href="https://www.cnblogs.com/uncleyong/p/11119489.html" class="c_b_p_desc_readmore"&gt;阅读全文&lt;/a&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+        &lt;div class="clear"&gt;&lt;/div&gt;
+        &lt;div class="postDesc"&gt;
+
+posted @ 2019-06-29 11:24 qzcsbj 阅读 (2140) 评论 (2)
+&lt;a href="https://i.cnblogs.com/EditPosts.aspx?postid=11119489" rel="nofollow"&gt;
+    编辑
+&lt;/a&gt;
+&lt;/div&gt;
+        &lt;div class="clear"&gt;&lt;/div&gt;
+&lt;/div&gt;
+
+
+
+&lt;div class="topicListFooter"&gt;
+    &lt;div id="nav_next_page"&gt;
+        
+
+    &lt;a href="https://www.cnblogs.com/uncleyong/default.html?page=2"&gt;
+        下一页
+    &lt;/a&gt;
+
+    &lt;/div&gt;    
+&lt;/div&gt;
+
+
+
+
+
+
+
+
+
+	&lt;/div&gt;&lt;!--end: forFlow --&gt;
+	&lt;/div&gt;&lt;!--end: mainContent 主体内容容器--&gt;
+
+	&lt;div id="sideBar"&gt;
+		&lt;div id="sideBarMain"&gt;
+			
+&lt;div id="sidebar_news" class="newsItem"&gt;
+            &lt;script&gt;loadBlogNews();&lt;/script&gt;
+&lt;/div&gt;
+
+			&lt;div id="blog-calendar" style="display:none"&gt;&lt;/div&gt;&lt;script&gt;loadBlogDefaultCalendar();&lt;/script&gt;
+			
+			&lt;div id="leftcontentcontainer"&gt;
+				&lt;div id="blog-sidecolumn"&gt;&lt;/div&gt;
+                    &lt;script&gt;loadBlogSideColumn();&lt;/script&gt;
+			&lt;/div&gt;
+			
+		&lt;/div&gt;&lt;!--end: sideBarMain --&gt;
+	&lt;/div&gt;&lt;!--end: sideBar 侧边栏容器 --&gt;
+	&lt;div class="clear"&gt;&lt;/div&gt;
+	&lt;/div&gt;&lt;!--end: main --&gt;
+	&lt;div class="clear"&gt;&lt;/div&gt;
+	&lt;div id="footer"&gt;
+		&lt;!--done--&gt;
+Copyright &amp;copy; 2019 qzcsbj
+    &lt;div id="poweredby"&gt;Powered by .NET Core 3.0 Preview 8 on Linux&lt;/div&gt;
+
+
+
+	&lt;/div&gt;&lt;!--end: footer --&gt;
+&lt;/div&gt;&lt;!--end: home 自定义的最大容器 --&gt;
+
+
+    
+&lt;/body&gt;
+&lt;/html&gt;
+</pre></td></tr><tr><td class="data key">Response File</td><td class="data delimiter">:</td><td class="data"><pre class="data"></pre></td></tr></table></div><div class="trail"></div></div></li></ol></div><div id="right-panel"></div></body></html>

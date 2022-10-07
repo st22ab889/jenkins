@@ -1,0 +1,1265 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testResults version="1.2">
+<httpSample t="146" it="0" lt="145" ct="101" ts="1566121251221" s="true" lb="HTTP Request" rc="200" rm="OK" tn="测试接口json 3-1" dt="text" by="545" sby="223" ng="1" na="3">
+  <responseHeader class="java.lang.String">HTTP/1.1 200 OK
+Connection: keep-alive
+Content-Type: application/json
+Date: Sun, 18 Aug 2019 09:40:51 GMT
+P3p: CP=&quot; OTI DSP COR IVA OUR IND COM &quot;
+P3p: CP=&quot; OTI DSP COR IVA OUR IND COM &quot;
+Server: Apache
+Set-Cookie: BAIDUID=4DED1B80CDF7A3C043EE24BBBC1BB0D3:FG=1; expires=Mon, 17-Aug-20 09:40:51 GMT; max-age=31536000; path=/; domain=.baidu.com; version=1
+Set-Cookie: BAIDUID=4DED1B80CDF7A3C078DF721EBE190DD1:FG=1; expires=Mon, 17-Aug-20 09:40:51 GMT; max-age=31536000; path=/; domain=.baidu.com; version=1
+Content-Length: 11
+</responseHeader>
+  <requestHeader class="java.lang.String">Connection: keep-alive
+Host: baike.baidu.com
+User-Agent: Apache-HttpClient/4.5.7 (Java/1.8.0_181)
+</requestHeader>
+  <responseData class="java.lang.String">{&quot;errno&quot;:2}</responseData>
+  <cookies class="java.lang.String"></cookies>
+  <method class="java.lang.String">GET</method>
+  <queryString class="java.lang.String"></queryString>
+  <java.net.URL>http://baike.baidu.com/api/openapi/BaikeLemmaCardApi?scope=103&amp;format=json&amp;appid=379020&amp;bk_key=%E9%93%B6%E9%AD%82&amp;bk_length=600</java.net.URL>
+</httpSample>
+<httpSample t="146" it="0" lt="145" ct="101" ts="1566121251221" s="true" lb="HTTP Request" rc="200" rm="OK" tn="测试百度 2-1" dt="text" by="2781" sby="117" ng="1" na="3">
+  <responseHeader class="java.lang.String">HTTP/1.1 200 OK
+Accept-Ranges: bytes
+Cache-Control: private, no-cache, no-store, proxy-revalidate, no-transform
+Connection: Keep-Alive
+Content-Length: 2381
+Content-Type: text/html
+Date: Sun, 18 Aug 2019 09:40:51 GMT
+Etag: &quot;588604c4-94d&quot;
+Last-Modified: Mon, 23 Jan 2017 13:27:32 GMT
+Pragma: no-cache
+Server: bfe/1.0.8.18
+Set-Cookie: BDORZ=27315; max-age=86400; domain=.baidu.com; path=/
+</responseHeader>
+  <requestHeader class="java.lang.String">Connection: keep-alive
+Host: www.baidu.com
+User-Agent: Apache-HttpClient/4.5.7 (Java/1.8.0_181)
+</requestHeader>
+  <responseData class="java.lang.String">&lt;!DOCTYPE html&gt;&#xd;
+&lt;!--STATUS OK--&gt;&lt;html&gt; &lt;head&gt;&lt;meta http-equiv=content-type content=text/html;charset=utf-8&gt;&lt;meta http-equiv=X-UA-Compatible content=IE=Edge&gt;&lt;meta content=always name=referrer&gt;&lt;link rel=stylesheet type=text/css href=http://s1.bdstatic.com/r/www/cache/bdorz/baidu.min.css&gt;&lt;title&gt;ç&#x99;¾åº¦ä¸&#x80;ä¸&#x8b;ï¼&#x8c;ä½ å°±ç&#x9f;¥é&#x81;&#x93;&lt;/title&gt;&lt;/head&gt; &lt;body link=#0000cc&gt; &lt;div id=wrapper&gt; &lt;div id=head&gt; &lt;div class=head_wrapper&gt; &lt;div class=s_form&gt; &lt;div class=s_form_wrapper&gt; &lt;div id=lg&gt; &lt;img hidefocus=true src=//www.baidu.com/img/bd_logo1.png width=270 height=129&gt; &lt;/div&gt; &lt;form id=form name=f action=//www.baidu.com/s class=fm&gt; &lt;input type=hidden name=bdorz_come value=1&gt; &lt;input type=hidden name=ie value=utf-8&gt; &lt;input type=hidden name=f value=8&gt; &lt;input type=hidden name=rsv_bp value=1&gt; &lt;input type=hidden name=rsv_idx value=1&gt; &lt;input type=hidden name=tn value=baidu&gt;&lt;span class=&quot;bg s_ipt_wr&quot;&gt;&lt;input id=kw name=wd class=s_ipt value maxlength=255 autocomplete=off autofocus&gt;&lt;/span&gt;&lt;span class=&quot;bg s_btn_wr&quot;&gt;&lt;input type=submit id=su value=ç&#x99;¾åº¦ä¸&#x80;ä¸&#x8b; class=&quot;bg s_btn&quot;&gt;&lt;/span&gt; &lt;/form&gt; &lt;/div&gt; &lt;/div&gt; &lt;div id=u1&gt; &lt;a href=http://news.baidu.com name=tj_trnews class=mnav&gt;æ&#x96;°é&#x97;»&lt;/a&gt; &lt;a href=http://www.hao123.com name=tj_trhao123 class=mnav&gt;hao123&lt;/a&gt; &lt;a href=http://map.baidu.com name=tj_trmap class=mnav&gt;å&#x9c;°å&#x9b;¾&lt;/a&gt; &lt;a href=http://v.baidu.com name=tj_trvideo class=mnav&gt;è§&#x86;é¢&#x91;&lt;/a&gt; &lt;a href=http://tieba.baidu.com name=tj_trtieba class=mnav&gt;è´´å&#x90;§&lt;/a&gt; &lt;noscript&gt; &lt;a href=http://www.baidu.com/bdorz/login.gif?login&amp;amp;tpl=mn&amp;amp;u=http%3A%2F%2Fwww.baidu.com%2f%3fbdorz_come%3d1 name=tj_login class=lb&gt;ç&#x99;»å½&#x95;&lt;/a&gt; &lt;/noscript&gt; &lt;script&gt;document.write(&apos;&lt;a href=&quot;http://www.baidu.com/bdorz/login.gif?login&amp;tpl=mn&amp;u=&apos;+ encodeURIComponent(window.location.href+ (window.location.search === &quot;&quot; ? &quot;?&quot; : &quot;&amp;&quot;)+ &quot;bdorz_come=1&quot;)+ &apos;&quot; name=&quot;tj_login&quot; class=&quot;lb&quot;&gt;ç&#x99;»å½&#x95;&lt;/a&gt;&apos;);&lt;/script&gt; &lt;a href=//www.baidu.com/more/ name=tj_briicon class=bri style=&quot;display: block;&quot;&gt;æ&#x9b;´å¤&#x9a;äº§å&#x93;&#x81;&lt;/a&gt; &lt;/div&gt; &lt;/div&gt; &lt;/div&gt; &lt;div id=ftCon&gt; &lt;div id=ftConw&gt; &lt;p id=lh&gt; &lt;a href=http://home.baidu.com&gt;å&#x85;³äº&#x8e;ç&#x99;¾åº¦&lt;/a&gt; &lt;a href=http://ir.baidu.com&gt;About Baidu&lt;/a&gt; &lt;/p&gt; &lt;p id=cp&gt;&amp;copy;2017&amp;nbsp;Baidu&amp;nbsp;&lt;a href=http://www.baidu.com/duty/&gt;ä½¿ç&#x94;¨ç&#x99;¾åº¦å&#x89;&#x8d;å¿&#x85;è¯»&lt;/a&gt;&amp;nbsp; &lt;a href=http://jianyi.baidu.com/ class=cp-feedback&gt;æ&#x84;&#x8f;è§&#x81;å&#x8f;&#x8d;é¦&#x88;&lt;/a&gt;&amp;nbsp;äº¬ICPè¯&#x81;030173å&#x8f;·&amp;nbsp; &lt;img src=//www.baidu.com/img/gs.gif&gt; &lt;/p&gt; &lt;/div&gt; &lt;/div&gt; &lt;/div&gt; &lt;/body&gt; &lt;/html&gt;&#xd;
+</responseData>
+  <cookies class="java.lang.String"></cookies>
+  <method class="java.lang.String">GET</method>
+  <queryString class="java.lang.String"></queryString>
+  <java.net.URL>http://www.baidu.com/</java.net.URL>
+</httpSample>
+<httpSample t="850" it="0" lt="176" ct="135" ts="1566121251221" s="true" lb="HTTP请求" rc="200" rm="OK" tn="线程组 1-1" dt="text" by="19004" sby="258" ng="1" na="1">
+  <httpSample t="176" it="0" lt="176" ct="135" ts="1566121251221" s="true" lb="HTTP请求-0" rc="301" rm="Moved Permanently" tn="线程组 1-1" dt="" by="160" sby="129" ng="1" na="1">
+    <responseHeader class="java.lang.String">HTTP/1.1 301 Moved Permanently
+Date: Sun, 18 Aug 2019 09:40:51 GMT
+Content-Length: 0
+Connection: keep-alive
+Location: https://www.cnblogs.com/UncleYong/
+</responseHeader>
+    <requestHeader class="java.lang.String">Connection: keep-alive
+Host: www.cnblogs.com
+User-Agent: Apache-HttpClient/4.5.7 (Java/1.8.0_181)
+</requestHeader>
+    <responseData class="java.lang.String">Non-TEXT response data, cannot record: ()</responseData>
+    <cookies class="java.lang.String"></cookies>
+    <method class="java.lang.String">GET</method>
+    <queryString class="java.lang.String"></queryString>
+    <redirectLocation class="java.lang.String">https://www.cnblogs.com/UncleYong/</redirectLocation>
+    <java.net.URL>http://www.cnblogs.com/UncleYong/</java.net.URL>
+  </httpSample>
+  <httpSample t="673" it="0" lt="633" ct="548" ts="1566121251398" s="true" lb="HTTP请求-1" rc="200" rm="OK" tn="线程组 1-1" dt="text" by="18844" sby="129" ng="1" na="1">
+    <responseHeader class="java.lang.String">HTTP/1.1 200 OK
+Date: Sun, 18 Aug 2019 09:40:51 GMT
+Content-Type: text/html; charset=utf-8
+Transfer-Encoding: chunked
+Connection: keep-alive
+Vary: Accept-Encoding
+Cache-Control: public,max-age=10
+</responseHeader>
+    <requestHeader class="java.lang.String">Connection: keep-alive
+Host: www.cnblogs.com
+User-Agent: Apache-HttpClient/4.5.7 (Java/1.8.0_181)
+</requestHeader>
+    <responseData class="java.lang.String">&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;zh-cn&quot;&gt;
+&lt;head&gt;
+    &lt;meta charset=&quot;utf-8&quot; /&gt;
+    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot; /&gt;
+    &lt;meta name=&quot;referrer&quot; content=&quot;origin&quot; /&gt;
+    
+    &lt;meta http-equiv=&quot;Cache-Control&quot; content=&quot;no-transform&quot; /&gt;
+    &lt;meta http-equiv=&quot;Cache-Control&quot; content=&quot;no-siteapp&quot; /&gt;
+    &lt;title&gt;qzcsbj - 博客园&lt;/title&gt;
+    
+    &lt;link rel=&quot;shortcut icon&quot; href=&quot;//common.cnblogs.com/favicon.ico&quot; type=&quot;image/x-icon&quot; /&gt;
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;/css/blog-common.min.css?v=HrvK75b61-WJQPXtn_liCIWUC4EcnwT_lmrRbncieJo&quot; /&gt;
+    &lt;link id=&quot;MainCss&quot; rel=&quot;stylesheet&quot; href=&quot;/skins/simplememory/bundle-simplememory.min.css?v=h-hNL0OecmJJJBSDulvE8iy08VWrYSL9CnbTmAQnC3Q&quot; /&gt;
+    &lt;link type=&quot;text/css&quot; rel=&quot;stylesheet&quot; href=&quot;https://www.cnblogs.com/blog/customcss/305209.css?v=jYxX9I/Nb1vp87guGt3mXLUPQzw=&quot; /&gt;
+    &lt;link id=&quot;mobile-style&quot; media=&quot;only screen and (max-width: 767px)&quot; type=&quot;text/css&quot; rel=&quot;stylesheet&quot; href=&quot;/skins/SimpleMemory/bundle-SimpleMemory-mobile.min.css&quot; /&gt;
+    
+    &lt;link type=&quot;application/rss+xml&quot; rel=&quot;alternate&quot; href=&quot;https://www.cnblogs.com/uncleyong/rss&quot; /&gt;
+    &lt;link type=&quot;application/rsd+xml&quot; rel=&quot;EditURI&quot; href=&quot;https://www.cnblogs.com/uncleyong/rsd.xml&quot; /&gt;
+    &lt;link type=&quot;application/wlwmanifest+xml&quot; rel=&quot;wlwmanifest&quot; href=&quot;https://www.cnblogs.com/uncleyong/wlwmanifest.xml&quot; /&gt;
+    &lt;script src=&quot;https://common.cnblogs.com/scripts/jquery-2.2.0.min.js&quot;&gt;&lt;/script&gt;
+    &lt;script src=&quot;/js/blog-common.min.js?v=QpGyczkTXk3TRlmx5WjzQ1nBeI2bvPcJ0wTjD2PWkv0&quot;&gt;&lt;/script&gt;
+    &lt;script&gt;
+        var currentBlogId = 305209;
+        var currentBlogApp = &apos;uncleyong&apos;;
+        var cb_enable_mathjax = false;
+        var isLogined = false;
+    &lt;/script&gt;
+    
+    
+    
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;a name=&quot;top&quot;&gt;&lt;/a&gt;
+    &lt;div id=&quot;page_begin_html&quot;&gt;
+        &lt;!--火箭1&#xd;
+&lt;link href=&quot;https://blog-static.cnblogs.com/files/uncleyong/huojian.css&quot; rel=&quot;stylesheet&quot;&gt;&#xd;
+--&gt;&#xd;
+&#xd;
+&lt;!--火箭2--&gt;&#xd;
+&lt;link href=&quot;https://blog-static.cnblogs.com/files/uncleyong/huojian2.css&quot; rel=&quot;stylesheet&quot;&gt;
+    &lt;/div&gt;
+    
+&lt;!--done--&gt;
+&lt;div id=&quot;home&quot;&gt;
+&lt;div id=&quot;header&quot;&gt;
+	&lt;div id=&quot;blogTitle&quot;&gt;
+        &lt;a id=&quot;lnkBlogLogo&quot; href=&quot;https://www.cnblogs.com/uncleyong/&quot;&gt;&lt;img id=&quot;blogLogo&quot; src=&quot;/skins/custom/images/logo.gif&quot; alt=&quot;返回主页&quot; /&gt;&lt;/a&gt;		
+		
+&lt;!--done--&gt;
+&lt;h1&gt;
+&lt;a id=&quot;Header1_HeaderTitle&quot; class=&quot;headermaintitle&quot; href=&quot;https://www.cnblogs.com/uncleyong/&quot;&gt;全栈测试笔记&lt;/a&gt;
+&lt;/h1&gt;
+&lt;h2&gt;
+做一个暖心的测试技术分享者，分享干货包括：性能、自动化、测开、安全。
+&lt;/h2&gt;
+
+
+
+
+		
+	&lt;/div&gt;&lt;!--end: blogTitle 博客的标题和副标题 --&gt;
+	&lt;div id=&quot;navigator&quot;&gt;
+		
+&lt;ul id=&quot;navList&quot;&gt;
+&lt;li&gt;&lt;a id=&quot;blog_nav_sitehome&quot; class=&quot;menu&quot; href=&quot;https://www.cnblogs.com/&quot;&gt;
+博客园&lt;/a&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;a id=&quot;blog_nav_myhome&quot; class=&quot;menu&quot; href=&quot;https://www.cnblogs.com/uncleyong/&quot;&gt;
+首页&lt;/a&gt;
+&lt;/li&gt;
+&lt;li&gt;
+
+&lt;a id=&quot;blog_nav_newpost&quot; class=&quot;menu&quot; href=&quot;https://i.cnblogs.com/EditPosts.aspx?opt=1&quot;&gt;
+新随笔&lt;/a&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;a id=&quot;blog_nav_contact&quot; class=&quot;menu&quot; href=&quot;https://msg.cnblogs.com/send/qzcsbj&quot;&gt;
+联系&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;
+
+&lt;!--&lt;partial name=&quot;./Shared/_XmlLink.cshtml&quot; model=&quot;Model&quot; /&gt;&lt;/li&gt;--&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;a id=&quot;blog_nav_admin&quot; class=&quot;menu&quot; href=&quot;https://i.cnblogs.com/&quot;&gt;
+管理&lt;/a&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+
+
+		&lt;div class=&quot;blogStats&quot;&gt;
+			
+			&lt;span id=&quot;stats_post_count&quot;&gt;随笔 - 
+216&amp;nbsp; &lt;/span&gt;
+&lt;span id=&quot;stats_article_count&quot;&gt;文章 - 
+0&amp;nbsp; &lt;/span&gt;
+&lt;span id=&quot;stats-comment_count&quot;&gt;评论 - 
+37&lt;/span&gt;
+
+			
+		&lt;/div&gt;&lt;!--end: blogStats --&gt;
+	&lt;/div&gt;&lt;!--end: navigator 博客导航栏 --&gt;
+&lt;/div&gt;&lt;!--end: header 头部 --&gt;
+
+&lt;div id=&quot;main&quot;&gt;
+	&lt;div id=&quot;mainContent&quot;&gt;
+	&lt;div class=&quot;forFlow&quot;&gt;
+		
+&lt;!--done--&gt;
+
+
+
+
+
+		
+
+
+&lt;div class=&quot;day&quot;&gt;
+    &lt;div class=&quot;dayTitle&quot;&gt;
+        &lt;a href=&quot;https://www.cnblogs.com/uncleyong/archive/2019/05/08.html&quot;&gt;2019年5月8日&lt;/a&gt;
+    &lt;/div&gt;
+
+        &lt;div class=&quot;postTitle&quot;&gt;
+            
+
+&lt;a class=&quot;postTitle2&quot; href=&quot;https://www.cnblogs.com/uncleyong/p/10836607.html&quot;&gt;
+[置顶]    测试技术提升建议（必看）
+&lt;/a&gt;
+
+        &lt;/div&gt;
+        &lt;div class=&quot;postCon&quot;&gt;
+
+    &lt;div class=&quot;c_b_p_desc&quot;&gt;
+摘要：去年年底开始，很多测试人员抱怨互联网寒冬来袭，抱怨找不到好工作，抱怨要求高，但是我发现，技术好的，找工作甚至找到非常不错的工作还是很轻松的。所以，还是要自身实力强，打铁还需自身硬。 测试招聘要求发展 2010年左右，测试招聘要求大概都是熟悉测试流程，熟悉用例设计方法。 2017年左右，测试招聘要求是            &lt;a href=&quot;https://www.cnblogs.com/uncleyong/p/10836607.html&quot; class=&quot;c_b_p_desc_readmore&quot;&gt;阅读全文&lt;/a&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+        &lt;div class=&quot;clear&quot;&gt;&lt;/div&gt;
+        &lt;div class=&quot;postDesc&quot;&gt;
+
+posted @ 2019-05-08 23:26 qzcsbj 阅读 (4107) 评论 (7)
+&lt;a href=&quot;https://i.cnblogs.com/EditPosts.aspx?postid=10836607&quot; rel=&quot;nofollow&quot;&gt;
+    编辑
+&lt;/a&gt;
+&lt;/div&gt;
+        &lt;div class=&quot;clear&quot;&gt;&lt;/div&gt;
+&lt;/div&gt;
+
+
+		
+
+
+&lt;div class=&quot;day&quot;&gt;
+    &lt;div class=&quot;dayTitle&quot;&gt;
+        &lt;a href=&quot;https://www.cnblogs.com/uncleyong/archive/2016/08/09.html&quot;&gt;2016年8月9日&lt;/a&gt;
+    &lt;/div&gt;
+
+        &lt;div class=&quot;postTitle&quot;&gt;
+            
+
+&lt;a class=&quot;postTitle2&quot; href=&quot;https://www.cnblogs.com/uncleyong/p/10530261.html&quot;&gt;
+[置顶]    【自学目录】从测试小白到高级全栈测试修炼之路（自动化 、性能、测开、安全），持续更新中。。。
+&lt;/a&gt;
+
+        &lt;/div&gt;
+        &lt;div class=&quot;postCon&quot;&gt;
+
+    &lt;div class=&quot;c_b_p_desc&quot;&gt;
+摘要：说明：以下内容均为本人工作及学习总结，分享给大家，抛砖引玉，共同进步。 》》》》》》 标红的为已经完成的，黑色点不动的是待完成的，加密的是草稿阶段。 逆袭路线推荐 测试技术提升建议：https://www.cnblogs.com/uncleyong/p/10836607.html 1、测试入门：测试            &lt;a href=&quot;https://www.cnblogs.com/uncleyong/p/10530261.html&quot; class=&quot;c_b_p_desc_readmore&quot;&gt;阅读全文&lt;/a&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+        &lt;div class=&quot;clear&quot;&gt;&lt;/div&gt;
+        &lt;div class=&quot;postDesc&quot;&gt;
+
+posted @ 2016-08-09 23:49 qzcsbj 阅读 (15999) 评论 (3)
+&lt;a href=&quot;https://i.cnblogs.com/EditPosts.aspx?postid=10530261&quot; rel=&quot;nofollow&quot;&gt;
+    编辑
+&lt;/a&gt;
+&lt;/div&gt;
+        &lt;div class=&quot;clear&quot;&gt;&lt;/div&gt;
+&lt;/div&gt;
+
+
+		
+
+
+&lt;div class=&quot;day&quot;&gt;
+    &lt;div class=&quot;dayTitle&quot;&gt;
+        &lt;a href=&quot;https://www.cnblogs.com/uncleyong/archive/2019/08/14.html&quot;&gt;2019年8月14日&lt;/a&gt;
+    &lt;/div&gt;
+
+        &lt;div class=&quot;postTitle&quot;&gt;
+            
+
+&lt;a class=&quot;postTitle2&quot; href=&quot;https://www.cnblogs.com/uncleyong/p/11356236.html&quot;&gt;
+    flask如何返回真正意义上的json字符串？以及中文如何正常显示？
+&lt;/a&gt;
+
+        &lt;/div&gt;
+        &lt;div class=&quot;postCon&quot;&gt;
+
+    &lt;div class=&quot;c_b_p_desc&quot;&gt;
+摘要：flask中，不能直接return字典，需要把字典转换为json字符串方式有三种：1. return str(字典)2.return json.dumps(字典)3.return jsonify(字典)其中，dumps是json模块的方法，jsonify是flask封装的方法 虽然他们返回的都是js            &lt;a href=&quot;https://www.cnblogs.com/uncleyong/p/11356236.html&quot; class=&quot;c_b_p_desc_readmore&quot;&gt;阅读全文&lt;/a&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+        &lt;div class=&quot;clear&quot;&gt;&lt;/div&gt;
+        &lt;div class=&quot;postDesc&quot;&gt;
+
+posted @ 2019-08-14 22:46 qzcsbj 阅读 (55) 评论 (0)
+&lt;a href=&quot;https://i.cnblogs.com/EditPosts.aspx?postid=11356236&quot; rel=&quot;nofollow&quot;&gt;
+    编辑
+&lt;/a&gt;
+&lt;/div&gt;
+        &lt;div class=&quot;clear&quot;&gt;&lt;/div&gt;
+&lt;/div&gt;
+
+
+		
+
+
+&lt;div class=&quot;day&quot;&gt;
+    &lt;div class=&quot;dayTitle&quot;&gt;
+        &lt;a href=&quot;https://www.cnblogs.com/uncleyong/archive/2019/08/13.html&quot;&gt;2019年8月13日&lt;/a&gt;
+    &lt;/div&gt;
+
+        &lt;div class=&quot;postTitle&quot;&gt;
+            
+
+&lt;a class=&quot;postTitle2&quot; href=&quot;https://www.cnblogs.com/uncleyong/p/11343821.html&quot;&gt;
+    记录一次群答问：requests获取cookie
+&lt;/a&gt;
+
+        &lt;/div&gt;
+        &lt;div class=&quot;postCon&quot;&gt;
+
+    &lt;div class=&quot;c_b_p_desc&quot;&gt;
+摘要：问题： 为了测试，写的sever，下面仅为set cookie的部分代码 测试 输出结果： &amp;lt;Response [200]&amp;gt;200{&amp;quot;code&amp;quot;:9420, &amp;quot;msg&amp;quot;:&amp;quot;恭喜qzcsbj，登录成功&amp;quot;,&amp;quot;token&amp;quot;:&amp;quot;970aa0ddb521bcde8ce7f1592a889e1c&amp;quot;}&amp;lt;Reque            &lt;a href=&quot;https://www.cnblogs.com/uncleyong/p/11343821.html&quot; class=&quot;c_b_p_desc_readmore&quot;&gt;阅读全文&lt;/a&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+        &lt;div class=&quot;clear&quot;&gt;&lt;/div&gt;
+        &lt;div class=&quot;postDesc&quot;&gt;
+
+posted @ 2019-08-13 06:28 qzcsbj 阅读 (11) 评论 (0)
+&lt;a href=&quot;https://i.cnblogs.com/EditPosts.aspx?postid=11343821&quot; rel=&quot;nofollow&quot;&gt;
+    编辑
+&lt;/a&gt;
+&lt;/div&gt;
+        &lt;div class=&quot;clear&quot;&gt;&lt;/div&gt;
+&lt;/div&gt;
+
+
+		
+
+
+&lt;div class=&quot;day&quot;&gt;
+    &lt;div class=&quot;dayTitle&quot;&gt;
+        &lt;a href=&quot;https://www.cnblogs.com/uncleyong/archive/2019/08/05.html&quot;&gt;2019年8月5日&lt;/a&gt;
+    &lt;/div&gt;
+
+        &lt;div class=&quot;postTitle&quot;&gt;
+            
+
+&lt;a class=&quot;postTitle2&quot; href=&quot;https://www.cnblogs.com/uncleyong/p/11309729.html&quot;&gt;
+    笔试题：python文件操作
+&lt;/a&gt;
+
+        &lt;/div&gt;
+        &lt;div class=&quot;postCon&quot;&gt;
+
+    &lt;div class=&quot;c_b_p_desc&quot;&gt;
+摘要：请说出下面代码结果及原因，很easy。 说明：test.txt文件不存在 输出结果及原因： 输出结果及原因： 输出结果及原因：            &lt;a href=&quot;https://www.cnblogs.com/uncleyong/p/11309729.html&quot; class=&quot;c_b_p_desc_readmore&quot;&gt;阅读全文&lt;/a&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+        &lt;div class=&quot;clear&quot;&gt;&lt;/div&gt;
+        &lt;div class=&quot;postDesc&quot;&gt;
+
+posted @ 2019-08-05 22:13 qzcsbj 阅读 (164) 评论 (0)
+&lt;a href=&quot;https://i.cnblogs.com/EditPosts.aspx?postid=11309729&quot; rel=&quot;nofollow&quot;&gt;
+    编辑
+&lt;/a&gt;
+&lt;/div&gt;
+        &lt;div class=&quot;clear&quot;&gt;&lt;/div&gt;
+&lt;/div&gt;
+
+
+		
+
+
+&lt;div class=&quot;day&quot;&gt;
+    &lt;div class=&quot;dayTitle&quot;&gt;
+        &lt;a href=&quot;https://www.cnblogs.com/uncleyong/archive/2019/08/02.html&quot;&gt;2019年8月2日&lt;/a&gt;
+    &lt;/div&gt;
+
+        &lt;div class=&quot;postTitle&quot;&gt;
+            
+
+&lt;a class=&quot;postTitle2&quot; href=&quot;https://www.cnblogs.com/uncleyong/p/11289033.html&quot;&gt;
+    面向对象小测试（二）
+&lt;/a&gt;
+
+        &lt;/div&gt;
+        &lt;div class=&quot;postCon&quot;&gt;
+
+    &lt;div class=&quot;c_b_p_desc&quot;&gt;
+摘要：请参考下面代码，分别说出1-19题运行结果，及原因。 特别说明：__query2这个方法后面的所有方法上面都有装饰器， 博客里面没显示出来，是博客的bug吧，要选中才显示，最好复制出来看 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19            &lt;a href=&quot;https://www.cnblogs.com/uncleyong/p/11289033.html&quot; class=&quot;c_b_p_desc_readmore&quot;&gt;阅读全文&lt;/a&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+        &lt;div class=&quot;clear&quot;&gt;&lt;/div&gt;
+        &lt;div class=&quot;postDesc&quot;&gt;
+
+posted @ 2019-08-02 00:54 qzcsbj 阅读 (112) 评论 (0)
+&lt;a href=&quot;https://i.cnblogs.com/EditPosts.aspx?postid=11289033&quot; rel=&quot;nofollow&quot;&gt;
+    编辑
+&lt;/a&gt;
+&lt;/div&gt;
+        &lt;div class=&quot;clear&quot;&gt;&lt;/div&gt;
+&lt;/div&gt;
+
+
+		
+
+
+&lt;div class=&quot;day&quot;&gt;
+    &lt;div class=&quot;dayTitle&quot;&gt;
+        &lt;a href=&quot;https://www.cnblogs.com/uncleyong/archive/2019/08/01.html&quot;&gt;2019年8月1日&lt;/a&gt;
+    &lt;/div&gt;
+
+        &lt;div class=&quot;postTitle&quot;&gt;
+            
+
+&lt;a class=&quot;postTitle2&quot; href=&quot;https://www.cnblogs.com/uncleyong/p/11283647.html&quot;&gt;
+    面向对象小测试（一）
+&lt;/a&gt;
+
+        &lt;/div&gt;
+        &lt;div class=&quot;postCon&quot;&gt;
+
+    &lt;div class=&quot;c_b_p_desc&quot;&gt;
+摘要：没对象？没关系，new一个，赶紧来测试下自己new的技术如何吧。 请直接说出上面代码结果及原因： 请直接说出上面代码结果及原因： 请直接说出上面代码结果及原因： 请直接说出上面代码结果及原因： 请直接说出上面代码结果及原因： 请直接说出上面代码结果及原因： 请直接说出上面代码结果及原因： 请直接说出            &lt;a href=&quot;https://www.cnblogs.com/uncleyong/p/11283647.html&quot; class=&quot;c_b_p_desc_readmore&quot;&gt;阅读全文&lt;/a&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+        &lt;div class=&quot;clear&quot;&gt;&lt;/div&gt;
+        &lt;div class=&quot;postDesc&quot;&gt;
+
+posted @ 2019-08-01 00:47 qzcsbj 阅读 (247) 评论 (2)
+&lt;a href=&quot;https://i.cnblogs.com/EditPosts.aspx?postid=11283647&quot; rel=&quot;nofollow&quot;&gt;
+    编辑
+&lt;/a&gt;
+&lt;/div&gt;
+        &lt;div class=&quot;clear&quot;&gt;&lt;/div&gt;
+&lt;/div&gt;
+
+
+		
+
+
+&lt;div class=&quot;day&quot;&gt;
+    &lt;div class=&quot;dayTitle&quot;&gt;
+        &lt;a href=&quot;https://www.cnblogs.com/uncleyong/archive/2019/07/27.html&quot;&gt;2019年7月27日&lt;/a&gt;
+    &lt;/div&gt;
+
+        &lt;div class=&quot;postTitle&quot;&gt;
+            
+
+&lt;a class=&quot;postTitle2&quot; href=&quot;https://www.cnblogs.com/uncleyong/p/11268846.html&quot;&gt;
+    接口测试：postman PK jmeter
+&lt;/a&gt;
+
+        &lt;/div&gt;
+        &lt;div class=&quot;postCon&quot;&gt;
+
+    &lt;div class=&quot;c_b_p_desc&quot;&gt;
+摘要：测试接口，postman和jmeter是用得最频繁的工具，特别是jmeter，支持很多种协议，除了测功能，还能做自动化测试和性能测试（更多内容，请参考：https://www.cnblogs.com/uncleyong/category/881242.html）。 下面主要介绍postman和jme            &lt;a href=&quot;https://www.cnblogs.com/uncleyong/p/11268846.html&quot; class=&quot;c_b_p_desc_readmore&quot;&gt;阅读全文&lt;/a&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+        &lt;div class=&quot;clear&quot;&gt;&lt;/div&gt;
+        &lt;div class=&quot;postDesc&quot;&gt;
+
+posted @ 2019-07-27 11:12 qzcsbj 阅读 (620) 评论 (0)
+&lt;a href=&quot;https://i.cnblogs.com/EditPosts.aspx?postid=11268846&quot; rel=&quot;nofollow&quot;&gt;
+    编辑
+&lt;/a&gt;
+&lt;/div&gt;
+        &lt;div class=&quot;clear&quot;&gt;&lt;/div&gt;
+&lt;/div&gt;
+
+
+		
+
+
+&lt;div class=&quot;day&quot;&gt;
+    &lt;div class=&quot;dayTitle&quot;&gt;
+        &lt;a href=&quot;https://www.cnblogs.com/uncleyong/archive/2019/07/22.html&quot;&gt;2019年7月22日&lt;/a&gt;
+    &lt;/div&gt;
+
+        &lt;div class=&quot;postTitle&quot;&gt;
+            
+
+&lt;a class=&quot;postTitle2&quot; href=&quot;https://www.cnblogs.com/uncleyong/p/11230413.html&quot;&gt;
+    【笔试题】局部变量和全局变量---------------【答不对，你还敢说你精通、熟悉python？】
+&lt;/a&gt;
+
+        &lt;/div&gt;
+        &lt;div class=&quot;postCon&quot;&gt;
+
+    &lt;div class=&quot;c_b_p_desc&quot;&gt;
+摘要：请说出运行结果，并解释why? 第一部分 上面代码结果是： 上面代码结果是： 上面代码结果是： 函数外部未定义res 上面代码结果是： 上面代码结果是： 上面代码结果是： 上面代码结果是： 上面代码结果是： 上面代码结果是： 函数外部未定义money 上面代码结果是： 第二部分 上面代码结果是： 上            &lt;a href=&quot;https://www.cnblogs.com/uncleyong/p/11230413.html&quot; class=&quot;c_b_p_desc_readmore&quot;&gt;阅读全文&lt;/a&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+        &lt;div class=&quot;clear&quot;&gt;&lt;/div&gt;
+        &lt;div class=&quot;postDesc&quot;&gt;
+
+posted @ 2019-07-22 23:53 qzcsbj 阅读 (662) 评论 (0)
+&lt;a href=&quot;https://i.cnblogs.com/EditPosts.aspx?postid=11230413&quot; rel=&quot;nofollow&quot;&gt;
+    编辑
+&lt;/a&gt;
+&lt;/div&gt;
+        &lt;div class=&quot;clear&quot;&gt;&lt;/div&gt;
+&lt;/div&gt;
+
+
+		
+
+
+&lt;div class=&quot;day&quot;&gt;
+    &lt;div class=&quot;dayTitle&quot;&gt;
+        &lt;a href=&quot;https://www.cnblogs.com/uncleyong/archive/2019/07/06.html&quot;&gt;2019年7月6日&lt;/a&gt;
+    &lt;/div&gt;
+
+        &lt;div class=&quot;postTitle&quot;&gt;
+            
+
+&lt;a class=&quot;postTitle2&quot; href=&quot;https://www.cnblogs.com/uncleyong/p/11158806.html&quot;&gt;
+    面试必备：技术术语
+&lt;/a&gt;
+
+        &lt;/div&gt;
+        &lt;div class=&quot;postCon&quot;&gt;
+
+    &lt;div class=&quot;c_b_p_desc&quot;&gt;
+摘要：部分整理自网络，如有侵权，请联系删除。 正向代理 &amp;amp; 反向代理 正向代理：作为一个媒介将互联网上获取的资源返回给相关联的客户端，代理和客户端在一个局域网，对于服务端是透明的。 反向代理：根据客户端的请求，从后端的服务器上获取资源，然后再将这些资源返回给客户端，代理和服务器在一个局域网，对客户端是透明            &lt;a href=&quot;https://www.cnblogs.com/uncleyong/p/11158806.html&quot; class=&quot;c_b_p_desc_readmore&quot;&gt;阅读全文&lt;/a&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+        &lt;div class=&quot;clear&quot;&gt;&lt;/div&gt;
+        &lt;div class=&quot;postDesc&quot;&gt;
+
+posted @ 2019-07-06 17:24 qzcsbj 阅读 (358) 评论 (0)
+&lt;a href=&quot;https://i.cnblogs.com/EditPosts.aspx?postid=11158806&quot; rel=&quot;nofollow&quot;&gt;
+    编辑
+&lt;/a&gt;
+&lt;/div&gt;
+        &lt;div class=&quot;clear&quot;&gt;&lt;/div&gt;
+&lt;/div&gt;
+
+
+		
+
+
+&lt;div class=&quot;day&quot;&gt;
+    &lt;div class=&quot;dayTitle&quot;&gt;
+        &lt;a href=&quot;https://www.cnblogs.com/uncleyong/archive/2019/06/30.html&quot;&gt;2019年6月30日&lt;/a&gt;
+    &lt;/div&gt;
+
+        &lt;div class=&quot;postTitle&quot;&gt;
+            
+
+&lt;a class=&quot;postTitle2&quot; href=&quot;https://www.cnblogs.com/uncleyong/p/10986466.html&quot;&gt;
+    性能测试：jmeter中通过beanshell把关联转变成参数化
+&lt;/a&gt;
+
+        &lt;/div&gt;
+        &lt;div class=&quot;postCon&quot;&gt;
+
+    &lt;div class=&quot;c_b_p_desc&quot;&gt;
+摘要：在用jmeter做性能测试的时候，可能会因为依赖请求导致一些问题。 问题一：问题一：参数化数据量不足，比如：我要压测的某个接口依赖登录，先通过登录获取到tokenId（每个账号登录一次），然后作为被压测接口的入参，如果账号不足，当我并发的线程数多于登录账号数量，就会出现账号二次登录，而前一次登录获取            &lt;a href=&quot;https://www.cnblogs.com/uncleyong/p/10986466.html&quot; class=&quot;c_b_p_desc_readmore&quot;&gt;阅读全文&lt;/a&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+        &lt;div class=&quot;clear&quot;&gt;&lt;/div&gt;
+        &lt;div class=&quot;postDesc&quot;&gt;
+
+posted @ 2019-06-30 21:29 qzcsbj 阅读 (242) 评论 (0)
+&lt;a href=&quot;https://i.cnblogs.com/EditPosts.aspx?postid=10986466&quot; rel=&quot;nofollow&quot;&gt;
+    编辑
+&lt;/a&gt;
+&lt;/div&gt;
+        &lt;div class=&quot;clear&quot;&gt;&lt;/div&gt;
+&lt;/div&gt;
+
+
+		
+
+
+&lt;div class=&quot;day&quot;&gt;
+    &lt;div class=&quot;dayTitle&quot;&gt;
+        &lt;a href=&quot;https://www.cnblogs.com/uncleyong/archive/2019/06/29.html&quot;&gt;2019年6月29日&lt;/a&gt;
+    &lt;/div&gt;
+
+        &lt;div class=&quot;postTitle&quot;&gt;
+            
+
+&lt;a class=&quot;postTitle2&quot; href=&quot;https://www.cnblogs.com/uncleyong/p/11119489.html&quot;&gt;
+    笔试题汇总，含参考答案（持续更新中。。。自问自答，自娱自乐）--机会只留给有准备的人【注册登录可见】
+&lt;/a&gt;
+
+        &lt;/div&gt;
+        &lt;div class=&quot;postCon&quot;&gt;
+
+    &lt;div class=&quot;c_b_p_desc&quot;&gt;
+只有注册用户登录后才能阅读该文。            &lt;a href=&quot;https://www.cnblogs.com/uncleyong/p/11119489.html&quot; class=&quot;c_b_p_desc_readmore&quot;&gt;阅读全文&lt;/a&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+        &lt;div class=&quot;clear&quot;&gt;&lt;/div&gt;
+        &lt;div class=&quot;postDesc&quot;&gt;
+
+posted @ 2019-06-29 11:24 qzcsbj 阅读 (2140) 评论 (2)
+&lt;a href=&quot;https://i.cnblogs.com/EditPosts.aspx?postid=11119489&quot; rel=&quot;nofollow&quot;&gt;
+    编辑
+&lt;/a&gt;
+&lt;/div&gt;
+        &lt;div class=&quot;clear&quot;&gt;&lt;/div&gt;
+&lt;/div&gt;
+
+
+
+&lt;div class=&quot;topicListFooter&quot;&gt;
+    &lt;div id=&quot;nav_next_page&quot;&gt;
+        
+
+    &lt;a href=&quot;https://www.cnblogs.com/uncleyong/default.html?page=2&quot;&gt;
+        下一页
+    &lt;/a&gt;
+
+    &lt;/div&gt;    
+&lt;/div&gt;
+
+
+
+
+
+
+
+
+
+	&lt;/div&gt;&lt;!--end: forFlow --&gt;
+	&lt;/div&gt;&lt;!--end: mainContent 主体内容容器--&gt;
+
+	&lt;div id=&quot;sideBar&quot;&gt;
+		&lt;div id=&quot;sideBarMain&quot;&gt;
+			
+&lt;div id=&quot;sidebar_news&quot; class=&quot;newsItem&quot;&gt;
+            &lt;script&gt;loadBlogNews();&lt;/script&gt;
+&lt;/div&gt;
+
+			&lt;div id=&quot;blog-calendar&quot; style=&quot;display:none&quot;&gt;&lt;/div&gt;&lt;script&gt;loadBlogDefaultCalendar();&lt;/script&gt;
+			
+			&lt;div id=&quot;leftcontentcontainer&quot;&gt;
+				&lt;div id=&quot;blog-sidecolumn&quot;&gt;&lt;/div&gt;
+                    &lt;script&gt;loadBlogSideColumn();&lt;/script&gt;
+			&lt;/div&gt;
+			
+		&lt;/div&gt;&lt;!--end: sideBarMain --&gt;
+	&lt;/div&gt;&lt;!--end: sideBar 侧边栏容器 --&gt;
+	&lt;div class=&quot;clear&quot;&gt;&lt;/div&gt;
+	&lt;/div&gt;&lt;!--end: main --&gt;
+	&lt;div class=&quot;clear&quot;&gt;&lt;/div&gt;
+	&lt;div id=&quot;footer&quot;&gt;
+		&lt;!--done--&gt;
+Copyright &amp;copy; 2019 qzcsbj
+    &lt;div id=&quot;poweredby&quot;&gt;Powered by .NET Core 3.0 Preview 8 on Linux&lt;/div&gt;
+
+
+
+	&lt;/div&gt;&lt;!--end: footer --&gt;
+&lt;/div&gt;&lt;!--end: home 自定义的最大容器 --&gt;
+
+
+    
+&lt;/body&gt;
+&lt;/html&gt;
+</responseData>
+    <cookies class="java.lang.String"></cookies>
+    <method class="java.lang.String">GET</method>
+    <queryString class="java.lang.String"></queryString>
+    <java.net.URL>https://www.cnblogs.com/UncleYong/</java.net.URL>
+  </httpSample>
+  <responseHeader class="java.lang.String">HTTP/1.1 200 OK
+Date: Sun, 18 Aug 2019 09:40:51 GMT
+Content-Type: text/html; charset=utf-8
+Transfer-Encoding: chunked
+Connection: keep-alive
+Vary: Accept-Encoding
+Cache-Control: public,max-age=10
+</responseHeader>
+  <requestHeader class="java.lang.String">Connection: keep-alive
+Host: www.cnblogs.com
+User-Agent: Apache-HttpClient/4.5.7 (Java/1.8.0_181)
+</requestHeader>
+  <responseData class="java.lang.String">&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;zh-cn&quot;&gt;
+&lt;head&gt;
+    &lt;meta charset=&quot;utf-8&quot; /&gt;
+    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot; /&gt;
+    &lt;meta name=&quot;referrer&quot; content=&quot;origin&quot; /&gt;
+    
+    &lt;meta http-equiv=&quot;Cache-Control&quot; content=&quot;no-transform&quot; /&gt;
+    &lt;meta http-equiv=&quot;Cache-Control&quot; content=&quot;no-siteapp&quot; /&gt;
+    &lt;title&gt;qzcsbj - 博客园&lt;/title&gt;
+    
+    &lt;link rel=&quot;shortcut icon&quot; href=&quot;//common.cnblogs.com/favicon.ico&quot; type=&quot;image/x-icon&quot; /&gt;
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;/css/blog-common.min.css?v=HrvK75b61-WJQPXtn_liCIWUC4EcnwT_lmrRbncieJo&quot; /&gt;
+    &lt;link id=&quot;MainCss&quot; rel=&quot;stylesheet&quot; href=&quot;/skins/simplememory/bundle-simplememory.min.css?v=h-hNL0OecmJJJBSDulvE8iy08VWrYSL9CnbTmAQnC3Q&quot; /&gt;
+    &lt;link type=&quot;text/css&quot; rel=&quot;stylesheet&quot; href=&quot;https://www.cnblogs.com/blog/customcss/305209.css?v=jYxX9I/Nb1vp87guGt3mXLUPQzw=&quot; /&gt;
+    &lt;link id=&quot;mobile-style&quot; media=&quot;only screen and (max-width: 767px)&quot; type=&quot;text/css&quot; rel=&quot;stylesheet&quot; href=&quot;/skins/SimpleMemory/bundle-SimpleMemory-mobile.min.css&quot; /&gt;
+    
+    &lt;link type=&quot;application/rss+xml&quot; rel=&quot;alternate&quot; href=&quot;https://www.cnblogs.com/uncleyong/rss&quot; /&gt;
+    &lt;link type=&quot;application/rsd+xml&quot; rel=&quot;EditURI&quot; href=&quot;https://www.cnblogs.com/uncleyong/rsd.xml&quot; /&gt;
+    &lt;link type=&quot;application/wlwmanifest+xml&quot; rel=&quot;wlwmanifest&quot; href=&quot;https://www.cnblogs.com/uncleyong/wlwmanifest.xml&quot; /&gt;
+    &lt;script src=&quot;https://common.cnblogs.com/scripts/jquery-2.2.0.min.js&quot;&gt;&lt;/script&gt;
+    &lt;script src=&quot;/js/blog-common.min.js?v=QpGyczkTXk3TRlmx5WjzQ1nBeI2bvPcJ0wTjD2PWkv0&quot;&gt;&lt;/script&gt;
+    &lt;script&gt;
+        var currentBlogId = 305209;
+        var currentBlogApp = &apos;uncleyong&apos;;
+        var cb_enable_mathjax = false;
+        var isLogined = false;
+    &lt;/script&gt;
+    
+    
+    
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;a name=&quot;top&quot;&gt;&lt;/a&gt;
+    &lt;div id=&quot;page_begin_html&quot;&gt;
+        &lt;!--火箭1&#xd;
+&lt;link href=&quot;https://blog-static.cnblogs.com/files/uncleyong/huojian.css&quot; rel=&quot;stylesheet&quot;&gt;&#xd;
+--&gt;&#xd;
+&#xd;
+&lt;!--火箭2--&gt;&#xd;
+&lt;link href=&quot;https://blog-static.cnblogs.com/files/uncleyong/huojian2.css&quot; rel=&quot;stylesheet&quot;&gt;
+    &lt;/div&gt;
+    
+&lt;!--done--&gt;
+&lt;div id=&quot;home&quot;&gt;
+&lt;div id=&quot;header&quot;&gt;
+	&lt;div id=&quot;blogTitle&quot;&gt;
+        &lt;a id=&quot;lnkBlogLogo&quot; href=&quot;https://www.cnblogs.com/uncleyong/&quot;&gt;&lt;img id=&quot;blogLogo&quot; src=&quot;/skins/custom/images/logo.gif&quot; alt=&quot;返回主页&quot; /&gt;&lt;/a&gt;		
+		
+&lt;!--done--&gt;
+&lt;h1&gt;
+&lt;a id=&quot;Header1_HeaderTitle&quot; class=&quot;headermaintitle&quot; href=&quot;https://www.cnblogs.com/uncleyong/&quot;&gt;全栈测试笔记&lt;/a&gt;
+&lt;/h1&gt;
+&lt;h2&gt;
+做一个暖心的测试技术分享者，分享干货包括：性能、自动化、测开、安全。
+&lt;/h2&gt;
+
+
+
+
+		
+	&lt;/div&gt;&lt;!--end: blogTitle 博客的标题和副标题 --&gt;
+	&lt;div id=&quot;navigator&quot;&gt;
+		
+&lt;ul id=&quot;navList&quot;&gt;
+&lt;li&gt;&lt;a id=&quot;blog_nav_sitehome&quot; class=&quot;menu&quot; href=&quot;https://www.cnblogs.com/&quot;&gt;
+博客园&lt;/a&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;a id=&quot;blog_nav_myhome&quot; class=&quot;menu&quot; href=&quot;https://www.cnblogs.com/uncleyong/&quot;&gt;
+首页&lt;/a&gt;
+&lt;/li&gt;
+&lt;li&gt;
+
+&lt;a id=&quot;blog_nav_newpost&quot; class=&quot;menu&quot; href=&quot;https://i.cnblogs.com/EditPosts.aspx?opt=1&quot;&gt;
+新随笔&lt;/a&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;a id=&quot;blog_nav_contact&quot; class=&quot;menu&quot; href=&quot;https://msg.cnblogs.com/send/qzcsbj&quot;&gt;
+联系&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;
+
+&lt;!--&lt;partial name=&quot;./Shared/_XmlLink.cshtml&quot; model=&quot;Model&quot; /&gt;&lt;/li&gt;--&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;a id=&quot;blog_nav_admin&quot; class=&quot;menu&quot; href=&quot;https://i.cnblogs.com/&quot;&gt;
+管理&lt;/a&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+
+
+		&lt;div class=&quot;blogStats&quot;&gt;
+			
+			&lt;span id=&quot;stats_post_count&quot;&gt;随笔 - 
+216&amp;nbsp; &lt;/span&gt;
+&lt;span id=&quot;stats_article_count&quot;&gt;文章 - 
+0&amp;nbsp; &lt;/span&gt;
+&lt;span id=&quot;stats-comment_count&quot;&gt;评论 - 
+37&lt;/span&gt;
+
+			
+		&lt;/div&gt;&lt;!--end: blogStats --&gt;
+	&lt;/div&gt;&lt;!--end: navigator 博客导航栏 --&gt;
+&lt;/div&gt;&lt;!--end: header 头部 --&gt;
+
+&lt;div id=&quot;main&quot;&gt;
+	&lt;div id=&quot;mainContent&quot;&gt;
+	&lt;div class=&quot;forFlow&quot;&gt;
+		
+&lt;!--done--&gt;
+
+
+
+
+
+		
+
+
+&lt;div class=&quot;day&quot;&gt;
+    &lt;div class=&quot;dayTitle&quot;&gt;
+        &lt;a href=&quot;https://www.cnblogs.com/uncleyong/archive/2019/05/08.html&quot;&gt;2019年5月8日&lt;/a&gt;
+    &lt;/div&gt;
+
+        &lt;div class=&quot;postTitle&quot;&gt;
+            
+
+&lt;a class=&quot;postTitle2&quot; href=&quot;https://www.cnblogs.com/uncleyong/p/10836607.html&quot;&gt;
+[置顶]    测试技术提升建议（必看）
+&lt;/a&gt;
+
+        &lt;/div&gt;
+        &lt;div class=&quot;postCon&quot;&gt;
+
+    &lt;div class=&quot;c_b_p_desc&quot;&gt;
+摘要：去年年底开始，很多测试人员抱怨互联网寒冬来袭，抱怨找不到好工作，抱怨要求高，但是我发现，技术好的，找工作甚至找到非常不错的工作还是很轻松的。所以，还是要自身实力强，打铁还需自身硬。 测试招聘要求发展 2010年左右，测试招聘要求大概都是熟悉测试流程，熟悉用例设计方法。 2017年左右，测试招聘要求是            &lt;a href=&quot;https://www.cnblogs.com/uncleyong/p/10836607.html&quot; class=&quot;c_b_p_desc_readmore&quot;&gt;阅读全文&lt;/a&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+        &lt;div class=&quot;clear&quot;&gt;&lt;/div&gt;
+        &lt;div class=&quot;postDesc&quot;&gt;
+
+posted @ 2019-05-08 23:26 qzcsbj 阅读 (4107) 评论 (7)
+&lt;a href=&quot;https://i.cnblogs.com/EditPosts.aspx?postid=10836607&quot; rel=&quot;nofollow&quot;&gt;
+    编辑
+&lt;/a&gt;
+&lt;/div&gt;
+        &lt;div class=&quot;clear&quot;&gt;&lt;/div&gt;
+&lt;/div&gt;
+
+
+		
+
+
+&lt;div class=&quot;day&quot;&gt;
+    &lt;div class=&quot;dayTitle&quot;&gt;
+        &lt;a href=&quot;https://www.cnblogs.com/uncleyong/archive/2016/08/09.html&quot;&gt;2016年8月9日&lt;/a&gt;
+    &lt;/div&gt;
+
+        &lt;div class=&quot;postTitle&quot;&gt;
+            
+
+&lt;a class=&quot;postTitle2&quot; href=&quot;https://www.cnblogs.com/uncleyong/p/10530261.html&quot;&gt;
+[置顶]    【自学目录】从测试小白到高级全栈测试修炼之路（自动化 、性能、测开、安全），持续更新中。。。
+&lt;/a&gt;
+
+        &lt;/div&gt;
+        &lt;div class=&quot;postCon&quot;&gt;
+
+    &lt;div class=&quot;c_b_p_desc&quot;&gt;
+摘要：说明：以下内容均为本人工作及学习总结，分享给大家，抛砖引玉，共同进步。 》》》》》》 标红的为已经完成的，黑色点不动的是待完成的，加密的是草稿阶段。 逆袭路线推荐 测试技术提升建议：https://www.cnblogs.com/uncleyong/p/10836607.html 1、测试入门：测试            &lt;a href=&quot;https://www.cnblogs.com/uncleyong/p/10530261.html&quot; class=&quot;c_b_p_desc_readmore&quot;&gt;阅读全文&lt;/a&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+        &lt;div class=&quot;clear&quot;&gt;&lt;/div&gt;
+        &lt;div class=&quot;postDesc&quot;&gt;
+
+posted @ 2016-08-09 23:49 qzcsbj 阅读 (15999) 评论 (3)
+&lt;a href=&quot;https://i.cnblogs.com/EditPosts.aspx?postid=10530261&quot; rel=&quot;nofollow&quot;&gt;
+    编辑
+&lt;/a&gt;
+&lt;/div&gt;
+        &lt;div class=&quot;clear&quot;&gt;&lt;/div&gt;
+&lt;/div&gt;
+
+
+		
+
+
+&lt;div class=&quot;day&quot;&gt;
+    &lt;div class=&quot;dayTitle&quot;&gt;
+        &lt;a href=&quot;https://www.cnblogs.com/uncleyong/archive/2019/08/14.html&quot;&gt;2019年8月14日&lt;/a&gt;
+    &lt;/div&gt;
+
+        &lt;div class=&quot;postTitle&quot;&gt;
+            
+
+&lt;a class=&quot;postTitle2&quot; href=&quot;https://www.cnblogs.com/uncleyong/p/11356236.html&quot;&gt;
+    flask如何返回真正意义上的json字符串？以及中文如何正常显示？
+&lt;/a&gt;
+
+        &lt;/div&gt;
+        &lt;div class=&quot;postCon&quot;&gt;
+
+    &lt;div class=&quot;c_b_p_desc&quot;&gt;
+摘要：flask中，不能直接return字典，需要把字典转换为json字符串方式有三种：1. return str(字典)2.return json.dumps(字典)3.return jsonify(字典)其中，dumps是json模块的方法，jsonify是flask封装的方法 虽然他们返回的都是js            &lt;a href=&quot;https://www.cnblogs.com/uncleyong/p/11356236.html&quot; class=&quot;c_b_p_desc_readmore&quot;&gt;阅读全文&lt;/a&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+        &lt;div class=&quot;clear&quot;&gt;&lt;/div&gt;
+        &lt;div class=&quot;postDesc&quot;&gt;
+
+posted @ 2019-08-14 22:46 qzcsbj 阅读 (55) 评论 (0)
+&lt;a href=&quot;https://i.cnblogs.com/EditPosts.aspx?postid=11356236&quot; rel=&quot;nofollow&quot;&gt;
+    编辑
+&lt;/a&gt;
+&lt;/div&gt;
+        &lt;div class=&quot;clear&quot;&gt;&lt;/div&gt;
+&lt;/div&gt;
+
+
+		
+
+
+&lt;div class=&quot;day&quot;&gt;
+    &lt;div class=&quot;dayTitle&quot;&gt;
+        &lt;a href=&quot;https://www.cnblogs.com/uncleyong/archive/2019/08/13.html&quot;&gt;2019年8月13日&lt;/a&gt;
+    &lt;/div&gt;
+
+        &lt;div class=&quot;postTitle&quot;&gt;
+            
+
+&lt;a class=&quot;postTitle2&quot; href=&quot;https://www.cnblogs.com/uncleyong/p/11343821.html&quot;&gt;
+    记录一次群答问：requests获取cookie
+&lt;/a&gt;
+
+        &lt;/div&gt;
+        &lt;div class=&quot;postCon&quot;&gt;
+
+    &lt;div class=&quot;c_b_p_desc&quot;&gt;
+摘要：问题： 为了测试，写的sever，下面仅为set cookie的部分代码 测试 输出结果： &amp;lt;Response [200]&amp;gt;200{&amp;quot;code&amp;quot;:9420, &amp;quot;msg&amp;quot;:&amp;quot;恭喜qzcsbj，登录成功&amp;quot;,&amp;quot;token&amp;quot;:&amp;quot;970aa0ddb521bcde8ce7f1592a889e1c&amp;quot;}&amp;lt;Reque            &lt;a href=&quot;https://www.cnblogs.com/uncleyong/p/11343821.html&quot; class=&quot;c_b_p_desc_readmore&quot;&gt;阅读全文&lt;/a&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+        &lt;div class=&quot;clear&quot;&gt;&lt;/div&gt;
+        &lt;div class=&quot;postDesc&quot;&gt;
+
+posted @ 2019-08-13 06:28 qzcsbj 阅读 (11) 评论 (0)
+&lt;a href=&quot;https://i.cnblogs.com/EditPosts.aspx?postid=11343821&quot; rel=&quot;nofollow&quot;&gt;
+    编辑
+&lt;/a&gt;
+&lt;/div&gt;
+        &lt;div class=&quot;clear&quot;&gt;&lt;/div&gt;
+&lt;/div&gt;
+
+
+		
+
+
+&lt;div class=&quot;day&quot;&gt;
+    &lt;div class=&quot;dayTitle&quot;&gt;
+        &lt;a href=&quot;https://www.cnblogs.com/uncleyong/archive/2019/08/05.html&quot;&gt;2019年8月5日&lt;/a&gt;
+    &lt;/div&gt;
+
+        &lt;div class=&quot;postTitle&quot;&gt;
+            
+
+&lt;a class=&quot;postTitle2&quot; href=&quot;https://www.cnblogs.com/uncleyong/p/11309729.html&quot;&gt;
+    笔试题：python文件操作
+&lt;/a&gt;
+
+        &lt;/div&gt;
+        &lt;div class=&quot;postCon&quot;&gt;
+
+    &lt;div class=&quot;c_b_p_desc&quot;&gt;
+摘要：请说出下面代码结果及原因，很easy。 说明：test.txt文件不存在 输出结果及原因： 输出结果及原因： 输出结果及原因：            &lt;a href=&quot;https://www.cnblogs.com/uncleyong/p/11309729.html&quot; class=&quot;c_b_p_desc_readmore&quot;&gt;阅读全文&lt;/a&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+        &lt;div class=&quot;clear&quot;&gt;&lt;/div&gt;
+        &lt;div class=&quot;postDesc&quot;&gt;
+
+posted @ 2019-08-05 22:13 qzcsbj 阅读 (164) 评论 (0)
+&lt;a href=&quot;https://i.cnblogs.com/EditPosts.aspx?postid=11309729&quot; rel=&quot;nofollow&quot;&gt;
+    编辑
+&lt;/a&gt;
+&lt;/div&gt;
+        &lt;div class=&quot;clear&quot;&gt;&lt;/div&gt;
+&lt;/div&gt;
+
+
+		
+
+
+&lt;div class=&quot;day&quot;&gt;
+    &lt;div class=&quot;dayTitle&quot;&gt;
+        &lt;a href=&quot;https://www.cnblogs.com/uncleyong/archive/2019/08/02.html&quot;&gt;2019年8月2日&lt;/a&gt;
+    &lt;/div&gt;
+
+        &lt;div class=&quot;postTitle&quot;&gt;
+            
+
+&lt;a class=&quot;postTitle2&quot; href=&quot;https://www.cnblogs.com/uncleyong/p/11289033.html&quot;&gt;
+    面向对象小测试（二）
+&lt;/a&gt;
+
+        &lt;/div&gt;
+        &lt;div class=&quot;postCon&quot;&gt;
+
+    &lt;div class=&quot;c_b_p_desc&quot;&gt;
+摘要：请参考下面代码，分别说出1-19题运行结果，及原因。 特别说明：__query2这个方法后面的所有方法上面都有装饰器， 博客里面没显示出来，是博客的bug吧，要选中才显示，最好复制出来看 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19            &lt;a href=&quot;https://www.cnblogs.com/uncleyong/p/11289033.html&quot; class=&quot;c_b_p_desc_readmore&quot;&gt;阅读全文&lt;/a&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+        &lt;div class=&quot;clear&quot;&gt;&lt;/div&gt;
+        &lt;div class=&quot;postDesc&quot;&gt;
+
+posted @ 2019-08-02 00:54 qzcsbj 阅读 (112) 评论 (0)
+&lt;a href=&quot;https://i.cnblogs.com/EditPosts.aspx?postid=11289033&quot; rel=&quot;nofollow&quot;&gt;
+    编辑
+&lt;/a&gt;
+&lt;/div&gt;
+        &lt;div class=&quot;clear&quot;&gt;&lt;/div&gt;
+&lt;/div&gt;
+
+
+		
+
+
+&lt;div class=&quot;day&quot;&gt;
+    &lt;div class=&quot;dayTitle&quot;&gt;
+        &lt;a href=&quot;https://www.cnblogs.com/uncleyong/archive/2019/08/01.html&quot;&gt;2019年8月1日&lt;/a&gt;
+    &lt;/div&gt;
+
+        &lt;div class=&quot;postTitle&quot;&gt;
+            
+
+&lt;a class=&quot;postTitle2&quot; href=&quot;https://www.cnblogs.com/uncleyong/p/11283647.html&quot;&gt;
+    面向对象小测试（一）
+&lt;/a&gt;
+
+        &lt;/div&gt;
+        &lt;div class=&quot;postCon&quot;&gt;
+
+    &lt;div class=&quot;c_b_p_desc&quot;&gt;
+摘要：没对象？没关系，new一个，赶紧来测试下自己new的技术如何吧。 请直接说出上面代码结果及原因： 请直接说出上面代码结果及原因： 请直接说出上面代码结果及原因： 请直接说出上面代码结果及原因： 请直接说出上面代码结果及原因： 请直接说出上面代码结果及原因： 请直接说出上面代码结果及原因： 请直接说出            &lt;a href=&quot;https://www.cnblogs.com/uncleyong/p/11283647.html&quot; class=&quot;c_b_p_desc_readmore&quot;&gt;阅读全文&lt;/a&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+        &lt;div class=&quot;clear&quot;&gt;&lt;/div&gt;
+        &lt;div class=&quot;postDesc&quot;&gt;
+
+posted @ 2019-08-01 00:47 qzcsbj 阅读 (247) 评论 (2)
+&lt;a href=&quot;https://i.cnblogs.com/EditPosts.aspx?postid=11283647&quot; rel=&quot;nofollow&quot;&gt;
+    编辑
+&lt;/a&gt;
+&lt;/div&gt;
+        &lt;div class=&quot;clear&quot;&gt;&lt;/div&gt;
+&lt;/div&gt;
+
+
+		
+
+
+&lt;div class=&quot;day&quot;&gt;
+    &lt;div class=&quot;dayTitle&quot;&gt;
+        &lt;a href=&quot;https://www.cnblogs.com/uncleyong/archive/2019/07/27.html&quot;&gt;2019年7月27日&lt;/a&gt;
+    &lt;/div&gt;
+
+        &lt;div class=&quot;postTitle&quot;&gt;
+            
+
+&lt;a class=&quot;postTitle2&quot; href=&quot;https://www.cnblogs.com/uncleyong/p/11268846.html&quot;&gt;
+    接口测试：postman PK jmeter
+&lt;/a&gt;
+
+        &lt;/div&gt;
+        &lt;div class=&quot;postCon&quot;&gt;
+
+    &lt;div class=&quot;c_b_p_desc&quot;&gt;
+摘要：测试接口，postman和jmeter是用得最频繁的工具，特别是jmeter，支持很多种协议，除了测功能，还能做自动化测试和性能测试（更多内容，请参考：https://www.cnblogs.com/uncleyong/category/881242.html）。 下面主要介绍postman和jme            &lt;a href=&quot;https://www.cnblogs.com/uncleyong/p/11268846.html&quot; class=&quot;c_b_p_desc_readmore&quot;&gt;阅读全文&lt;/a&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+        &lt;div class=&quot;clear&quot;&gt;&lt;/div&gt;
+        &lt;div class=&quot;postDesc&quot;&gt;
+
+posted @ 2019-07-27 11:12 qzcsbj 阅读 (620) 评论 (0)
+&lt;a href=&quot;https://i.cnblogs.com/EditPosts.aspx?postid=11268846&quot; rel=&quot;nofollow&quot;&gt;
+    编辑
+&lt;/a&gt;
+&lt;/div&gt;
+        &lt;div class=&quot;clear&quot;&gt;&lt;/div&gt;
+&lt;/div&gt;
+
+
+		
+
+
+&lt;div class=&quot;day&quot;&gt;
+    &lt;div class=&quot;dayTitle&quot;&gt;
+        &lt;a href=&quot;https://www.cnblogs.com/uncleyong/archive/2019/07/22.html&quot;&gt;2019年7月22日&lt;/a&gt;
+    &lt;/div&gt;
+
+        &lt;div class=&quot;postTitle&quot;&gt;
+            
+
+&lt;a class=&quot;postTitle2&quot; href=&quot;https://www.cnblogs.com/uncleyong/p/11230413.html&quot;&gt;
+    【笔试题】局部变量和全局变量---------------【答不对，你还敢说你精通、熟悉python？】
+&lt;/a&gt;
+
+        &lt;/div&gt;
+        &lt;div class=&quot;postCon&quot;&gt;
+
+    &lt;div class=&quot;c_b_p_desc&quot;&gt;
+摘要：请说出运行结果，并解释why? 第一部分 上面代码结果是： 上面代码结果是： 上面代码结果是： 函数外部未定义res 上面代码结果是： 上面代码结果是： 上面代码结果是： 上面代码结果是： 上面代码结果是： 上面代码结果是： 函数外部未定义money 上面代码结果是： 第二部分 上面代码结果是： 上            &lt;a href=&quot;https://www.cnblogs.com/uncleyong/p/11230413.html&quot; class=&quot;c_b_p_desc_readmore&quot;&gt;阅读全文&lt;/a&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+        &lt;div class=&quot;clear&quot;&gt;&lt;/div&gt;
+        &lt;div class=&quot;postDesc&quot;&gt;
+
+posted @ 2019-07-22 23:53 qzcsbj 阅读 (662) 评论 (0)
+&lt;a href=&quot;https://i.cnblogs.com/EditPosts.aspx?postid=11230413&quot; rel=&quot;nofollow&quot;&gt;
+    编辑
+&lt;/a&gt;
+&lt;/div&gt;
+        &lt;div class=&quot;clear&quot;&gt;&lt;/div&gt;
+&lt;/div&gt;
+
+
+		
+
+
+&lt;div class=&quot;day&quot;&gt;
+    &lt;div class=&quot;dayTitle&quot;&gt;
+        &lt;a href=&quot;https://www.cnblogs.com/uncleyong/archive/2019/07/06.html&quot;&gt;2019年7月6日&lt;/a&gt;
+    &lt;/div&gt;
+
+        &lt;div class=&quot;postTitle&quot;&gt;
+            
+
+&lt;a class=&quot;postTitle2&quot; href=&quot;https://www.cnblogs.com/uncleyong/p/11158806.html&quot;&gt;
+    面试必备：技术术语
+&lt;/a&gt;
+
+        &lt;/div&gt;
+        &lt;div class=&quot;postCon&quot;&gt;
+
+    &lt;div class=&quot;c_b_p_desc&quot;&gt;
+摘要：部分整理自网络，如有侵权，请联系删除。 正向代理 &amp;amp; 反向代理 正向代理：作为一个媒介将互联网上获取的资源返回给相关联的客户端，代理和客户端在一个局域网，对于服务端是透明的。 反向代理：根据客户端的请求，从后端的服务器上获取资源，然后再将这些资源返回给客户端，代理和服务器在一个局域网，对客户端是透明            &lt;a href=&quot;https://www.cnblogs.com/uncleyong/p/11158806.html&quot; class=&quot;c_b_p_desc_readmore&quot;&gt;阅读全文&lt;/a&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+        &lt;div class=&quot;clear&quot;&gt;&lt;/div&gt;
+        &lt;div class=&quot;postDesc&quot;&gt;
+
+posted @ 2019-07-06 17:24 qzcsbj 阅读 (358) 评论 (0)
+&lt;a href=&quot;https://i.cnblogs.com/EditPosts.aspx?postid=11158806&quot; rel=&quot;nofollow&quot;&gt;
+    编辑
+&lt;/a&gt;
+&lt;/div&gt;
+        &lt;div class=&quot;clear&quot;&gt;&lt;/div&gt;
+&lt;/div&gt;
+
+
+		
+
+
+&lt;div class=&quot;day&quot;&gt;
+    &lt;div class=&quot;dayTitle&quot;&gt;
+        &lt;a href=&quot;https://www.cnblogs.com/uncleyong/archive/2019/06/30.html&quot;&gt;2019年6月30日&lt;/a&gt;
+    &lt;/div&gt;
+
+        &lt;div class=&quot;postTitle&quot;&gt;
+            
+
+&lt;a class=&quot;postTitle2&quot; href=&quot;https://www.cnblogs.com/uncleyong/p/10986466.html&quot;&gt;
+    性能测试：jmeter中通过beanshell把关联转变成参数化
+&lt;/a&gt;
+
+        &lt;/div&gt;
+        &lt;div class=&quot;postCon&quot;&gt;
+
+    &lt;div class=&quot;c_b_p_desc&quot;&gt;
+摘要：在用jmeter做性能测试的时候，可能会因为依赖请求导致一些问题。 问题一：问题一：参数化数据量不足，比如：我要压测的某个接口依赖登录，先通过登录获取到tokenId（每个账号登录一次），然后作为被压测接口的入参，如果账号不足，当我并发的线程数多于登录账号数量，就会出现账号二次登录，而前一次登录获取            &lt;a href=&quot;https://www.cnblogs.com/uncleyong/p/10986466.html&quot; class=&quot;c_b_p_desc_readmore&quot;&gt;阅读全文&lt;/a&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+        &lt;div class=&quot;clear&quot;&gt;&lt;/div&gt;
+        &lt;div class=&quot;postDesc&quot;&gt;
+
+posted @ 2019-06-30 21:29 qzcsbj 阅读 (242) 评论 (0)
+&lt;a href=&quot;https://i.cnblogs.com/EditPosts.aspx?postid=10986466&quot; rel=&quot;nofollow&quot;&gt;
+    编辑
+&lt;/a&gt;
+&lt;/div&gt;
+        &lt;div class=&quot;clear&quot;&gt;&lt;/div&gt;
+&lt;/div&gt;
+
+
+		
+
+
+&lt;div class=&quot;day&quot;&gt;
+    &lt;div class=&quot;dayTitle&quot;&gt;
+        &lt;a href=&quot;https://www.cnblogs.com/uncleyong/archive/2019/06/29.html&quot;&gt;2019年6月29日&lt;/a&gt;
+    &lt;/div&gt;
+
+        &lt;div class=&quot;postTitle&quot;&gt;
+            
+
+&lt;a class=&quot;postTitle2&quot; href=&quot;https://www.cnblogs.com/uncleyong/p/11119489.html&quot;&gt;
+    笔试题汇总，含参考答案（持续更新中。。。自问自答，自娱自乐）--机会只留给有准备的人【注册登录可见】
+&lt;/a&gt;
+
+        &lt;/div&gt;
+        &lt;div class=&quot;postCon&quot;&gt;
+
+    &lt;div class=&quot;c_b_p_desc&quot;&gt;
+只有注册用户登录后才能阅读该文。            &lt;a href=&quot;https://www.cnblogs.com/uncleyong/p/11119489.html&quot; class=&quot;c_b_p_desc_readmore&quot;&gt;阅读全文&lt;/a&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+        &lt;div class=&quot;clear&quot;&gt;&lt;/div&gt;
+        &lt;div class=&quot;postDesc&quot;&gt;
+
+posted @ 2019-06-29 11:24 qzcsbj 阅读 (2140) 评论 (2)
+&lt;a href=&quot;https://i.cnblogs.com/EditPosts.aspx?postid=11119489&quot; rel=&quot;nofollow&quot;&gt;
+    编辑
+&lt;/a&gt;
+&lt;/div&gt;
+        &lt;div class=&quot;clear&quot;&gt;&lt;/div&gt;
+&lt;/div&gt;
+
+
+
+&lt;div class=&quot;topicListFooter&quot;&gt;
+    &lt;div id=&quot;nav_next_page&quot;&gt;
+        
+
+    &lt;a href=&quot;https://www.cnblogs.com/uncleyong/default.html?page=2&quot;&gt;
+        下一页
+    &lt;/a&gt;
+
+    &lt;/div&gt;    
+&lt;/div&gt;
+
+
+
+
+
+
+
+
+
+	&lt;/div&gt;&lt;!--end: forFlow --&gt;
+	&lt;/div&gt;&lt;!--end: mainContent 主体内容容器--&gt;
+
+	&lt;div id=&quot;sideBar&quot;&gt;
+		&lt;div id=&quot;sideBarMain&quot;&gt;
+			
+&lt;div id=&quot;sidebar_news&quot; class=&quot;newsItem&quot;&gt;
+            &lt;script&gt;loadBlogNews();&lt;/script&gt;
+&lt;/div&gt;
+
+			&lt;div id=&quot;blog-calendar&quot; style=&quot;display:none&quot;&gt;&lt;/div&gt;&lt;script&gt;loadBlogDefaultCalendar();&lt;/script&gt;
+			
+			&lt;div id=&quot;leftcontentcontainer&quot;&gt;
+				&lt;div id=&quot;blog-sidecolumn&quot;&gt;&lt;/div&gt;
+                    &lt;script&gt;loadBlogSideColumn();&lt;/script&gt;
+			&lt;/div&gt;
+			
+		&lt;/div&gt;&lt;!--end: sideBarMain --&gt;
+	&lt;/div&gt;&lt;!--end: sideBar 侧边栏容器 --&gt;
+	&lt;div class=&quot;clear&quot;&gt;&lt;/div&gt;
+	&lt;/div&gt;&lt;!--end: main --&gt;
+	&lt;div class=&quot;clear&quot;&gt;&lt;/div&gt;
+	&lt;div id=&quot;footer&quot;&gt;
+		&lt;!--done--&gt;
+Copyright &amp;copy; 2019 qzcsbj
+    &lt;div id=&quot;poweredby&quot;&gt;Powered by .NET Core 3.0 Preview 8 on Linux&lt;/div&gt;
+
+
+
+	&lt;/div&gt;&lt;!--end: footer --&gt;
+&lt;/div&gt;&lt;!--end: home 自定义的最大容器 --&gt;
+
+
+    
+&lt;/body&gt;
+&lt;/html&gt;
+</responseData>
+  <cookies class="java.lang.String"></cookies>
+  <method class="java.lang.String">GET</method>
+  <queryString class="java.lang.String"></queryString>
+  <redirectLocation class="java.lang.String">https://www.cnblogs.com/UncleYong/</redirectLocation>
+  <java.net.URL>https://www.cnblogs.com/UncleYong/</java.net.URL>
+</httpSample>
+
+</testResults>
