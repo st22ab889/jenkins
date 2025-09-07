@@ -1,0 +1,250 @@
+
+1.更改网卡配置
+cp /etc/sysconfig/network-scripts/ifcfg-ens33 /etc/sysconfig/network-scripts/ifcfg-ens33.bak
+vim /etc/sysconfig/network-scripts/ifcfg-ens33    	# 这里一定要设置为 ONBOOT=yes 
+systemctl restart network
+
+
+2.更改 yum repo 配置
+cd  /etc/yum.repos.d
+cp CentOS-Base.repo CentOS-Base.repo.bak
+vi CentOS-Base.repo
+yum install vim wget curl
+
+
+3.关闭防火墙
+systemctl status firewalld
+systemctl disable firewalld
+systemctl stop firewalld
+systemctl status firewalld
+	
+
+4.关闭selinux
+vim /etc/selinux/config
+setenforce 0
+getenforce		# Permissive
+
+
+5.jenkins service unit 
+vim /usr/lib/systemd/system/jenkins.service
+
+========================================================
+
+login
+	http://192.168.32.200:8080/
+	admin
+
+	cat /var/lib/jenkins/secrets/initialAdminPassword
+	3d9b7724a4e546cb832d5919c95ba931
+	
+	安装 stage view 以及 blue ocean 插件
+	
+
+pipeline的命名最好不要有空格，因为在运行pipeline时，会在Jenkins的工作目录下创建一个名为 pipeline名称的文件夹，如果文件夹有空格，容易造成不可意料的错误
+	
+http://<your-jenkins-host>/jnlpJars/agent.jar
+
+vim /etc/profile
+export JAVA_HOME=/usr/local/jdk-21
+export PATH=$PATH:$JAVA_HOME/bin
+
+source /etc/profile
+
+
+jenkins工作目录：/var/lib/jenkins/workspace/
+
+https://www.jenkins.io/solutions/pipeline/
+https://www.jenkins.io/zh/doc/book/pipeline/syntax/
+
+
+=======================================================
+
+第一步. 我们需要安装kubernetes 插件， 
+点击 Manage Jenkins -> Manage Plugins -> Available -> 搜索"Kubernetes" ->  勾选"Kubernetes"安装即可。
+
+15 devops		#里面有流水线代码
+
+=======================================================
+
+在 Jenkins Pipeline 结合 Kubernetes 插件的场景中，maven 容器能够访问 jnlp-agent 工作目录的核心原因是 **Jenkins Kubernetes 插件会自动为 Pod 中的所有容器挂载共享的工作空间卷**，无需显式配置。
+
+
+具体来说，当使用 `podTemplate` 定义 Pod 模板时，Jenkins Kubernetes 插件会默认做以下操作：
+
+1. **自动创建工作空间卷**  
+   插件会自动为 Pod 添加一个 `emptyDir` 类型的卷（临时存储卷），作为整个 Pipeline 的共享工作目录（通常路径为 `/workspace` 或 `/home/jenkins/workspace`）。
+
+2. **所有容器共享工作空间卷**  
+   该工作空间卷会被**同时挂载到 Pod 中的所有容器**（包括 jnlp-agent 容器、maven 容器、docker 容器等）的相同路径下。  
+   因此，jnlp-agent 容器通过 `checkout scm` 拉取的代码会存放在这个共享目录中，而 maven 容器也能在同一个路径下看到这些代码文件。
+
+3. **jnlp-agent 的角色**  
+   jnlp-agent 容器是 Jenkins 控制器与 Pod 之间的通信代理，负责执行 Pipeline 的核心逻辑（如 checkout 代码、切换 stage 等），但它的工作目录会通过共享卷暴露给其他容器，使得其他工具容器（如 maven）可以直接操作其中的文件。
+
+
+简单说：Jenkins 会自动为 Pod 中的所有容器“牵线搭桥”，通过共享卷让它们访问同一个工作目录，因此即使没有显式配置，maven 容器也能操作 jnlp-agent 拉取的代码。这是 Kubernetes 插件为了简化 Pipeline 编写而做的默认优化。
+
+=======================================================
+
+在 Jenkins Pipeline 中，“Pipeline 内置步骤”和“Groovy 函数”确实容易混淆，但只要抓住它们的**来源、用途和使用场景**，就能清晰区分。以下是理顺思路的核心逻辑：
+
+
+### 一、先明确两个核心概念的本质区别
+| **维度**         | **Pipeline 内置步骤（Steps）**                          | **Groovy 函数（含自定义函数）**                          |
+|------------------|-------------------------------------------------------|-------------------------------------------------------|
+| **来源**         | 由 Jenkins 插件或 Pipeline 框架提供（非 Groovy 原生）       | 来自 Groovy 语言本身（如 `println`）或用户自定义（用 `def` 定义） |
+| **作用**         | 执行 CI/CD 相关的具体操作（与 Jenkins 环境交互）           | 处理逻辑、数据计算、流程控制（纯编程语言层面的逻辑）         |
+| **典型例子**     | `echo`（输出日志）、`sh`（执行 shell 命令）、`git`（拉代码）、`archiveArtifacts`（归档产物） | `def sum(a,b) { return a+b }`（自定义函数）、`for` 循环、`if-else` 条件判断 |
+
+
+### 二、如何快速区分和使用？
+#### 1. 记住：Pipeline 步骤是“CI/CD 专属操作”
+Pipeline 步骤是 Jenkins 为了实现流水线功能（如代码拉取、构建、部署、日志输出等）专门设计的“工具”，它们的作用直接和 CI/CD 流程相关，且**只能在 Jenkins Pipeline 环境中运行**。
+
+比如：
+- `sh 'npm install'`：调用步骤执行 shell 命令（和构建相关）；
+- `git url: 'xxx'`：调用步骤拉取代码（和版本控制相关）；
+- `echo '开始构建'`：调用步骤输出日志（和流水线运行状态相关）。
+
+这些步骤的名称和功能是固定的，由 Jenkins 插件提供（比如 `git` 步骤来自 Git 插件），你不能随意修改它们的实现。
+
+
+#### 2. Groovy 函数是“逻辑处理工具”
+Groovy 是 Pipeline 脚本的“编程语言”，它的函数（包括语言自带的和你自定义的）用于处理**逻辑判断、数据转换、流程组织**等，和 CI/CD 本身无关，换成其他场景（如普通 Groovy 脚本）也能运行。
+
+比如：
+- 自定义函数：`def formatDate() { return new Date().toString() }`（处理日期格式化，和 CI/CD 无关）；
+- 语言自带功能：`if (result == 'SUCCESS') { ... }`（条件判断）、`for (i in 1..3) { ... }`（循环）。
+
+这些是编程语言的通用能力，不依赖 Jenkins 环境，只是恰好被用来组织 Pipeline 的逻辑。
+
+
+### 三、实际使用中的“顺理”技巧
+1. **看用途**：  
+   - 如果你要做“和流水线运行相关的操作”（如执行命令、拉代码、发通知），用的是 **Pipeline 步骤**；  
+   - 如果你要做“数据处理或逻辑控制”（如拼接字符串、判断条件、循环执行某段代码），用的是 **Groovy 语法/函数**。
+
+2. **看是否依赖 Jenkins 环境**：  
+   - 脱离 Jenkins 后，`sh`、`git`、`echo`（Pipeline 的 echo）就无法运行了——这些是步骤；  
+   - 脱离 Jenkins 后，`if-else`、`def` 定义的函数、`println`（Groovy 原生输出）依然能在 Groovy 脚本中运行——这些是 Groovy 功能。
+
+3. **熟悉常用步骤和 Groovy 基础**：  
+   - 记住几个核心步骤：`echo`、`sh`/`bat`、`git`、`stash`、`unstash` 等，它们是 Pipeline 的“操作指令”；  
+   - 掌握 Groovy 基础语法：变量定义（`def`）、条件判断（`if`）、循环（`for`）、函数定义（`def 函数名() {}`），这些是“逻辑组织工具”。
+
+
+### 总结
+Pipeline 步骤是“流水线的操作工具”（做具体的 CI/CD 事），Groovy 函数是“逻辑的组织工具”（处理逻辑和数据）。把它们理解为“工具的两个层面”：前者负责“做什么具体操作”，后者负责“怎么组织这些操作的逻辑”，就不会觉得乱了。多写几个简单的流水线脚本（比如包含 `sh` 步骤和 `if` 判断），很快就能熟练区分了。
+
+
+
+=======================================================
+
+
+在 Jenkins Pipeline 中，`script{}` 和 `sh` 是两种不同的语法结构，用途和场景有明显区别：
+
+
+### **1. `script{}` 块**
+- **作用**：在声明式 Pipeline 中嵌入**Groovy 脚本逻辑**，用于处理复杂的流程控制（如条件判断、循环、变量操作等）。
+- **本质**：是声明式 Pipeline 对 Groovy 脚本的兼容层，允许在结构化的声明式语法中插入脚本化逻辑。
+- **使用场景**：
+  - 需要进行条件判断（`if/else`）、循环（`for/while`）
+  - 定义或操作复杂变量（如 Groovy 集合、对象）
+  - 调用 Jenkins 提供的 Groovy API（如操作构建参数、访问构建历史）
+
+- **示例**：
+  ```groovy
+  pipeline {
+    agent any
+    stages {
+      stage('Example') {
+        steps {
+          script {  // 嵌入 Groovy 逻辑
+            def branch = env.BRANCH_NAME
+            if (branch == 'main') {
+              echo "当前是主分支"
+            } else {
+              echo "当前是开发分支"
+            }
+          }
+        }
+      }
+    }
+  }
+  ```
+
+
+### **2. `sh` 步骤**
+- **作用**：在 Pipeline 中执行**shell 命令**（适用于 Linux/Unix 环境，Windows 对应 `bat` 或 `powershell`）。
+- **本质**：是 Jenkins 提供的内置步骤（Step），用于与操作系统交互，执行命令行操作。
+- **使用场景**：
+  - 执行编译命令（如 `mvn clean package`、`npm install`）
+  - 操作文件系统（如 `cp`、`mkdir`、`ls`）
+  - 调用系统工具或脚本（如 `git`、`docker` 命令）
+
+- **示例**：
+  ```groovy
+  pipeline {
+    agent any
+    stages {
+      stage('Build') {
+        steps {
+          sh 'echo "开始编译"'  // 执行 shell 命令
+          sh '''
+            # 多行 shell 命令
+            mvn clean package
+            ls -l target/
+          '''
+        }
+      }
+    }
+  }
+  ```
+
+
+### **核心区别**
+| 维度         | `script{}` 块                  | `sh` 步骤                      |
+|--------------|--------------------------------|-------------------------------|
+| 执行环境     | 运行在 Jenkins 控制器的 JVM 中 | 运行在代理节点（Agent）的 shell 环境中 |
+| 语法         | 使用 Groovy 语法               | 使用 shell 语法（如 Bash）     |
+| 用途         | 流程控制、变量处理、调用 Jenkins API | 执行系统命令、编译构建、文件操作等 |
+| 输出日志     | Groovy 代码的执行日志          | shell 命令的输出日志           |
+| 错误处理     | 遵循 Groovy 异常机制           | 命令返回非 0 状态码会导致构建失败 |
+
+
+### **总结**
+- 用 `script{}` 处理**Pipeline 逻辑层面**的需求（如分支判断、动态流程）。
+- 用 `sh` 处理**操作系统层面**的需求（如执行命令、调用工具）。
+
+在实际 Pipeline 中，两者经常结合使用：例如用 `script{}` 定义变量和条件，再用 `sh` 执行具体的命令。
+
+=======================================================
+
+https://cp.baidu.com/chat?chatId=df74f1a6b1c258fafab069dc5022aaea988f41a1&type=simple
+https://www.doubao.com/chat/16532912615820802
+https://chat.deepseek.com/a/chat/s/2acaff05-b5eb-4813-ad49-347df8ea2f81
+一个社区管理的可复制的流水线示例的集合: https://www.jenkins.io/zh/doc/pipeline/examples/
+
+
+看到这里:  https://www.jenkins.io/zh/doc/book/pipeline/shared-libraries
+
+	
+
+=======================================================
+git:
+
+Git stash 主要用于临时保存你当前工作目录中的修改（包括未提交的更改），以便你可以随时切换分支或进行其他操作而不丢失这些更改。
+Git stage（通常通过 git add 命令实现）用于将文件的更改添加到暂存区（staging area）。暂存区是 Git 用于准备下一次提交的地方。
+
+github app 如何使用 ?
+
+=======================================================
+
+yum deplist git				# 检测git的依赖包
+sudo yum remove git			
+yum autoremove --dry-run	# 检测孤儿包，不删除. 没有 --dry-run 会删除. 低版本没有 autoremove 选项
+
+package-cleanup --leaves			# 检测孤儿包(仅查看，不删除)，yum-utils 工具集中的 package-cleanup 来检测并清理孤儿包
+package-cleanup --remove-leaves		# 需删除孤儿包(谨慎操作)
+
+

@@ -1,0 +1,48 @@
+
+stage('Build') {
+	node {
+		sh '''
+			mkdir target
+			echo "this is a test file" > ./target/test.txt
+			pwd
+			ls -al
+		'''
+		stash includes: '**/target/*.txt', name: 'TextFile'
+		
+		deleteDir()
+	}
+}
+
+stage('Test') {
+	node('node_a'){
+		try {
+			unstash 'TextFile'
+			sh '''
+				pwd
+				ls -l target
+				cat ./target/test.txt
+			'''
+		}
+		finally{
+			deleteDir()
+		}
+	}
+}
+
+
+stage('Parallel Tasks'){
+	
+	// 并行运行
+	parallel DefaultNode: {
+		node {
+			sh 'pwd'
+		}
+	},
+	Node_A: {
+		node('node_a'){
+			sh 'pwd'
+		}
+	}
+	// 可以继续添加并行的node块
+}
+

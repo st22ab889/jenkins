@@ -1,0 +1,76 @@
+node('! node_a') {				// try 也可以包住整个 node
+	try {						// try 包住整个stage相当于声明式脚本中的 post 写法
+		/* docker.image('node:7-alpine').inside {
+			stage ('Test') {
+				sh 'node --version'
+			}
+		} */
+		
+		withEnv(['DISABLE_AUTH=true','DB_ENGING=sqlite']){			// 定义临时变量
+			stage('First') {
+				if (2 > 1) {
+					sh 'printenv'
+					timeout(time:5, unit:'SECONDS'){
+						retry(3){
+						sh '''
+						ip=`ip a | grep inet | tail -2 | head -1 | awk  '{print $2}'`
+						echo $ip          
+						''' 
+						}
+					}
+				}else{
+					echo 'this is first stage'
+				}
+			}
+		}
+		
+		stage('second') {
+			try {
+				// sh 'exit 1'    
+				echo ('this is second stage')
+			}
+			catch (exc) {
+				// throw exc
+			}
+			finally {
+				echo 'This will always run'
+			}
+		}	
+
+		stage ('Three') {
+			if(env.BRANCH_NAME == 'main'){					// 相当于声明式语法中的 when
+				echo 'deploy to product environment'
+			}else{
+				echo 'deploy to other environment'
+			}
+		
+			input 'Do you want to go on ?'
+		}
+		
+	}
+	catch (e) {
+        // Since we're catching the exception in order to report on it, we need to re-throw it, to ensure that the build is marked as failed
+        throw e		
+	}
+	finally {
+		
+		/*
+		需要使用 ${} 的情况：当你在字符串中需要嵌入变量的值时，使用 ${} 语法。例如：echo "当前构建结果是：${currentBuild.result}"，这样会将变量 currentBuild.result 的值插入到字符串中进行输出。
+		不需要使用 ${} 的情况：在逻辑表达式、赋值语句、函数参数传递等非字符串场景中，直接使用变量名即可。例如：if (currentBuild.result == 'UNSTABLE')、def result = currentBuild.result、someFunction(currentBuild.result) 等，这些情况下不需要用 ${} 来引用变量。
+		*/
+		
+		/* currentBuild.properties.each { key, value ->			// 需要在jenkins中批准才能使用这个方法
+			echo "${key}: ${value}"
+		} */
+		
+		echo "currentBuild.result: ${currentBuild.result}" 		// 这里没有构建完成，所以值为 null
+		
+		if(currentBuild.result == 'UNSTABLE'){
+		    echo 'I am unstable :/'
+		} else {
+		    echo 'One way or another, I have finished' 
+		}
+		
+		deleteDir()
+	}
+}

@@ -1,0 +1,128 @@
+try {
+	node {
+	
+		// 方式6: 使用 checkout
+		// checkout scm
+	
+		stage('pull code from gitee.com'){						// stage 中没有步骤不会报错
+			
+			// 方式2: Username with Password 凭据, Username 为 GitHub 用户名(不是昵称), password 为 token.
+			/* withCredentials([usernamePassword(credentialsId: '64a0a0dd-17d9-4260-8ba6-c00f8ab9eba6', passwordVariable: 'Token', usernameVariable: 'UserName')]) {
+				// 注意: 这里要使用 sh ''' , 而不是 sh """, 参考: https://www.jenkins.io/zh/doc/book/pipeline/jenkinsfile/#%E5%A4%84%E7%90%86%E5%87%AD%E6%8D%AE
+				sh '''
+				repoUrl="https://gitee.com/st22ab889/polling-app-client.git"
+				AUTH_REPO_URL=$(echo "$repoUrl" | sed "s|https://|https://$UserName:$Token@|")
+				git clone "$AUTH_REPO_URL" .
+				git checkout master
+				'''
+			} */
+			
+			/*
+			git(
+				url: 'https://gitee.com/st22ab889/polling-app-client.git',
+				credentialsId: '64a0a0dd-17d9-4260-8ba6-c00f8ab9eba6',
+				branch: 'master'
+			)
+			*/
+			
+			/*
+			withCredentials([usernamePassword(credentialsId: '64a0a0dd-17d9-4260-8ba6-c00f8ab9eba6', passwordVariable: 'Token', usernameVariable: 'UserName')]) {
+				//script 块可以要, 也可以不要
+				//script {
+					def repoUrl = 'https://gitee.com/st22ab889/polling-app-client.git'
+					def authenticatedRepoUrl = repoUrl.replace("https://", "https://${UserName}:${Token}@")
+					git url:authenticatedRepoUrl,
+						branch: 'master'
+				//}
+			}
+			*/
+			
+			
+			// 方式3(推荐方式,适合团队/生产环境): SSH Username with private key 凭据. UserName 不在 url 中引用可以任意设定, 然后配置 Private Key
+			/*
+			git (
+				url: 'git@gitee.com:st22ab889/polling-app-client.git',
+				credentialsId: 'b8473db6-363e-4a12-9131-dd2e8838712f',
+				branch: 'master'
+			)
+			*/
+			
+			/*
+			withCredentials([sshUserPrivateKey(
+				credentialsId: 'b8473db6-363e-4a12-9131-dd2e8838712f', 
+				keyFileVariable: 'ssh_key_file',   
+				usernameVariable: 'username'   
+			)]) {
+				sh '''
+					eval $(ssh-agent -s)											# 启动 ssh-agent 并加载私钥
+					ssh-add ${ssh_key_file}
+					ssh-keyscan gitee.com >> ~/.ssh/known_hosts						# 信任 Gitee 主机密钥（避免 Host key 验证失败）
+					git clone git@gitee.com:st22ab889/polling-app-client.git		# 直接克隆仓库（ssh-agent 会自动提供密钥）
+					cd polling-app-client
+					git checkout master
+				'''
+			}
+			*/
+			
+			// 方式4: 参考 Declarative-v2-凭据
+			
+			
+			// 方式6: "checkout scm" 官方文档是放在 node 块中，实测也可以放在 stage 块中
+			checkout scm
+			
+			sh 'ls -al'
+		}
+		
+		stage ('login to 138.2.118.182 with SSH private key') {
+			withCredentials([sshUserPrivateKey(credentialsId: 'cd3a6c69-9abb-48f8-9a26-cfdcd48dd445', keyFileVariable: 'key_file_path', usernameVariable: 'UserName')]) {
+				// 简单的连贯命令：直接用 ssh '命令1; 命令2; ...' 即可模拟终端登录后的操作,保持上下文
+				// 复杂交互场景：结合 expect 工具(需在 Jenkins 节点安装 expect)自动处理交互流程(输入应答),实现完全自动化,模拟"登录远程机器后交互式执行多条命令"的效果
+				sh '''
+					ssh -i $key_file_path -o StrictHostKeyChecking=no ${UserName}@138.2.118.182 "echo 'success'"		// 登录成功运行一个命令
+					ssh -i $key_file_path -o StrictHostKeyChecking=no ${UserName}@138.2.118.182 "						// 登录成功运行多个命令
+						ps -aux | grep docker;
+						free -h
+						df -h
+					"		
+				'''
+			}
+		}
+		
+		stage ('login to 192.168.32.200 with SSH Username+Password') {
+			withCredentials([usernamePassword(credentialsId: '8796888d-c23e-4e59-aab0-8251bccb816f', passwordVariable: 'Pwd', usernameVariable: 'UserName')]) {
+				sh '''
+					echo "此方法要求运行pipeline脚本的节点安装了sshpass"
+					# sshpass -p "${Pwd}" ssh -o StrictHostKeyChecking=no ${UserName}@192.168.32.200 "ps -aux | grep jenkins"
+				'''
+			}
+		}
+	}
+
+}
+catch(exc){
+
+}
+finally{
+    
+	/*
+	直接使用 deleteDir(), pipeline报异常,因为 deleteDir() 需要访问 Jenkins 的文件系统上下文(FilePath),而 finally 块若不在 node 或 agent 作用域内，将失去工作空间路径上下文。
+	deleteDir() 步骤需要在 node 上下文中执行，因为：
+		deleteDir() 依赖 hudson.FilePath 对象获取工作空间路径
+		finally 块可能脱离节点执行上下文
+		Jenkins 要求文件操作必须在分配的工作空间内执行	
+	最佳实践:
+		必须使用时确保在 `node{}` 块内
+		避免裸用 `deleteDir()`
+		优先使用 `cleanWs` 插件（更健壮，支持更多配置）
+	*/
+	// deleteDir() 
+	
+	node {
+		deleteDir() 
+	}
+}
+
+
+
+
+

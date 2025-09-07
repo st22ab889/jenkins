@@ -1,0 +1,139 @@
+
+// 在源代码中管理 Jenkinsfile: https://www.jenkins.io/zh/doc/book/pipeline/getting-started/
+// Jenkinsfile代码片段生成器:  http://192.168.32.200:8080/pipeline-syntax/
+// Jenkinsfile声明式指令生成器: http://192.168.32.200:8080/directive-generator/
+pipeline {
+    // agent none 
+    
+	/* agent {
+        docker { image 'node:7-alpine' }
+    } */
+	
+    /* agent {
+        // label "! node_a"
+        label "node_a"
+    } */
+    
+    agent {
+        node { 
+            label "node_a" 
+            customWorkspace './mydir/demo'
+        }
+    } 
+    
+	environment {									// 环境变量定义在这里表示全局的，定义在stage中表示阶段级别使用
+		DISABLE_AUTH = 'true'
+		DB_ENGING = 'sqlite'
+	}
+	
+    stages {
+        stage('First') {
+            // agent { label 'node_a' } 
+            steps {
+                echo 'print environment'		// 是"echo ('print environment')"的简化写法，Groovy 语言允许在调用函数/方法时省略括号(当参数明确时),sh和其它step也是一样原理 
+                sh 'printenv'
+				
+                retry(3) {                           // 运行失败会继续运行到第三次，第三次失败，pipeline失败 
+                    sh 'ip a | grep inet | tail -2 | head -1 | awk  "{print $2}" '
+                    // sh 'lsa'
+                }
+                timeout(time:3, unit:'SECONDS'){    // unit:'MINUTES'
+                    sh 'sleep 2'                    // 如果运行超时, pipeline将会失败
+                }
+                
+                /* timeout(time:10, unit:'SECONDS') {
+                    retry(3) {
+                        sh 'lsa'
+                    }
+                } */
+            }
+        }
+		
+        stage('Second') {
+            // agent { label '! node_a' } 
+            steps {
+                sh '''
+                ip=`ip a | grep inet | tail -2 | head -1 | awk  '{print $2}'`
+                echo $ip
+                dir=`pwd`
+                echo $dir
+                '''
+            }
+        }
+		
+		stage('Third') {
+		
+			// when { branch 'development' }		  	//  when可以实现多分支, 比如在两个stage中分别实现dev和pro阶段的不同行为
+		
+			steps {
+				input "Do you want to go on ?"			// 人工确认
+			}
+			
+			post {
+				always {								// 这里不受人工确认结果影响,始终会运行
+					echo "this is third stage"			
+				}
+			}
+			
+		}
+		
+		stage('Fourth') {
+			
+			// when 必须放在 stage 内，脚本式pipeline中不支持 when. 
+			// when { branch 'production' }									// 仅当分支为development时执行	
+			// when { tag "release-*" }  									// 代码Tag符合通配符规则时执行
+			// when { environment name: 'DEPLOY_TO', value: 'DEV' }  		// 环境变量DEPLOY_TO=DEV时执行
+			// when { expression { return params.DEBUG_MODE == true } }  	// 根据参数值动态判断
+			// when { changeRequest }  										// 仅针对代码审查请求执行,(需Jenkins ≥ 2.22，低版本需升级插件)
+			
+			/*
+			when {
+				allOf {
+					branch 'main'
+					environment name:'AUTO_DEPLOY', value: 'true'
+				}
+			}
+			*/
+			
+			// when { anyOf {branch 'dev'; tag 'test-*'}}		// Of 中的 "O"是大写
+			
+			when { not { buildingTag() } }						// 非Tag构建才执行测试	
+			
+			steps {
+				echo 'this is fourth stage'
+			}
+		}
+		
+    }
+    
+    post {
+        always {
+            echo 'This will always run'
+			deleteDir()
+        }
+        success {
+            echo 'This will run only if successful'
+			/*
+			mail to: 'team@example.com',
+				subject: "Failed Pipeline: ${currentBuild.fullDisplayName}",
+				body: "Something is wrong with ${env.BUILD_URL}"
+				
+			hipchatSend message: "Attention @here ${env.JOB_NAME} #${env.BUILD_NUMBER} has failed.", color: 'RED'	
+			
+			slackSend channel: '#ops-room', color: 'good', message: "The pipeline ${currentBuild.fullDisplayName} completed successfully."
+			*/
+		}
+        failure {
+            echo 'This will run only if failed'
+        }
+        
+        unstable {
+            echo 'This will run only if the run was marked as unstable'
+        }
+        
+        changed {
+            echo 'This will run only if the state of the Pipeline has changed'
+            echo 'For example, if the Pipeline was previously failing but is now successful'           
+        }
+    }
+}

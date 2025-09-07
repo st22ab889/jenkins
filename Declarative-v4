@@ -1,0 +1,117 @@
+pipeline {
+	
+	agent none
+	
+	stages {
+
+		stage('Build') {
+			
+			agent any
+			
+			steps {
+				
+				// 许多流水线步骤也使用命名参数语法作为在 Groovy 中创建的 Map(使用语法 [key1: value1, key2: value2])的简写 
+				// git url: 'git://example.com/amazing-project.git', branch: 'master'
+				// git([url: 'git://example.com/amazing-project.git', branch: 'master'])
+				
+				// 为了方便，当调用只有一个参数的步骤时(或仅一个强制参数),参数名称可以省略，例如：
+				// sh 'echo hello' 
+				// sh([script: 'echo hello'])
+				
+			
+				sh '''
+					mkdir target
+					echo "this is a test file" > ./target/test.txt
+					pwd
+					ls -al
+				'''
+				// ** 是通配符(glob 模式匹配符)，表示匹配任意层级的目录(包括当前目录和所有子目录)
+				// name 表示 stash 这个步骤的名字
+				stash includes: '**/target/*.txt', name: 'TextFile'
+			}
+			
+			post {
+				always {
+					deleteDir()				// 这一步并不会影响 stash 暂存文件, 一旦流水线运行完成，就会从 Jenkins master 中删除暂存文件 
+				}
+			}
+
+		}
+		
+		stage('Test') {
+			
+			agent {
+				label 'node_a'
+			}
+			
+			steps {
+				// 表示把名为'TextFile'的stash中生成的文件拷贝到当前agent的工作空间中
+				unstash 'TextFile'
+				sh '''
+					pwd
+					ls -l target
+					cat ./target/test.txt
+				'''
+			}
+			
+			post {
+			
+				always {
+					deleteDir()
+				}
+			}	
+		}
+		
+		
+		stage('Parallel Tasks') {
+			
+			// 默认情况下，任何一个并行子阶段失败，整个并行阶段会立即终止(其他子阶段可能被中断),可通过 failFast true|false 控制
+			failFast true 		// 一旦有一个失败，立即终止所有并行任务
+			
+			// parallel 必须包含在 stage 内部，不能直接在 stages 下使用. 并行的内容必须是 stage 块(每个并行任务都是一个子阶段)
+			// 支持嵌套并行(并行阶段中再包含并行子阶段),可以结合 when 条件判断,动态决定是否执行某个并行任务
+			parallel {
+				stage('task one'){
+					agent {
+						label 'node_a'
+					}
+					steps{
+						sh 'pwd'
+					}
+				}
+				stage('task two'){
+					agent any
+					steps{
+						sh 'pwd'
+					}
+				}
+				stage('task three'){
+					agent {
+						label 'node_a'
+					}
+					steps{
+						sh 'pwd'
+					}
+				}				
+			}
+			
+			
+		
+		}
+		
+		/*
+		stage('End'){
+			steps {
+				echo "End of pipeline"
+			}
+		}
+		*/
+	}
+
+	post {
+		always {
+			// deleteDir()
+			echo "DONE"
+		}
+	}
+}

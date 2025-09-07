@@ -1,0 +1,110 @@
+#!/usr/bin/env groovy			// IDE不能正确的使用语法高亮显示脚本式 Jenkinsfile, 加入 Shebang line (Groovy syntax), 必须放在第一行
+
+
+properties([					// 脚本式要使用 properties 块
+	parameters ([				// parameters 使用"([  ])"块, 声明式使用"{}"块	
+		string(name: 'HostName', defaultValue: 'abc.com', description:'input your host name'),		// 声明式后面没有逗号
+		booleanParam(name: 'IsPatch', defaultValue: true, description: 'patch or not'),
+		choice(name: 'PatchVersion', choices:['1.21.002','1.22.005', '1.23.333']),
+		password(name: 'Pwd', defaultValue:'', description: 'input your login password'),
+		text(name: 'Notes', defaultValue: 'no more info', description:'input your note')
+		// 还支持其它三种类型参数: 凭据参数、文件参数、运行时参数
+	])
+])
+
+env.MYTOOL_VERSION = '1.33'		// Jenkins 会自动将 Pipeline 中的自定义的环境变量注入到 shell 环境中,本质是通过Groovy代码给env对象动态添加属性,支持复杂逻辑(如计算、条件赋值)
+
+
+node { 
+	
+	sh 'echo my tool version is $MYTOOL_VERSION'	// shell 中引用环境变量,这四种写法都行
+	sh "echo 'my tool version is $MYTOOL_VERSION'"
+	sh "echo my tool version is '$MYTOOL_VERSION'"	
+	sh 'echo my tool version is "$MYTOOL_VERSION"'
+	
+	echo "my tool version is ${MYTOOL_VERSION}" 	// Pipeline语法中引用环境变量,如果是字符串插值需用${MYTOOL_VERSION}或${env.MYTOOL_VERSION},且只能加双引号
+	echo "my tool version is ${env.MYTOOL_VERSION}"
+	echo env.MYTOOL_VERSION							// Pipeline语法中引用环境变量,如果不是字符串插值,可以直接 env.MYTOOL_VERSION  
+	
+	
+    env.BUILD_TIME = new Date().format("yyyyMMdd")	// 动态计算赋值
+    if (env.BRANCH_NAME == "main") {				// 条件赋值		
+        env.DEPLOY_ENV = "prod"
+    } else {
+        env.DEPLOY_ENV = "test"
+    }
+    echo "编译时间: ${env.BUILD_TIME}, 环境: ${env.DEPLOY_ENV}"	
+	
+	
+    stage('First') { 
+		def buildID = env.BUILD_ID
+		echo "this build id is $buildID"
+	   
+		echo "this job name is ${env.JOB_NAME}"
+	   
+		sh 'echo "Jenkins url is $JENKINS_URL"'
+    }
+	
+    stage('Second') { 
+		// withEnv() 代码块 定义的变量仅在块内部生效,相当于临时变量
+		withEnv(['TEMP_DIR=/tmp/build', "LOG_LEVEL=${env.DEBUG ? 'debug' : 'info'}"]) {		
+			echo "临时目录: ${TEMP_DIR}" 
+			sh 'echo "日志级别: $LOG_LEVEL"'
+		}
+		// echo "临时目录: ${TEMP_DIR}"  	// withEnv块外无法访问, pipeline 报异常,最终失败
+    }
+	
+    stage('Third') { 
+		echo '脚本时pipeline不支持 environment{} 定义变量'
+    }
+	
+	stage('fourth') { 
+	
+		sh 'echo Hostname is $HostName'					// 说明 parameter 参数也会引入到系统的环境变量
+		echo "host name is ${params.HostName}"			// 使用 pipeline echo 步骤, 要在字符串中引用变量, 要用双引号 	
+		echo params.Notes
+		
+		script {													// 脚本式也支持 script 块. 用和不用效果一样
+			if(params.IsPatch){
+				echo "Patch level is ${params.PatchVersion}"
+			}else{
+				echo "info is ${params.Notes}"
+			}
+		}
+		
+    }
+
+	stage('fifth'){
+		// sh 'echo Full project name is $fullProjectName'				// 不能打印出变量,说明 currentBuild 的变量没有注入到系统环境变量中
+		echo "Full project name is ${currentBuild.fullProjectName}"
+		echo currentBuild.fullProjectName
+	}
+	
+	stage('sixth'){
+		/*
+		// withEnv 也可以直接放在 node 块中. PATH+MAVEN 表示把 MAVEN 的变量追加到节点的PATH变量中
+		withEnv(["PATH+MAVEN=${tool 'M3'}/bin"]){
+			// sh'mvn -B verify'
+			sh "echo $PATH"
+		}
+		*/
+		echo '打开代码前,请先在Jenkins的"全局工具配置"中配置工具'
+	}
+	
+	stage('seventh'){
+		env.CC = """${sh(
+				returnStdout:true,
+				script: 'echo "clang"'	
+			)}""".trim()
+		
+		env.EXIT_STATUS = """${sh(
+				returnStatus:true,
+				script:'exit 1'
+			)}"""
+
+		echo "CC: ${env.CC}"		 
+		echo "status: ${EXIT_STATUS}"
+	}
+
+}
+

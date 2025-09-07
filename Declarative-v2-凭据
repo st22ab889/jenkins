@@ -1,0 +1,498 @@
+
+// 凭据的使用: https://www.jenkins.io/zh/doc/book/using/using-credentials/
+pipeline {
+
+	agent any
+	
+	stages {
+	
+		stage('pull code from gitee.com'){				// 定义了stage, 就一定要有steps, 否则会报错. 一个stage只能包含一个steps
+			
+			steps {										// 定义了steps, 就一定要有步骤, 否则会报错.
+				
+				// 方式1(不推荐，逐步被淘汰): Username with Password 凭据, 适用场景：个人账号临时使用(不推荐用于生产环境)
+				/*
+				withCredentials([gitUsernamePassword(credentialsId: '填入credential id', gitToolName: 'Default')]) {
+					// some block
+				}
+				*/
+				
+				
+				// 方式2: Username with Password 凭据, Username 为 GitHub 用户名(不是昵称), password 为 token.
+				//		  获取token方式: 登录 GitHub 点击头像 → Settings → Developer settings → Personal access tokens → Generate new token
+				/* 
+				withCredentials([usernamePassword(credentialsId: '64a0a0dd-17d9-4260-8ba6-c00f8ab9eba6', passwordVariable: 'Token', usernameVariable: 'UserName')]) {
+					sh '''
+					repoUrl="https://gitee.com/st22ab889/polling-app-client.git"
+					AUTH_REPO_URL=$(echo "$repoUrl" | sed "s|https://|https://$UserName:$Token@|")
+					git clone "$AUTH_REPO_URL" .
+					git checkout master									# git 是运行这个pipeline节点上安装的git
+					'''
+				} 
+				*/
+				
+				
+				/*
+				git(		// git 是jenkins插件
+					url: 'https://gitee.com/st22ab889/polling-app-client.git',
+					credentialsId: '64a0a0dd-17d9-4260-8ba6-c00f8ab9eba6',
+					branch: 'master'
+				) 
+				*/
+				
+				/*
+				withCredentials([usernamePassword(credentialsId: '64a0a0dd-17d9-4260-8ba6-c00f8ab9eba6', passwordVariable: 'Token', usernameVariable: 'UserName')]) {
+					// 在声明式 Pipeline 中嵌入 Groovy 脚本逻辑，用于处理复杂的流程控制(如条件判断、循环、变量操作等)
+					script {
+						def repoUrl = 'https://gitee.com/st22ab889/polling-app-client.git'
+						def authenticatedRepoUrl = repoUrl.replace("https://", "https://${UserName}:${Token}@")
+						// git 是jenkins插件
+						git url:authenticatedRepoUrl,
+							branch: 'master'
+					}
+				}
+				*/
+				
+				
+				// 方式3(推荐方式,适合团队/生产环境): SSH Username with private key 凭据. UserName 不在 url 中引用可以任意设定, 然后配置 Private Key 
+				//		需要配置 系统管理 -> 'Manage Jenkins' -> 'Security' -> Host Key Verification Strategy 改为"Accept first connection"或"No verification"
+				// git 步骤是 Jenkins 对系统 Git 命令的"包装器",负责处理参数解析和凭据注入,但实际执行 Git 操作的仍是宿主机上安装的 Git 软件。如果运行 Pipeline 的节点没有预先安装 Git,该步骤会失败
+				/*
+				git (
+					url: 'git@gitee.com:st22ab889/polling-app-client.git',
+					credentialsId: 'b8473db6-363e-4a12-9131-dd2e8838712f',
+					branch: 'master'
+				)
+				*/
+				
+				/* 
+				withCredentials([sshUserPrivateKey(
+					credentialsId: 'b8473db6-363e-4a12-9131-dd2e8838712f', 
+					keyFileVariable: 'ssh_key_file',   
+					usernameVariable: 'username'   
+				)]) {
+					sh 'ssh-keyscan gitee.com >> ~/.ssh/known_hosts'					// 信任GitHub主机密钥(可选，解决Host key verification failed问题)
+					sh 'chmod 600 ${ssh_key_file}'
+					sh """
+						git config --global core.sshCommand "ssh -i ${ssh_key_file}"	// 当 Git 版本低于 2.10.0 时, 不支持 core.sshCommand	
+						git clone git@gitee.com:st22ab889/polling-app-client.git
+						cd polling-app-client
+						git checkout master  
+					"""
+				}
+				*/ 
+				
+				/*
+				// 当 Git 版本低于 2.10.0 时的解决方案: 使用 ssh-agent (推荐)  或 临时修改 SSH 配置文件
+				withCredentials([sshUserPrivateKey(
+					credentialsId: 'b8473db6-363e-4a12-9131-dd2e8838712f', 
+					keyFileVariable: 'ssh_key_file',   
+					usernameVariable: 'username'   
+				)]) {
+					sh '''
+						eval $(ssh-agent -s)											# 启动 ssh-agent 并加载私钥
+						ssh-add ${ssh_key_file}
+						ssh-keyscan gitee.com >> ~/.ssh/known_hosts						# 信任 Gitee 主机密钥（避免 Host key 验证失败）
+						git clone git@gitee.com:st22ab889/polling-app-client.git		# 直接克隆仓库（ssh-agent 会自动提供密钥）
+						cd polling-app-client
+						git checkout master
+					'''
+				}
+				*/
+				
+				
+				// 方式4(推荐方式): Github APP 凭据 的方式拉起代码, 需要 App ID 和 私钥文件(.pem). 暂时 skip
+				
+				
+				// 方式5：在 Jenkins 任务中使用凭据
+				/*
+				自由风格项目：
+					源码管理 → 选择「Git」→ 仓库 URL（HTTPS 对应 PAT / 密码，SSH 对应 git@github.com:xxx/xxx.git）。
+					点击「Credentials」下拉框，选择已配置的凭据。
+				*/
+				
+				
+				// 方式6：checkout scm
+				/*
+				流水线项目：
+					在里面配置Git仓库(如果是 http url，使用 用户名+密码 的凭据, 如果是 git url, 使用 ssh 凭据), 分支, Jenkinsfile脚本路径
+					比如Jenkinsfile在仓库中的路径为: 仓库名 /jenkins/script/jenkinsfile, 那么脚本路径就为 script/jenkinsfile. 
+				*/
+				sh 'ls -al'
+				checkout scm
+				sh 'ls -al'
+			}
+		}
+		
+		stage('login to 138.2.118.182 with SSH private key'){
+			
+			steps {
+				
+				/*
+				SSH Pipeline Steps 插件可提供  sshCommand、sshScript、sshPut、sshGet 等步骤 实现对远程机器的 SSH 登录和操作
+					sshCommand: 用于在远程机器上执行一条简单的 Shell 命令。
+					sshScript: 如果需要执行复杂逻辑，可在本地编写 Shell 脚本，然后通过 sshScript 上传到远程机器并执行。
+					sshPut: 将本地文件 / 目录上传到远程机器。
+					sshGet：从远程机器下载文件 / 目录到本地
+				*/
+				
+				withCredentials([sshUserPrivateKey(credentialsId: 'cd3a6c69-9abb-48f8-9a26-cfdcd48dd445', keyFileVariable: 'key_file_path', usernameVariable: 'UserName')]) {
+					// 简单的连贯命令：直接用 ssh '命令1; 命令2; ...' 即可模拟终端登录后的操作,保持上下文
+					// 复杂交互场景：结合 expect 工具(需在 Jenkins 节点安装 expect)自动处理交互流程(输入应答),实现完全自动化,模拟"登录远程机器后交互式执行多条命令"的效果
+					sh '''
+						ssh -i $key_file_path -o StrictHostKeyChecking=no ${UserName}@138.2.118.182 "echo 'success'"		// 登录成功运行一个命令
+						ssh -i $key_file_path -o StrictHostKeyChecking=no ${UserName}@138.2.118.182 "						// 登录成功运行多个命令
+							ps -aux | grep docker;
+							free -h
+							df -h
+						"		
+					'''
+				}
+				
+			}
+		}	
+		
+		stage('login to 192.168.32.200 with SSH Username+Password'){
+			
+			steps {
+				withCredentials([usernamePassword(credentialsId: '8796888d-c23e-4e59-aab0-8251bccb816f', passwordVariable: 'Pwd', usernameVariable: 'UserName')]) {
+					echo "此方法要求运行pipeline脚本的节点安装了sshpass"
+					/*
+					sh '''
+						sshpass -p "${Pwd}" ssh -o StrictHostKeyChecking=no ${UserName}@192.168.32.200 "
+							ps -aux | grep jenkins;
+							free -h
+							df -h	
+						"
+					'''
+					*/
+				}
+			}
+		}	
+	
+	}
+	
+	post {
+		always {
+			deleteDir()				// 定义了always, 就一定要有步骤, 否则会报错.
+		}
+	}
+	
+}
+
+
+================================================================================================================================
+
+"checkout scm"文档： 
+	https://plugins.jenkins.io/workflow-scm-step/
+	https://www.jenkins.io/doc/pipeline/steps/workflow-scm-step/#-checkout-%20check%20out%20from%20version%20control
+	https://www.jenkins.io/zh/doc/book/pipeline/jenkinsfile/#%E5%A4%84%E7%90%86%E5%87%AD%E6%8D%AE
+	
+	scm 是一个特殊变量，它的核心作用是：自动关联触发当前流水线运行的代码版本。例如：
+		当你向 main 分支推送一个新提交时，scm 会自动指向这个新提交的版本；
+		当你通过 Pull Request 触发流水线时，scm 会自动指向 PR 对应的合并版本；
+		当你重新运行历史构建时，scm 会指向该历史构建对应的代码版本。
+	
+	也就是说传递给scm的参数可以控制仓库地址、分支名等. 如下:
+		checkout scm: [
+			$class: 'GitSCM',
+			branches: [[name: '*/main']],
+			userRemoteConfigs: [[url: 'https://github.com/repo1.git']]
+		], poll: false, name: 'repo1'
+	
+	
+对于声明式pipeline来说：
+	当pipeline运行时,就会从远程仓库拉取项目,放运行pipeline的 checkout scm 步骤时,又会拉取一次代码.
+	
+	
+对于脚本式pipeline来说：
+	当pipeline运行时,只是从远程仓库中拉取jenkinsfile文件并绑定到流水线上,如果没有在pipeline脚本中显示的写明"checkout scm",不会拉取仓库
+	"checkout scm"应该是主要应用于脚本式pipeline,官方式例也是用脚本式pipeline
+	
+	
+如果 Jenkinsfile 和 项目仓库 没在同一个仓库:
+	对于声明式pipeline来说, 流水线配置jenkinsfile所在的远程仓库后,流水线运行时会拉取整个仓库. 可以在pipeline脚本中拉取项目仓库,同时Jenkinsfile所在的仓库会被自动从工作空间删除
+	对于脚本时pipeline来说, 如果jenkinsfile和项目在同一个仓库,在脚本中写上"checkout scm"就能检出项目仓库. 如果项是另一个远程仓库, 在 Jenkinsfile 中写代码拉取即可
+	
+
+AI回答1, `checkout scm`作用:
+	`checkout scm`的实际作用可以总结出其核心功能和意义如下：
+
+	### 1. **通用的SCM检出能力**
+	`checkout scm`是Jenkins中一个**通用的源代码管理（SCM）检出步骤**，它不仅限于Git，还支持所有符合规范的SCM插件（如Mercurial、Subversion等）。文档明确提到：“`checkout`步骤可用于运行任何其他SCM插件（只要插件已更新到兼容版本）”。
+
+	这意味着`checkout scm`是一个标准化的接口，无论使用哪种版本控制系统（Git、SVN、Mercurial等），都可以通过它统一实现代码检出，无需为不同SCM编写差异化的步骤。
+
+
+	### 2. **灵活传递SCM配置参数**
+	`checkout scm`通过`scm`参数接收一个配置映射（map），其中至少包含：
+	- `$class`：指定SCM实现类的完整类名或简称（例如Git对应的类名），用于告诉Jenkins使用哪种SCM插件。
+	- 其他参数：如`poll`（是否启用轮询检测代码变更）、`changelog`（是否生成变更日志），以及特定SCM插件支持的配置项（如Git的分支、URL、凭证等）。
+
+	文档提到“可使用Snippet Generator生成具体SCM的示例”，说明`checkout scm`支持根据不同SCM的特性动态传入参数，适配各种复杂配置（例如指定分支、检出深度、子模块处理等）。
+
+
+	### 3. **兼容特殊场景和扩展功能**
+	文档指出，`checkout scm`还可用于“为缺乏对某些特殊功能支持的SCM执行集成操作”。例如：
+	- 当某个SCM插件的默认集成不支持特定功能（如自定义克隆路径、复杂的权限验证）时，可通过`checkout scm`手动传递参数实现。
+	- 在多分支流水线、PR构建等动态场景中，自动适配当前分支/PR的SCM配置（如自动检出触发构建的分支代码）。
+
+
+	### 4. **与“初始检出”的本质区别**
+	结合之前的讨论，文档中描述的`checkout scm`是**显式的、完整的代码检出步骤**，而Jenkins配置中为了加载Jenkinsfile的“初始检出”通常是最小化的（可能仅拉取单个文件）。`checkout scm`的核心作用是确保工作区中存在完整的项目代码，并根据配置的SCM参数（分支、版本等）精确检出目标代码，为后续构建步骤（编译、测试等）提供基础。
+
+
+	### 总结
+	`checkout scm`是Jenkins中**标准化、通用化的代码检出步骤**，其核心作用是：通过统一接口适配各种SCM插件，接收灵活的配置参数，将指定版本的代码完整检出到工作区，支持常规和特殊场景下的代码获取需求，是流水线中确保代码可用性的关键步骤。
+
+
+AI回答2, `checkout scm`作用:
+	您提供的这段官方文档非常精准地解释了在 **Scripted Pipeline** 中 `checkout scm` 的核心作用和设计初衷。这帮助我们从一个更底层的视角理解了它的必要性。
+
+	让我们来分解并说明这段文档的关键信息：
+
+	### 1. `node` 是工作的先决条件
+
+	> “the example above node is a crucial first step as it allocates an executor and workspace for the Pipeline. In essence, without node, a Pipeline cannot do any work!”
+
+	*   **含义**：在 Scripted Pipeline 中，`node { ... }` 块是**必须的**。它做了两件关键事：
+		1.  **分配执行器 (Executor)**：为流水线分配一个 Jenkins Agent（或留在 Master）来执行其中的步骤。
+		2.  **分配工作空间 (Workspace)**：为该次构建分配一个唯一的目录（工作空间），所有文件操作都将在这个目录中进行。
+	*   **结论**：任何实际的工作（如执行 shell 命令、编译代码）都必须在 `node` 块内进行。
+
+	### 2. `checkout scm` 是 `node` 内的首要任务
+
+	> “From within node, the first order of business will be to checkout the source code for this project.”
+
+	*   **含义**：在进入 `node` 块后，**第一件要做的事**就是检出源代码。这是一个最佳实践。
+	*   **原因**：工作空间在初始时是空的（或包含之前构建的残留文件）。你必须先把源代码放进去，后续的构建、测试步骤才能有东西可操作。
+
+	### 3. `scm` 变量的特殊性与重要性
+
+	> “Pipeline provides a quick and easy way to access the right revision of the source code... `scm` is a special variable which instructs the checkout step to clone the specific revision which triggered this Pipeline run.”
+
+	这是最关键的一点，它解释了 `checkout scm` 的不可替代性：
+
+	*   **`scm` 是一个特殊变量**：它不是你自己定义的，而是由 Jenkins **自动创建和填充**的。
+	*   **它指向“正确的修订版本”**：这个变量里存储的信息**不仅仅是你配置的仓库URL和分支名**，更重要的是，它**精确地指向了触发此次流水线运行的那个特定代码版本（commit hash）**。
+
+	#### 为什么这一点如此重要？
+
+	想象以下场景：
+	1.  **场景**：你的流水线配置为监视 `main` 分支。在 `t1` 时刻，有两次提交（`commit_A` 和 `commit_B`）相继被推送到 `main` 分支。
+	2.  **触发**：Jenkins 的 SCM 轮询机制会检测到变化，并**依次触发两次流水线运行**（Build #1 和 Build #2）。
+	3.  **问题**：如果 Build #1 和 Build #2 都简单地执行 `git checkout main`，那么它们最终构建的都是 `main` 分支的**最新代码**（即 `commit_B`）。这将导致两个构建的代码完全一样，无法反映出 `commit_A` 和 `commit_B` 各自的差异。
+
+	**`checkout scm` 如何解决这个问题？**
+
+	*   当 `commit_A` 触发 Build #1 时，Jenkins 不仅会启动流水线，还会将这次构建与 `commit_A` 这个**具体的修订版本**绑定。
+	*   Jenkins 会将这个信息（仓库URL + `commit_A`）注入到 Build #1 的 `scm` 变量中。
+	*   当 Build #1 执行到 `checkout scm` 时，Git 插件会去**精确地检出 `commit_A`**，而不是 `main` 分支的最新代码。
+	*   同理，Build #2 会通过 `checkout scm` 精确地检出 `commit_B`。
+
+	### 总结与结论
+
+	结合官方文档和您之前的实践，我们可以得出一个全面且精确的结论：
+
+	| 流水线类型/配置 | `checkout scm` 的核心作用 |
+	| :--- | :--- |
+	| **所有 “Pipeline script from SCM”** | **确保工作空间中的代码与触发本次构建的特定修订版本（commit）完全一致。** 这是实现**可重现构建**的基石。它保证了构建 #n 使用的代码就是触发构建 #n 的那次提交，而不是分支的最新状态。 |
+	| **Scripted Pipeline** | 除此之外，它还是**在分配的工作空间中获取源代码的首要且必须的步骤**。 |
+
+	**因此，无论流水线启动时是否已经预检出了代码，在 `Jenkinsfile` 中显式地使用 `checkout scm` 都是强烈推荐的。** 它的首要目的不再是“获取代码”，而是“**精确地同步到正确的代码版本**”，并执行SCM插件的完整生命周期管理（清理、更新、生成变更日志等）。
+
+	简单来说：**`checkout scm` 保证了你的构建结果与特定的代码变更之间存在准确的因果关系。** 没有它，你的构建历史将无法可靠地追踪到是哪个代码变更引入了成功或失败。		
+	
+
+多分支流水线: 多分支流水线能够为代码仓库中的每个分支生成独立的流水线，并且自动触发相应的构建任务	
+	
+	
+为什么 pipeline script form SCM 可以配多个仓库:
+	?
+
+	
+	
+================================================================================================================================
+
+在 Jenkins 中从 GitHub 拉取代码时，需要配置合适的凭据以通过 GitHub 的身份验证。常用的凭据类型有以下几种，可根据实际场景选择：
+
+
+### **1. 用户名+密码（不推荐，逐步被淘汰）**
+- **适用场景**：个人账号临时使用（不推荐用于生产环境）。
+- **限制**：GitHub 已逐步废弃密码直接访问，需开启「个人访问令牌（PAT）」替代。
+- **配置步骤**：
+  1. 在 Jenkins 首页 → **Manage Jenkins** → **Credentials** → **System** → **Global credentials** → **Add Credentials**。
+  2. **Kind** 选择「Username with password」。
+  3. **Username**：GitHub 账号用户名。
+  4. **Password**：GitHub 账号密码（或个人访问令牌 PAT，推荐后者）。
+  5. **ID**：自定义凭据ID（如 `github-username-pass`，便于 Pipeline 中引用）。
+
+
+### **2. 个人访问令牌（PAT，推荐个人使用）**
+- **适用场景**：个人账号访问 GitHub 仓库（替代密码，权限更可控）。
+- **优势**：可精细控制权限（如仅允许 `repo` 权限拉取代码），泄露后可随时吊销。
+- **配置步骤**：
+  1. **生成 GitHub PAT**：
+     - 登录 GitHub → 点击头像 → **Settings** → **Developer settings** → **Personal access tokens** → **Generate new token**。
+     - 勾选必要权限：至少勾选 `repo`（用于私有仓库）或 `public_repo`（仅公共仓库）。
+     - 生成后复制令牌（仅显示一次，需保存）。
+  2. **在 Jenkins 中添加凭据**：
+     - 同「用户名+密码」步骤，**Kind** 选择「Username with password」。
+     - **Username**：GitHub 用户名。
+     - **Password**：填入刚才生成的 PAT。
+     - **ID**：自定义（如 `github-pat`）。
+
+
+### **3. SSH 密钥对（推荐团队/生产环境）**
+- **适用场景**：团队共享访问、自动化部署（无需频繁更新令牌）。
+- **优势**：无密码交互，适合持续集成场景，权限可通过 GitHub 团队管理。
+- **配置步骤**：
+  1. **生成 SSH 密钥对**（在 Jenkins 服务器或本地执行）：
+     ```bash
+     ssh-keygen -t ed25519 -C "jenkins@example.com"  # 生成密钥对，一路回车默认即可
+     ```
+     生成后会得到 `id_ed25519`（私钥）和 `id_ed25519.pub`（公钥）。
+
+  2. **配置 GitHub 公钥**：
+     - 登录 GitHub → 进入目标仓库 → **Settings** → **Deploy keys** → **Add deploy key**。
+     - **Title**：自定义（如 `jenkins-server`）。
+     - **Key**：粘贴 `id_ed25519.pub` 中的内容，勾选「Allow write access」（如需推送代码，否则仅读）。
+
+  3. **在 Jenkins 中添加私钥凭据**：
+     - Jenkins 凭据页面 → **Add Credentials** → **Kind** 选择「SSH Username with private key」。
+     - **Username**：GitHub 用户名（或任意标识，无实际影响）。
+     - **Private Key**：选择「Enter directly」，粘贴 `id_ed25519` 中的私钥内容。
+     - **ID**：自定义（如 `github-ssh`）。
+
+
+### **4. GitHub App 凭据（企业级推荐）**
+- **适用场景**：企业级团队、多仓库管理，权限更精细的权限控制。
+- **优势**：可按仓库/组织粒度分配权限，支持批量管理，无需个人账号关联。
+- **配置步骤**：
+  1. **在 GitHub 中创建 GitHub App**：
+     - GitHub 组织 → **Settings** → **Developer settings** → **GitHub Apps** → **New GitHub App**。
+     - 配置权限：至少勾选 `Contents`（读取内容）权限。
+     - 生成并下载私钥（PEM 文件）。
+  2. **在 Jenkins 中添加 GitHub App 凭据**：
+     - 安装 Jenkins 插件「GitHub App」。
+     - 凭据页面 → **Add Credentials** → **Kind** 选择「GitHub App」。
+     - 填写 App ID、私钥（上传 PEM 文件）、GitHub 服务器 URL。
+
+
+### **在 Jenkins 任务中使用凭据**
+1. **自由风格项目**：
+   - 源码管理 → 选择「Git」→ 仓库 URL（HTTPS 对应 PAT/密码，SSH 对应 `git@github.com:xxx/xxx.git`）。
+   - 点击「Credentials」下拉框，选择已配置的凭据。
+
+2. **Pipeline 项目**：
+   ```groovy
+   pipeline {
+     agent any
+     stages {
+       stage('Pull Code') {
+         steps {
+           git url: 'https://github.com/your-repo.git', 
+               credentialsId: 'github-pat'  // 填写凭据ID
+           // 或 SSH 方式
+           // git url: 'git@github.com:your-repo.git', 
+           //     credentialsId: 'github-ssh'
+         }
+       }
+     }
+   }
+   ```
+
+
+### **注意事项**
+- 优先使用 **SSH 密钥对** 或 **GitHub App**，安全性和可维护性更高。
+- 避免使用个人密码，推荐用 PAT 替代（权限更可控）。
+- 定期轮换凭据（如 PAT、SSH 密钥），降低泄露风险。
+
+根据团队规模和安全要求选择合适的凭据类型，即可在 Jenkins 中顺利拉取 GitHub 代码。
+
+
+
+================================================================================================================================
+
+当 Git 版本低于 2.10.0 时，`core.sshCommand` 配置不被支持，导致无法通过该方式指定 SSH 密钥。此时可通过以下两种更通用的方法解决，无需升级 Git 版本：
+
+
+### **方法 1：使用 `ssh-agent` 临时加载密钥（推荐）**
+`ssh-agent` 是 SSH 自带的密钥管理工具，可临时加载私钥并让 Git 自动使用，适用于所有 Git 版本。步骤如下：
+
+```groovy
+withCredentials([sshUserPrivateKey(
+    credentialsId: 'b8473db6-363e-4a12-9131-dd2e8838712f', 
+    keyFileVariable: 'ssh_key_file',   
+    usernameVariable: 'username'   
+)]) {
+    sh '''
+        # 启动 ssh-agent 并加载私钥
+        eval $(ssh-agent -s)
+        ssh-add ${ssh_key_file}
+        
+        # 信任 Gitee 主机密钥（避免 Host key 验证失败）
+        ssh-keyscan gitee.com >> ~/.ssh/known_hosts
+        
+        # 直接克隆仓库（ssh-agent 会自动提供密钥）
+        git clone git@gitee.com:st22ab889/polling-app-client.git
+        cd polling-app-client
+        git checkout master
+    '''
+}
+```
+
+**原理**：  
+`ssh-agent` 启动后会在当前 Shell 中运行一个后台进程，`ssh-add` 将私钥加载到该进程中，后续 SSH 相关命令（如 `git clone`）会自动从 `ssh-agent` 获取密钥，无需手动指定 `-i` 参数。
+
+
+### **方法 2：临时修改 SSH 配置文件**
+通过动态生成 SSH 配置文件，指定仓库对应的私钥路径，适用于需要长期维持配置的场景：
+
+```groovy
+withCredentials([sshUserPrivateKey(
+    credentialsId: 'b8473db6-363e-4a12-9131-dd2e8838712f', 
+    keyFileVariable: 'ssh_key_file',   
+    usernameVariable: 'username'   
+)]) {
+    sh '''
+        # 创建临时 SSH 配置目录（避免污染全局配置）
+        mkdir -p ~/.ssh/tmp
+        chmod 700 ~/.ssh/tmp
+        
+        # 生成临时 SSH 配置：指定 Gitee 仓库使用的密钥
+        cat > ~/.ssh/tmp/config << EOF
+Host gitee.com
+    HostName gitee.com
+    IdentityFile ${ssh_key_file}
+    User git
+EOF
+        
+        # 克隆时指定使用临时配置文件
+        GIT_SSH_COMMAND="ssh -F ~/.ssh/tmp/config" git clone git@gitee.com:st22ab889/polling-app-client.git
+        cd polling-app-client
+        git checkout master
+        
+        # 清理临时配置（可选）
+        rm -rf ~/.ssh/tmp
+    '''
+}
+```
+
+**原理**：  
+通过 `GIT_SSH_COMMAND` 指定 SSH 使用临时配置文件（`-F` 参数），配置文件中明确指定了 `gitee.com` 对应的私钥路径，Git 会通过 SSH 自动读取该配置。
+
+
+### **两种方法的对比**
+| 方法 | 优势 | 适用场景 |
+|------|------|----------|
+| `ssh-agent` | 无需修改配置文件，临时生效，干净无残留 | 单次克隆/拉取代码，避免配置污染 |
+| 临时 SSH 配置 | 可针对不同仓库精细化配置，兼容性强 | 需同时操作多个仓库（不同密钥）的场景 |
+
+
+### **额外注意事项**
+1. **私钥权限**：确保 `chmod 600 ${ssh_key_file}` 已执行，否则 SSH 会拒绝使用权限过高的密钥（错误提示：`Permissions 0644 for 'xxx' are too open`）。
+2. **主机密钥信任**：`ssh-keyscan gitee.com >> ~/.ssh/known_hosts` 必须执行，否则会因 Host key 验证失败导致克隆中断。
+3. **调试建议**：若仍失败，可在 `git clone` 前添加 `ssh -vT git@gitee.com` 命令，查看 SSH 连接的详细日志，确认密钥是否被正确使用（例如是否出现 `Server accepts key` 提示）。
+
+通过以上方法，即使 Git 版本较低，也能正常使用 SSH 密钥拉取代码。
