@@ -14,7 +14,7 @@
 *		step("Hello")  // 等价于 step.call("Hello")，隐式调用 call 方法	
 *
 *	2.在 Jenkins 共享库的 vars 目录下，每个脚本文件(如 sayHello.groovy)都会被 Jenkins 处理为一个单例对象,而脚本中定义的 call 方法会成为这个对象的方法
-*   3.不管是在类中还是在 vars 目录下的脚本文件中, 如果将call方法定义为静态方法,将失去 Groovy 的隐式调用特性
+*   3.在类中将call方法定义为静态方法,将失去 Groovy 的隐式调用特性.  
 */
 
 
@@ -63,11 +63,14 @@ def call(Closure body) {
 */
 
 
-
-static def test(String level, String message){
+/*
+* vars目录下的脚本文件中定义的任何静态方法都会导致使用共享库的pipeline运行失败,不管定义静态的call方法 还是 其它方法
+*/
+/*
+static def call(String level, String message){
 	echo "${level}: ${message}"
 }
-
+*/
 
 
 
