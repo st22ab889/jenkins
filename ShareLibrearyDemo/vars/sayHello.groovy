@@ -27,7 +27,7 @@
 * 	参数支持: 可以定义带参数(包括默认值) 的 call 方法，也可以接收代码块 (Closure), 实现类似 node { ... } 这样的结构化步骤。
 * 	命名规范: 文件名(即步骤名)必须全小写或驼峰式(如 sayHello、myCustomStep),否则 Jenkins 可能无法正确识别
 */
-def call(String name = 'jenkins', String age) {
+def call(String name = 'jenkins) {
 	echo "Hello, ${jenkins}"
 }
 
@@ -54,16 +54,17 @@ def call(String name = 'jenkins', String age) {
 *		在 Pipeline 上下文中，Closure 内可以调用 Jenkins 步骤(如 echo、sh), 这些步骤会被 Jenkins 引擎解析执行
 *		支持 Pipeline 特有的语法(如 @NonCPS 注解标记非序列化的 Closure)
 *
-* call 方法同样支持方法重载
+* 	5.经测试,vars目录下的脚本文件中的call方法不支持方法重载.类中的call方法重载未测试
 */
+/*
 def call(Closure body) {
 	body()
 }
+*/
 
 
 
-
-def callCall(String level, String message){
+static def call(String level, String message){
 	echo "${level}: ${message}"
 }
 
