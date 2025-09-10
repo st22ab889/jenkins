@@ -66,11 +66,11 @@ def call(Closure body) {
 /*
 * vars目录下的脚本文件中定义的任何静态方法都会导致使用共享库的pipeline运行失败,不管定义静态的call方法 还是 其它方法
 */
-/*
+
 static def call(String level, String message){
 	echo "${level}: ${message}"
 }
-*/
+
 
 
 
