@@ -57,14 +57,16 @@ def call(String name = 'jenkins') {
 * call 方法同样支持方法重载
 */
 def call(Closure body) {
-	body()
+	node {
+		body()
+	}
 }
 
 
 
 
 static def call(String Level, String message){
-	echo "Message: ${message}"
+	echo "${Level}: ${message}"
 }
 
 
