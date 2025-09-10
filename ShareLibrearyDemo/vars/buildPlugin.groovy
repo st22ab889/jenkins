@@ -10,7 +10,7 @@ def call(Map config) {
         // mail to: '...', subject: "${config.name} plugin build", body: '...'
 		
         echo "https://github.com/jenkinsci/${config.name}-plugin.git"
-        echo 'mvn ${config.action}'
-        echo '..., subject: ${config.name} plugin build, body: ...'
+        echo "mvn ${config.action}"
+        echo "..., subject: ${config.name} plugin build, body: ..."
 	}
 }
