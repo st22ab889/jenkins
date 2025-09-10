@@ -74,5 +74,9 @@ static def call(String level, String message){
 
 
 
-
+/*
+* "def test()" 和 "void test()"的区别:
+*	  明确声明返回值类型为 void: 表示该方法不返回任何值，方法体内不能有 return 语句返回具体值(即使是 null 也不行)
+*	  使用 def 声明返回值类型：def 是 Groovy 中的动态类型关键字，表示方法可以返回任意类型的值(也可以不返回值)，由方法体内的逻辑决定
+*/
 
