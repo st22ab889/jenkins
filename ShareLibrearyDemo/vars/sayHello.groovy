@@ -28,7 +28,7 @@
 * 	命名规范: 文件名(即步骤名)必须全小写或驼峰式(如 sayHello、myCustomStep),否则 Jenkins 可能无法正确识别
 */
 def call(String name = 'jenkins') {
-	echo "Hello, ${jenkins}"
+	echo "Hello, ${name}"
 }
 
 
