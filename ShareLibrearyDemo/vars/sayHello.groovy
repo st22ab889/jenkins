@@ -56,21 +56,20 @@ def call(String name = 'jenkins') {
 *
 * 	5.经测试,vars目录下的脚本文件中的call方法不支持方法重载.类中的call方法重载未测试
 */
-/*
+
 def call(Closure body) {
 	body()
 }
-*/
 
 
 /*
-* vars目录下的脚本文件中定义的任何静态方法都会导致使用共享库的pipeline运行失败,不管定义静态的call方法 还是 其它方法
+* 调用vars目录下脚本文件中定义的任何静态方法都会失败, 不管定义的是 静态的call方法 还是 静态的其它方法
 */
-
+/*
 static def call(String level, String message){
 	echo "${level}: ${message}"
 }
-
+*/
 
 
 
