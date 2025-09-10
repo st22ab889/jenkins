@@ -63,7 +63,7 @@ def call(Closure body) {
 
 
 
-static def call(String message){
+static def call(String Level, String message){
 	echo "Message: ${message}"
 }
 
