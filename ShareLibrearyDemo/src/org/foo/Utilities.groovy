@@ -11,10 +11,13 @@ package org.foo
 */
 
 class Utilities implements Serializable {
+	
 	def steps
+	
 	Utilities(steps){
 		this.steps = steps
 	}
+	
 	def mvn(args) {
 		// steps.sh "${steps.tool 'Maven'}/bin/mvn -o ${args}"
 		steps.echo "/usr/bin/mvn -o ${args}"
@@ -28,8 +31,7 @@ class Utilities implements Serializable {
 		// script.sh "${script.tool 'Maven'}/bin/mvn -s ${script.env.HOME}/jenkins.xml -o ${args}"
 		script.echo "usr/bin/mvn -s ${script.env.Home}/jenkins.xml  -o ${args}"
 	}
-	
-	
+
 }
 
 
