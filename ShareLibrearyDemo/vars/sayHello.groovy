@@ -27,7 +27,7 @@
 * 	参数支持: 可以定义带参数(包括默认值) 的 call 方法，也可以接收代码块 (Closure), 实现类似 node { ... } 这样的结构化步骤。
 * 	命名规范: 文件名(即步骤名)必须全小写或驼峰式(如 sayHello、myCustomStep),否则 Jenkins 可能无法正确识别
 */
-def call(String name = 'jenkins') {
+def call(String name = 'jenkins', String age) {
 	echo "Hello, ${jenkins}"
 }
 
