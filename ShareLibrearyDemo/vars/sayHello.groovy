@@ -54,12 +54,13 @@ def call(String name = 'jenkins') {
 *		在 Pipeline 上下文中，Closure 内可以调用 Jenkins 步骤(如 echo、sh), 这些步骤会被 Jenkins 引擎解析执行
 *		支持 Pipeline 特有的语法(如 @NonCPS 注解标记非序列化的 Closure)
 *
-* 	5.经测试,vars目录下的脚本文件中的call方法不支持方法重载.类中的call方法重载未测试
+* 	5.call方法支持重载
 */
-
 def call(Closure body) {
 	body()
 }
+
+
 
 
 /*
@@ -70,6 +71,8 @@ static def call(String level, String message){
 	echo "${level}: ${message}"
 }
 */
+
+
 
 
 
