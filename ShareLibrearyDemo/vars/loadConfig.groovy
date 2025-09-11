@@ -1,7 +1,7 @@
 
 def call(){
     // 加载资源文件(相对路径对应 resources 目录下的结构)
-    def configContent = libraryResource 'com/mycrop/pipeline/config.json'
+    def configContent = libraryResource 'com/mycorp/pipeline/config.json'
 
     // 将 JSON 字符串解析为 Map,需要 Groovy 的 JsonSlurper
     import groovy.json.JsonSlurper
@@ -36,6 +36,5 @@ Jenkins 共享库中**加载资源文件(如配置文件、模板、JSON 等)** 
 - **冲突避免**：使用类似 Java 包的结构（如 `com/公司名/项目名/`）命名资源目录，避免不同共享库的资源文件重名(例如 `com/othercorp/...` 就不会与示例中的 `com/mycorp/...` 冲突)。
 
 总结：在 Jenkins 共享库中通过 `libraryResource` 步骤加载 `resources` 目录下的资源文件，实现配置文件、模板等辅助文件的复用，同时通过包结构避免命名冲突。
-
 */
 
