@@ -94,21 +94,21 @@ echo useSomeLib(lib.Helper.new(lib.Constants.SOME_TEXT))
 ---
 
 ### 库版本:
-* 当共享库配置了 “默认版本” 时，以下两种情况会自动使用这个版本：
+#### 当共享库配置了 “默认版本” 时，以下两种情况会自动使用这个版本：
 - 勾选了 “Load implicitly（隐式加载）” 时（库会被自动加载）；
 - Pipeline 脚本中只通过库名引用共享库时，比如 @Library('my-shared-library') _（没指定具体版本）。
 - 如果没设置 “默认版本”，那 Pipeline 必须在引用时明确指定版本，比如 @Library('my-shared-library@master') _（@master 就是版本，通常是分支名）。
 
-* 如果在共享库配置中开启了 “Allow default version to be overridden（允许覆盖默认版本）”，那么：
+#### 如果在共享库配置中开启了 “Allow default version to be overridden（允许覆盖默认版本）”，那么：
 - 即使设置了默认版本，Pipeline 也可以在 @Library 注解中指定其他版本来覆盖它，比如默认版本是 main，但脚本里可以写 @Library('my-shared-library@dev') _ 来用 dev 版本；
 - 对于 “隐式加载” 的库，也能根据需要加载其他版本（原本隐式加载会用默认版本，开启后可以临时换版本）。
 - 总结来说：默认版本是共享库的 “默认选项”，但可以通过配置和脚本指定来灵活替换，具体能否替换取决于是否开启了 “允许覆盖” 的开关。
 
-* 当使用 library 步骤你也可以指定一个版本:   library 'my-shared-library@master'
+#### 当使用 library 步骤你也可以指定一个版本:   library 'my-shared-library@master'
 
-* library 步骤支持动态版本（可以通过代码算出版本号），而 @Library 注解只能用固定的版本字符串。 如: library "my-shared-library@$BRANCH_NAME"
+#### library 步骤支持动态版本（可以通过代码算出版本号），而 @Library 注解只能用固定的版本字符串。 如: library "my-shared-library@$BRANCH_NAME"
 
-* （使用 library 步骤时）可以加载与 “多分支流水线（multibranch）的 Jenkinsfile 所在的代码分支相同” 的共享库分支。
+#### （使用 library 步骤时）可以加载与 “多分支流水线（multibranch）的 Jenkinsfile 所在的代码分支相同” 的共享库分支。
 - 举个例子：如果你的多分支流水线中，当前运行的是 dev 分支的 Jenkinsfile，那么可以让共享库也自动加载它自己的 dev 分支（保持分支一致）
 - 再举一个例子：你还可以通过 “参数” 来选择要加载的共享库版本，比如让用户在触发流水线时手动选择用哪个版本的共享库（而不是写死的固定版本）。
 - 简单说：library 步骤很灵活，既多种方式指定版本 —— 可以和当前流水线分支保持一致，也可以通过参数动态选择，不用局限于写死的版本号。
@@ -170,10 +170,48 @@ Jenkins 中**共享库（Library）变更的预测试方法**，主要围绕 `Re
 
 ---
 
+Jenkins 中测试共享库的拉取请求(Pull Request)变更，核心是通过指定共享库的 PR 版本，在实际流水线中验证修改效果。具体含义和示例解析如下：
+
+### 核心内容解析：
+1. **测试共享库 PR 变更的方法**  
+   如果你的共享库托管在 GitHub 上，且 Jenkins 中共享库的 SCM 配置使用 GitHub，可以在使用该共享库的 Jenkinsfile 顶部添加：  
+   ```groovy
+   @Library('my-shared-library@pull/<你的PR编号>/head') _
+   ```  
+   这样就能在实际流水线中直接测试共享库的 PR 变更(无需先合并 PR 到主分支)。
+
+2. **其他代码托管平台的适配**  
+   对于 GitHub 以外的平台(如 Assembla、Bitbucket、GitLab 等)，需遵循其特定的 PR 或合并请求(Merge Request)分支命名规范(例如 GitLab 可能使用 `merge-requests/<编号>/head`)。
 
 
+### 示例场景详解：
+以 Jenkins 官方的 `ci.jenkins.io` 共享库为例(源码存储在 `github.com/jenkins-infra/pipeline-library/`)：
 
+1. **场景**：  
+   你为这个共享库开发了新功能，并提交了编号为 `123` 的 PR。
 
+2. **测试方法**：  
+   在专门的测试仓库(如 `jenkins-infra-test-plugin`)中修改其 Jenkinsfile，通过指定共享库的 PR 版本来验证变更：  
+   ```diff
+   --- jenkins-infra-test-plugin/Jenkinsfile
+   +++ jenkins-infra-test-plugin/Jenkinsfile
+   @@ -1,3 +1,4 @@
+   + @Library('pipeline-library@pull/123/head') _  // 引用 PR 123 的代码
+    buildPlugin(
+      useContainerAgent: true,
+      configurations: [
+        [platform: 'linux', jdk: 21],
+        [platform: 'windows', jdk: 17],
+    ])
+   ```
+
+3. **效果**：  
+   当测试仓库的流水线运行时，会使用共享库 PR 123 中的代码(而非正式版本),从而验证你的新功能是否正常工作。
+
+### 总结：
+这段话的核心是教你如何在不合并 PR 的情况下，直接在实际流水线中测试共享库的 PR 变更——通过在 `@Library` 注解中指定 `@pull/<PR编号>/head` (或对应平台的格式)，让流水线临时使用 PR 中的代码，确保修改符合预期后再合并。这是一种安全高效的共享库测试方式。
+
+---
 
 
 

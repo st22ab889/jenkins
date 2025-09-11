@@ -228,7 +228,16 @@ https://chat.deepseek.com/a/chat/s/2acaff05-b5eb-4813-ad49-347df8ea2f81
 
 看到这里:  https://www.jenkins.io/zh/doc/book/pipeline/shared-libraries
 
-	
+dns 解析: 
+https://www.nslookup.io/website-to-ip-lookup/
+https://www.site24x7.com/tools/find-ip-address-of-web-site.html	
+https://domaintoipconverter.com/index.php
+
+重要! 验证: 是的，声明式 Pipeline 可以调用共享库中定义的脚本式 Pipeline 代码，但需要注意调用方式和共享库的结构。
+
+=======================================================
+ as of this time : 截至目前
+
 
 =======================================================
 git:
