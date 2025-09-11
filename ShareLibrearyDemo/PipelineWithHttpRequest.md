@@ -19,7 +19,7 @@ pipeline {
                     
                     echo "响应内容: ${response}"
                     
-                    // 如需解析 JSON 响应（可结合 readJSON 步骤）
+                    // 如需解析 JSON 响应, 可结合 readJSON 步骤(需要安装 Pipeline Utility StepsVersion 插件)
                     def jsonResponse = readJSON text: response
                     echo "提取的字段值: ${jsonResponse.name}"
                 }
@@ -380,6 +380,157 @@ pipeline {
 - 替代方案：用 `curl` 或 `httpRequest` 插件避开沙箱限制。  
 
 选择最适合你环境的方式即可解决该错误。
+
+
+---
+
+
+##  在 Jenkins Pipeline 脚本中直接使用 `import groovy.json.JsonOutput` 可能会出现不支持的情况，这是因为 Pipeline 脚本运行在 CPS 转换(Continuation-passing style)环境中，对某些 Groovy 语法（包括 `import`）有特殊限制。
+
+### 解决方案：避免顶层 `import`，改用**全限定类名**或在 `script` 块内导入
+
+#### 方法 1：使用全限定类名（推荐，兼容性最好）
+不使用 `import`，直接在代码中写出完整的类路径（如 `groovy.json.JsonOutput`）：
+
+```groovy
+pipeline {
+    agent any
+    stages {
+        stage('JSON 美化') {
+            steps {
+                script {
+                    def jsonString = '{"name":"Jenkins","version":"2.401"}'
+                    
+                    // 解析 JSON
+                    def jsonData = readJSON text: jsonString
+                    
+                    // 直接使用全限定定类名，无需 import
+                    def prettyJson = groovy.json.JsonOutput.prettyPrint(
+                        groovy.json.JsonOutput.toJson(jsonData)
+                    )
+                    
+                    echo "美化后的 JSON：\n${prettyJson}"
+                }
+            }
+        }
+    }
+}
+```
+
+
+#### 方法 2：在 `script` 块内部导入（部分环境支持）
+将 `import` 语句放在 `script` 块内部（而非 Pipeline 顶层），某些 Jenkins 版本支持这种方式：
+
+```groovy
+pipeline {
+    agent any
+    stages {
+        stage('JSON 美化') {
+            steps {
+                script {
+                    // 在 script 块内导入
+                    import groovy.json.JsonOutput
+                    
+                    def jsonString = '{"name":"Jenkins","version":"2.401"}'
+                    def jsonData = readJSON text: jsonString
+                    
+                    def prettyJson = JsonOutput.prettyPrint(JsonOutput.toJson(jsonData))
+                    echo "美化后的 JSON：\n${prettyJson}"
+                }
+            }
+        }
+    }
+}
+```
+
+
+#### 方法 3：将逻辑封装到共享库（彻底解决语法限制）
+如果频繁使用 JSON 处理，可将相关逻辑放到共享库的 `src` 目录中（支持标准 Groovy 语法）：
+
+1. **共享库代码（`src/com/example/JsonUtils.groovy`）**：
+   ```groovy
+   package com.example
+   import groovy.json.JsonOutput  // 共享库中支持正常 import
+   
+   class JsonUtils {
+       static String prettyPrint(String jsonString) {
+           def jsonData = new groovy.json.JsonSlurper().parseText(jsonString)
+           return JsonOutput.prettyPrint(JsonOutput.toJson(jsonData))
+       }
+   }
+   ```
+
+2. **Pipeline 中调用**：
+   ```groovy
+   @Library('my-lib') import com.example.JsonUtils
+   
+   pipeline {
+       agent any
+       stages {
+           stage('使用共享库美化 JSON') {
+               steps {
+                   script {
+                       def jsonString = '{"name":"Jenkins","version":"2.401"}'
+                       def prettyJson = JsonUtils.prettyPrint(jsonString)
+                       echo "美化后的 JSON：\n${prettyJson}"
+                   }
+               }
+           }
+       }
+   }
+   ```
+
+
+### 为什么直接 `import` 可能失败？
+Jenkins Pipeline 脚本并非纯 Groovy 脚本，而是经过 CPS 转换后执行的。顶层 `import` 语句可能被 CPS 转换逻辑忽略或误处理，导致“不支持”的错误。而在 `script` 块内或共享库中，语法限制更宽松，更接近标准 Groovy 环境。
+
+推荐优先使用**方法 1（全限定类名）**，无需额外配置，兼容性最好。
+
+
+---
+
+
+## (了解)在 Jenkins Pipeline 中，**CPS 转换（Continuation-Passing Style Transformation）** 是一种特殊的代码处理机制，用于解决 Groovy 异步代码（如 `parallel`、`sleep`、`input` 等步骤）在流水线中的执行顺序和状态管理问题。
+
+
+### 核心含义：
+CPS 是一种编程范式转换，简单来说，它会将原本“顺序执行”的代码，改造成通过**回调函数（continuation）** 来控制流程的形式。这种转换让 Jenkins 能够在执行异步操作（如等待用户输入、并行任务）时，暂停当前流程、保存状态，并在操作完成后恢复执行。
+
+
+### 为什么需要 CPS 转换？
+Pipeline 脚本经常需要处理**异步步骤**：
+- 例如 `input` 步骤（等待用户确认）
+- `parallel` 步骤（并行执行多个任务）
+- 调用外部工具（如 `sh`、`bat`，需要等待命令完成）
+
+这些步骤执行时，Jenkins 需要暂停当前流水线、释放资源，直到操作完成后再继续。CPS 转换通过以下方式实现这种控制：
+1. 将代码分解为多个“片段”
+2. 为每个片段创建回调函数（记录下一段要执行的代码）
+3. 异步操作完成后，通过回调函数恢复执行流程
+
+
+### CPS 转换带来的影响：
+1. **语法限制**：  
+   并非所有 Groovy 语法都能被 CPS 正确转换，例如：
+   - 顶层 `import` 语句可能失效（需放在 `script` 块内或共享库中）
+   - 某些复杂的闭包嵌套、循环控制可能出现异常行为
+   - 部分 Groovy 高级特性（如自定义迭代器）可能不兼容
+
+2. **执行顺序保证**：  
+   即使有异步操作，CPS 转换也能保证代码按“表面顺序”执行。例如：
+   ```groovy
+   echo "开始"
+   input message: "确认继续？"  // 异步等待用户输入
+   echo "继续执行"  // 只有用户确认后才会执行
+   ```
+   看似是顺序执行，实际是 CPS 转换通过回调确保了执行顺序。
+
+3. **共享库的特殊性**：  
+   放在共享库 `src/` 目录中的代码默认不经过 CPS 转换（更接近原生 Groovy），而 `vars/` 目录中的代码会被转换。这也是共享库中可以使用更多 Groovy 特性的原因。
+
+
+### 总结：
+CPS 转换是 Jenkins Pipeline 为了支持异步步骤和流程控制而设计的核心机制，它通过改造代码结构，实现了“暂停-恢复”的执行模式。但这种转换也带来了一些语法限制，理解这些限制有助于避免 Pipeline 脚本中的异常行为（如 `import` 失效、闭包执行顺序错乱等）。
 
 
 
