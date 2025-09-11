@@ -1,0 +1,5 @@
+{
+    "buildTool": "maven",
+    "testCommand": "mvn test",
+    "timeout": 30
+}
