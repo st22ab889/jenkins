@@ -1,7 +1,7 @@
 
 def call(){
     // 加载资源文件(相对路径对应 resources 目录下的结构)
-    def configContent = libraryResource 'com/mycorp/pipeline/config.json'
+    def configContent = libraryResource 'resources/com/mycorp/pipeline/config.json'
     
     // 将 JSON 字符串解析为 Map,需要 Groovy 的 JsonSlurper
     import groovy.json.JsonSlurper
