@@ -226,10 +226,11 @@ https://chat.deepseek.com/a/chat/s/2acaff05-b5eb-4813-ad49-347df8ea2f81
 一个社区管理的可复制的流水线示例的集合: https://www.jenkins.io/zh/doc/pipeline/examples/
 
 
-看到这里:  https://www.jenkins.io/zh/doc/book/pipeline/shared-libraries
+看到这里:  https://www.jenkins.io/zh/doc/book/pipeline/development/
 
 dns 解析: 
-https://www.nslookup.io/website-to-ip-lookup/
+https://www.nslookup.io/website-to-ip-lookup/	
+	curl -s -X POST -H "Content-Type: application/json" -d '{"domain":"github.com"}' https://www.nslookup.io/api/v1/webservers
 https://www.site24x7.com/tools/find-ip-address-of-web-site.html	
 https://domaintoipconverter.com/index.php
 
