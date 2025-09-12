@@ -24,7 +24,7 @@ pipeline {
 
 **如何通过 SSH 使用jenkins CLI:**
 -	Jenkins 版本非常旧(2.200 之前),SSH 配置可能仍在"安全"页面，但目前主流版本（2.300+）均已迁移到"系统"页面.如何这两个页面都找不到,说明需要安装"SSH server"插件. 
--	安装后在"安全"或"系统"页面找到"SSH Server"配置端口.配置通常在"安全"页面,"SSH Server"插件主页有说明: Enable the built-in SSH server in Manage Jenkins » Configure Global Security.
+-	安装后在"安全"或"系统"页面找到 [SSH Server](https://plugins.jenkins.io/sshd/) 配置端口.配置通常在"安全"页面,"SSH Server"插件主页有说明: Enable the built-in SSH server in Manage Jenkins » Configure Global Security.
 -	
 
 ```shell
