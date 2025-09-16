@@ -280,4 +280,14 @@ curl --location --request GET -OL 'https://github.com/st22ab889/Mage-Linux/relea
 --header 'User-Agent: Apifox/1.0.0 (https://apifox.com)'
 
 
+curl --location --request GET  -L 'https://api.github.com/repos/st22ab889/Mage-Linux/releases/assets/227869924' \
+--header 'Accept: application/vnd.github+json' \
+--header 'Authorization: Bearer  abc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' \
+--header 'X-GitHub-Api-Version: 2022-11-28'
+
+
+
+
+
+
 
