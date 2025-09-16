@@ -229,8 +229,7 @@ https://chat.deepseek.com/a/chat/s/2acaff05-b5eb-4813-ad49-347df8ea2f81
 看到这里:  https://www.jenkins.io/zh/doc/book/pipeline/development/
 
 dns 解析: 
-https://www.nslookup.io/website-to-ip-lookup/	
-	curl -s -X POST -H "Content-Type: application/json" -d '{"domain":"github.com"}' https://www.nslookup.io/api/v1/webservers
+https://www.nslookup.io/website-to-ip-lookup/			# curl -s -X POST -H "Content-Type: application/json" -d '{"domain":"github.com"}' https://www.nslookup.io/api/v1/webservers
 https://www.site24x7.com/tools/find-ip-address-of-web-site.html	
 https://domaintoipconverter.com/index.php
 
@@ -256,5 +255,29 @@ yum autoremove --dry-run	# 检测孤儿包，不删除. 没有 --dry-run 会删�
 
 package-cleanup --leaves			# 检测孤儿包(仅查看，不删除)，yum-utils 工具集中的 package-cleanup 来检测并清理孤儿包
 package-cleanup --remove-leaves		# 需删除孤儿包(谨慎操作)
+
+
+============================================================
+
+https://link.wtturl.cn/?target=https%3A%2F%2Fdocs.github.com%2Fen%2Frest%2Freleases%2Freleases&scene=im&aid=497858&lang=zh
+
+
+https://docs.github.com/en/rest/releases/assets?apiVersion=2022-11-28#get-a-release-asset
+
+abc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
+
+
+curl --location --request GET 'https://api.github.com/repos/st22ab889/Mage-Linux/releases' \
+--header 'Accept:  application/vnd.github+json' \
+--header 'Authorization: Bearer  abc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' \
+--header 'X-GitHub-Api-Version: 2022-11-28' 
+
+
+curl --location --request GET -OL 'https://github.com/st22ab889/Mage-Linux/releases/download/document/linux-doc.zip' \
+--header 'Accept: application/octet-stream' \
+--header 'Authorization: Bearer  abc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' \
+--header 'X-GitHub-Api-Version: 2022-11-28' \
+--header 'User-Agent: Apifox/1.0.0 (https://apifox.com)'
+
 
 
